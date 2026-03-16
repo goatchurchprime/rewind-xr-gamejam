@@ -1,0 +1,247 @@
+[gd_scene format=3 uid="uid://ksq0mmbfkp5m"]
+
+[ext_resource type="PackedScene" uid="uid://clc5dre31iskm" path="res://addons/godot-xr-tools/xr/start_xr.tscn" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://kt7y43kjkbxj" path="res://main.gd" id="1_w48qg"]
+[ext_resource type="PackedScene" uid="uid://btknduttnmoxf" path="res://addons/godot-xr-tools/misc/vr_common_shader_cache.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://hpr0v012ghsb" path="res://addons/godot-xr-tools/hands/scenes/highpoly/left_tac_glove.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://bl2nuu3qhlb5k" path="res://addons/godot-xr-tools/functions/movement_direct.tscn" id="4_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dup2vp8v5rpi5" path="res://addons/godot-xr-tools/hands/scenes/highpoly/right_tac_glove.tscn" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://wtpox7m5vu2b" path="res://addons/godot-xr-tools/effects/fade.tscn" id="4_yaehf"]
+[ext_resource type="PackedScene" uid="uid://ctltchlf2j2r4" path="res://addons/xr-simulator/XRSimulator.tscn" id="5_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_efxa6"]
+[ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_dg77c"]
+[ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="9_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="11_074og"]
+[ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="11_dg77c"]
+[ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="12_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="13_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://djehrm378cbde" path="res://addons/player-networking/PlayerFrameLocal.tscn" id="14_w48qg"]
+[ext_resource type="PackedScene" uid="uid://bpiqycncflp0x" path="res://experiments/link.tscn" id="18_074og"]
+[ext_resource type="Script" uid="uid://bt6j554o0nyaw" path="res://experiments/snake.gd" id="19_getpj"]
+[ext_resource type="PackedScene" uid="uid://c8l60rnugru40" path="res://addons/godot-xr-tools/objects/pickable.tscn" id="20_getpj"]
+[ext_resource type="Material" uid="uid://ds2dpvbpht0ea" path="res://addons/godot-xr-tools/hands/materials/labglove.tres" id="22_ryguw"]
+[ext_resource type="PackedScene" uid="uid://ga34mr4qxgcd" path="res://experiments/link_join.tscn" id="23_d13ii"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_texture = ExtResource("11_074og")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+material = SubResource("StandardMaterial3D_1bvp3")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vivmo"]
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_vivmo")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+
+[sub_resource type="QuadMesh" id="QuadMesh_d13ii"]
+resource_local_to_scene = true
+size = Vector2(3, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1u8w0"]
+viewport_path = NodePath("NetworkGatewayViewport/Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0odxb"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_1u8w0")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lswn8"]
+resource_local_to_scene = true
+size = Vector3(3, 2, 0.02)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ryguw"]
+size = Vector3(0.2, 0.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d13ii"]
+size = Vector3(0.2, 0.5, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
+albedo_color = Color(0.19607843, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j832p"]
+size = Vector3(0.2, 0.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0a7ai"]
+size = Vector3(0.2, 0.5, 0.2)
+
+[node name="Main" type="Node3D" unique_id=858080943]
+script = ExtResource("1_w48qg")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=2104808566]
+
+[node name="StartXR" parent="XROrigin3D" unique_id=1828704898 instance=ExtResource("1_0xm2m")]
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=1940990165]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1355605, 0)
+
+[node name="VRCommonShaderCache" parent="XROrigin3D/XRCamera3D" unique_id=96670224 instance=ExtResource("2_h2yge")]
+
+[node name="Fade" parent="XROrigin3D/XRCamera3D" unique_id=1653719081 instance=ExtResource("4_yaehf")]
+
+[node name="XRController3D_left" type="XRController3D" parent="XROrigin3D" unique_id=1578896574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1938979, 1.0335946, -0.44095612)
+tracker = &"left_hand"
+
+[node name="LeftHand" parent="XROrigin3D/XRController3D_left" unique_id=1954624197 instance=ExtResource("3_1bvp3")]
+
+[node name="MovementDirect" parent="XROrigin3D/XRController3D_left" unique_id=264777544 instance=ExtResource("4_4c57u")]
+strafe = true
+
+[node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
+tracker = &"right_hand"
+
+[node name="RightHand" parent="XROrigin3D/XRController3D_right" unique_id=440374589 instance=ExtResource("4_lquwl")]
+
+[node name="MovementTurn" parent="XROrigin3D/XRController3D_right" unique_id=1785258142 instance=ExtResource("6_efxa6")]
+
+[node name="FunctionPointer" parent="XROrigin3D/XRController3D_right" unique_id=1192855557 instance=ExtResource("7_dg77c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.05, -0.1)
+
+[node name="MovementJump" parent="XROrigin3D/XRController3D_right" unique_id=1805752777 instance=ExtResource("9_2cqfq")]
+
+[node name="FunctionPickup" parent="XROrigin3D/XRController3D_right" unique_id=1914122785 instance=ExtResource("11_82xsv")]
+
+[node name="XRSimulator" parent="XROrigin3D" unique_id=1311045107 instance=ExtResource("5_lquwl")]
+enabled = false
+
+[node name="PlayerBody" parent="XROrigin3D" unique_id=337536217 instance=ExtResource("9_ycdy4")]
+
+[node name="World" type="Node3D" parent="." unique_id=1711002190]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World" unique_id=998891937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D" unique_id=833803378]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D" unique_id=1037734184]
+shape = SubResource("BoxShape3D_7mycd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=410131671]
+transform = Transform3D(0.9332047, -0.20871378, 0.29251954, 0.026180245, 0.8513603, 0.5239278, -0.35839045, -0.48127362, 0.79995763, 0, 3.990271, 0)
+light_energy = 3.592
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=112167591]
+environment = SubResource("Environment_1bvp3")
+
+[node name="NetworkGatewayViewport" parent="." unique_id=1130742234 instance=ExtResource("11_dg77c")]
+transform = Transform3D(0.8685104, 0, -0.4956709, 0, 1, 0, 0.4956709, 0, 0.8685104, -3.4790926, 0.9929738, -3.2379038)
+viewport_size = Vector2(650, 400)
+transparent = 1
+scene_properties_keys = PackedStringArray()
+
+[node name="Viewport" parent="NetworkGatewayViewport" index="0"]
+size = Vector2i(650, 400)
+
+[node name="NetworkGateway" parent="NetworkGatewayViewport/Viewport" index="0" unique_id=407170005 instance=ExtResource("12_ycdy4")]
+playersnodepath = NodePath("../../../PlayerAvatars")
+localplayerscene = ""
+
+[node name="roomname" parent="NetworkGatewayViewport/Viewport/NetworkGateway/VBox/TabContainer/MQTTsignalling/VBox/HBoxM/HSplitContainer/Msettings/HBox" parent_id_path=PackedInt32Array(407170005, 804249689) index="1" unique_id=113252904]
+text = "lime"
+
+[node name="Screen" parent="NetworkGatewayViewport" index="1"]
+mesh = SubResource("QuadMesh_d13ii")
+surface_material_override/0 = SubResource("StandardMaterial3D_0odxb")
+
+[node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
+viewport_size = Vector2(650, 400)
+
+[node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_lswn8")
+
+[node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
+
+[node name="VRPlayerAvatar" parent="PlayerAvatars" unique_id=391835606 instance=ExtResource("13_ycdy4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8132508, 1.1010478, 0)
+
+[node name="PlayerFrame" parent="PlayerAvatars/VRPlayerAvatar" unique_id=967951852 instance=ExtResource("14_w48qg")]
+
+[node name="Snake" type="Node3D" parent="." unique_id=681278199]
+script = ExtResource("19_getpj")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="Snake" unique_id=1501982221]
+process_mode = 3
+transform = Transform3D(0.21999936, -0.97549975, 0, 0.97549975, 0.21999936, 0, 0, 0, 1, 0.1995951, 0.15472385, -2)
+node_a = NodePath("../Link")
+node_b = NodePath("../Static")
+linear_limit_y/upper_distance = 3.0
+linear_limit_y/lower_distance = 2.0
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="Link" parent="Snake" unique_id=69079492 instance=ExtResource("18_074og")]
+transform = Transform3D(0.7979838, -0.6026789, 0, 0.6026789, 0.7979838, 0, 0, 0, 1, 0, 0.419, -2)
+
+[node name="Link2" parent="Snake" unique_id=213881782 instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.036, -2)
+
+[node name="Link3" parent="Snake" unique_id=280019344 instance=ExtResource("18_074og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.693, -2)
+
+[node name="PinJoint3D" type="PinJoint3D" parent="Snake" unique_id=217049673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7120527, -2)
+node_a = NodePath("../Link")
+node_b = NodePath("../Link2")
+
+[node name="PinJoint3D2" type="PinJoint3D" parent="Snake" unique_id=412190966]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3751212, -2)
+node_a = NodePath("../Link2")
+node_b = NodePath("../Link3")
+
+[node name="PickableObject" parent="Snake" unique_id=1775692038 instance=ExtResource("20_getpj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3308835, -2)
+
+[node name="CollisionShape3D" parent="Snake/PickableObject" index="0"]
+shape = SubResource("BoxShape3D_ryguw")
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Snake/PickableObject" unique_id=5741216]
+mesh = SubResource("BoxMesh_d13ii")
+material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="PinJoint3D3" type="PinJoint3D" parent="Snake" unique_id=924070122]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9807373, -2)
+node_a = NodePath("../Link3")
+node_b = NodePath("../PickableObject")
+
+[node name="Static" type="RigidBody3D" parent="Snake" unique_id=1061555862]
+transform = Transform3D(0.1382916, -0.9903914, 0, 0.9903914, 0.1382916, 0, 0, 0, 1, 0.38027954, 0.6243725, -1.2697756)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+gravity_scale = 0.0
+freeze = true
+linear_damp = 100.0
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="Snake/Static" unique_id=1972075299]
+mesh = SubResource("BoxMesh_j832p")
+material = ExtResource("22_ryguw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Snake/Static" unique_id=1880425742]
+shape = SubResource("BoxShape3D_0a7ai")
+
+[node name="LinkJoin" parent="Snake" unique_id=1362985399 instance=ExtResource("23_d13ii")]
+transform = Transform3D(0.21999936, -0.97549975, 0, 0.97549975, 0.21999936, 0, 0, 0, 1, 0.1995951, 0.15472385, -2)
+
+[connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
+
+[editable path="NetworkGatewayViewport"]
+[editable path="NetworkGatewayViewport/Viewport/NetworkGateway"]
+[editable path="Snake/Link"]
+[editable path="Snake/PickableObject"]

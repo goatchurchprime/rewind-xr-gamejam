@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://ga34mr4qxgcd"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ryguw"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.05
+radial_segments = 5
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d13ii"]
+albedo_color = Color(1, 1, 0.015686275, 1)
+
+[node name="LinkJoin" type="Generic6DOFJoint3D" unique_id=1362985399]
+process_mode = 3
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 1, 0, 0, 0)
+node_a = NodePath("../Link")
+node_b = NodePath("../Static")
+linear_limit_x/upper_distance = 2.0
+linear_limit_x/lower_distance = 3.0
+linear_limit_x/softness = 0.21
+angular_limit_x/enabled = false
+angular_limit_y/enabled = false
+angular_limit_z/enabled = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1739773312]
+mesh = SubResource("CylinderMesh_ryguw")
+surface_material_override/0 = SubResource("StandardMaterial3D_d13ii")
