@@ -34,7 +34,7 @@ import/blender/enabled=false
 
 [physics]
 
-3d/physics_engine="Jolt Physics"
+3d/physics_engine="GodotPhysics3D"
 
 [rendering]
 

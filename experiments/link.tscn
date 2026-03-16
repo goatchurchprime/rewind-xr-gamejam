@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bpiqycncflp0x"]
 
+[ext_resource type="PhysicsMaterial" uid="uid://dlox0lvwsy510" path="res://experiments/link_physics_material.tres" id="1_0a7ai"]
+
 [sub_resource type="BoxMesh" id="BoxMesh_j832p"]
 size = Vector3(0.2, 0.5, 0.2)
 
@@ -7,7 +9,10 @@ size = Vector3(0.2, 0.5, 0.2)
 size = Vector3(0.2, 0.5, 0.2)
 
 [node name="Link" type="RigidBody3D" unique_id=69079492]
+collision_layer = 8388608
+collision_mask = 8388608
 mass = 0.1
+physics_material_override = ExtResource("1_0a7ai")
 gravity_scale = 0.04
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=1972075299]

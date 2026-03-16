@@ -88,10 +88,10 @@ func PF_processlocalavatarposition(delta):
 	if projectedhands:
 		var headface = Vector3($HeadCam.transform.basis.z.x, 0, $HeadCam.transform.basis.z.z).normalized()
 		var headup = Vector3(headface.x, 0.8, headface.z)*0.25
-		handl.transform.origin += Vector3(headface.x*0.2, 0.2, headface.z*0.2)
+		handl.transform.origina += Vector3(headface.x*0.2, 0.2, headface.z*0.2)
 		handr.transform.origin += Vector3(headface.x*0.2, 0.2, headface.z*0.2)
 
-	var twovoipmic = get_node("/root/Main/NetworkGatewayViewport/Viewport/NetworkGateway/VBox/PlayerConnections/VBox/RecordingFeature/TwoVoipMic")
+	var twovoipmic = get_node_or_null("/root/Main/NetworkGatewayViewport/Viewport/NetworkGateway/VBox/PlayerConnections/VBox/RecordingFeature/TwoVoipMic")
 	if twovoipmic:
 		$HeadCam/AudioStreamPlayer/MouthSign.scale.z = twovoipmic.last_chunkmax
 
