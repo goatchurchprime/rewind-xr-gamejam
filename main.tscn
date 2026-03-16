@@ -49,6 +49,92 @@ height = 4.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
 albedo_color = Color(0.19607843, 1, 1, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_2cqfq"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
+albedo_color = Color(1, 1, 0.019607844, 1)
+
+[sub_resource type="Animation" id="Animation_074og"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPoint:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPoint:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.4460311, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPoint:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3.9958792, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_cegan"]
+resource_name = "snakehead"
+length = 3.6
+step = 0.0333333
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPoint:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0.16111112, 0, 0, -0.25, 0, 0.25, 0, 1.4909067, -0.086666666, -0.24848446, 0, 0, 1.4909067, -0.07333334, 0, 0, 0, 1.4909067, -0.08166668, 0, 0, 0, 4.631568, -0.083333336, -0.5234436, 0, 0, 7.6029463, -0.09999999, -0.49522975, 0, 0, 9.634123, -0.080000006, -0.3385294, 0, 0, 10.881989, -0.07833334, -0.20797761, 0, 0, 14.210493, -0.06833335, -0.5547508, 0, 0),
+"times": PackedFloat32Array(0, 0.96666664, 1.7766664, 2.2166665, 2.7066665, 3.1966665, 3.7966664, 4.2866664, 4.756666, 5.1666665)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPoint:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0.4460311, 0, 0, 0.16111112, 0, 0.4460311, -0.25, 0, 0.25, 0, 0.4460311, -0.086666666, 0, 0, 0, 1.6519856, -0.07333334, -0.20099244, 0, 0, 1.6519856, -0.08166668, 0, 0, 0, 1.6519856, -0.083333336, 0, 0, 0, 0.8543296, -0.09999999, 0.13294268, 0, 0, 0.8543296, -0.080000006, 0, 0, 0, 0.8543296, -0.07833334, 0, 0, 0, 0.8543296, -0.06833335, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.96666664, 1.7766664, 2.2166665, 2.7066665, 3.1966665, 3.7966664, 4.2866664, 4.756666, 5.1666665)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPoint:position:z")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-8.895548, 0, 0, 0.16111112, 0.8166115, -3.9958792, -0.25, 0, 0.25, 0, -2.059586, -0.086666666, -0.32271552, 0, 0, -2.059586, -0.07333334, 0, 0, 0, -0.6033299, -0.08166668, -0.24270937, 0, 0, 0.69793487, -0.083333336, -0.21687746, 0, 0, 0.69793487, -0.09999999, 0, 0, 0, -2.0754797, -0.080000006, 0.46223578, 0, 0, -5.061411, -0.07833334, 0.4976552, 0, 0, -5.061411, -0.06833335, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.96666664, 1.7766664, 2.2166665, 2.7066665, 3.1966665, 3.7966664, 4.2766666, 4.756666, 5.1666665)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82xsv"]
+_data = {
+&"RESET": SubResource("Animation_074og"),
+&"snakehead": SubResource("Animation_cegan")
+}
+
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
 
@@ -157,5 +243,18 @@ shape = SubResource("CylinderShape3D_getpj")
 [node name="CSGMesh3D" type="CSGMesh3D" parent="Snake/StaticBody3D3" unique_id=1467586468]
 mesh = SubResource("CylinderMesh_074og")
 material = SubResource("StandardMaterial3D_1u8w0")
+
+[node name="RewindPoint" type="MeshInstance3D" parent="Snake" unique_id=103143486]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4460311, -15.564739)
+mesh = SubResource("BoxMesh_2cqfq")
+surface_material_override/0 = SubResource("StandardMaterial3D_yaehf")
+
+[node name="AnimationPoint" type="MeshInstance3D" parent="Snake" unique_id=1581225900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4460311, -3.9958792)
+mesh = SubResource("BoxMesh_2cqfq")
+surface_material_override/0 = SubResource("StandardMaterial3D_yaehf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Snake" unique_id=1006540795]
+libraries/ = SubResource("AnimationLibrary_82xsv")
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]

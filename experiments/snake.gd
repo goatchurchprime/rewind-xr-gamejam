@@ -11,21 +11,38 @@ func _input(event):
 		print(links[0].global_position.x)
 		links[0].global_rotation.y += 0.2
 		print(links[0].global_position.x)
+	var Md = 10
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_P:
 		var h = $"../XROrigin3D/XRCamera3D".global_basis.z
-		links[0].global_position += Vector3(-h.x*0.5, 0, -h.z*0.5)
+		links[0].global_position += Vector3(-h.x, 0, -h.z)*Md
 		links[0].freeze = true
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_O:
 		var h = $"../XROrigin3D/XRCamera3D".global_basis.z
-		links[0].global_position += -Vector3(-h.x*0.5, 0, -h.z*0.5)
+		links[0].global_position += -Vector3(-h.x, 0, -h.z)*Md
+
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_Q:
+		$AnimationPlayer.play("snakehead")
+		links[0].freeze = false
+		links[-1].freeze = true
+		links[-1].global_position = $RewindPoint.global_position
+		
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_B:
+		var tween = get_tree().create_tween()
+		tween.tween_property(links[0], "global_position", $RewindPoint.global_position, 2.0)
+		#aalinks[0].global_position = $RewindPoint.global_position
+
+func _physics_process(delta):
+	if $AnimationPlayer.is_playing():
+		links[-1].global_position = $AnimationPoint.global_position
+		
 		
 var links = []
 var linkjoins = []
 func _ready():
 	var linkprev = null
-	for i in range(13):
+	for i in range(14.03):
 		var link = load("res://experiments/link.tscn").instantiate()
-		link.position = Vector3(i*gapstep-2, 0.5, -1)
+		link.position = Vector3(i*gapstep, 0.5, -1)
 		link.rotation_degrees.z = 90
 		add_child(link)
 		links.append(link)
@@ -34,18 +51,12 @@ func _ready():
 		else:
 			link.can_sleep = false
 		
-		var linkjoin
-		if false:
-			linkjoin = load("res://experiments/link_join.tscn").instantiate()
-			linkjoin.set_param_x(Generic6DOFJoint3D.PARAM_LINEAR_UPPER_LIMIT,i*0.4)
-			linkjoin.set_param_x(Generic6DOFJoint3D.PARAM_LINEAR_LOWER_LIMIT,i*0.4)
-		else:
-			linkjoin = PinJoint3D.new()
-			linkjoin.set_param(PinJoint3D.PARAM_BIAS, 0.01)
-			#linkjoin = load("res://experiments/link_join2.tscn").instantiate()
+		var linkjoin = PinJoint3D.new()
+		linkjoin.set_param(PinJoint3D.PARAM_BIAS, 0.1)
+		print(linkjoin.get_param(PinJoint3D.PARAM_BIAS))
 		if linkprev:
 			add_child(linkjoin)
-			linkjoin.global_position = Vector3((i-0.5)*gapstep-2, 0.5, -1)
+			linkjoin.global_position = Vector3((i-0.5)*gapstep, 0.5, -1)
 			linkjoin.node_a = linkprev.get_path() if linkprev else NodePath()
 			linkjoin.node_b = link.get_path()
 			linkjoins.append(linkjoin)
