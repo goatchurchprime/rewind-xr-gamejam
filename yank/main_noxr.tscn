@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://7wv8ivdpab3"]
 
-[ext_resource type="Script" uid="uid://cfw8mfes1g4wq" path="res://free_look_camera.gd" id="4_iowe6"]
+[ext_resource type="Script" uid="uid://cfw8mfes1g4wq" path="res://yank/free_look_camera.gd" id="4_iowe6"]
 [ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="14_lobby"]
 [ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_40fmg"]
 
