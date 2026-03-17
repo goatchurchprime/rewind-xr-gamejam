@@ -18,7 +18,7 @@ func _input(event):
 		links[0].freeze = true
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_O:
 		var h = $"../XROrigin3D/XRCamera3D".global_basis.z
-		links[0].global_position += -Vector3(-h.x, 0, -h.z)*Md
+		links[0].global_pospolksition += -Vector3(-h.x, 0, -h.z)*Md
 
 	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_Q:
 		$AnimationPlayer.play("snakehead")
@@ -31,11 +31,17 @@ func _input(event):
 		tween.tween_property(links[0], "global_position", $RewindPoint.global_position, 2.0)
 		#aalinks[0].global_position = $RewindPoint.global_position
 
+#	var g : Animation = $AnimationPlayer.get_animation("snakehead")
+#	print(g.get_track_count())
+#	print(g.value_track_interpolate(0, 0.1))
+#	print(g.value_track_interpolate(0, 3.1))
+#	print(g.value_track_interpolate(0, 4.1))
+
 func _physics_process(delta):
 	if $AnimationPlayer.is_playing():
 		links[-1].global_position = $AnimationPoint.global_position
-		
-		
+
+
 var links = []
 var linkjoins = []
 func _ready():
@@ -53,7 +59,6 @@ func _ready():
 		
 		var linkjoin = PinJoint3D.new()
 		linkjoin.set_param(PinJoint3D.PARAM_BIAS, 0.1)
-		print(linkjoin.get_param(PinJoint3D.PARAM_BIAS))
 		if linkprev:
 			add_child(linkjoin)
 			linkjoin.global_position = Vector3((i-0.5)*gapstep, 0.5, -1)
