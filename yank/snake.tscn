@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bme8t8qae1vra"]
+
+[ext_resource type="Script" uid="uid://ctn2oufalgndw" path="res://yank/snake.gd" id="1_ut348"]
+
+[node name="Snake" type="Node3D" unique_id=1147104204]
+script = ExtResource("1_ut348")
+links = 11
+
+[node name="Debug" type="CanvasLayer" parent="." unique_id=525279070]
+
+[node name="Control" type="Control" parent="Debug" unique_id=376478768]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Debug/Control" unique_id=234070206]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Frame" type="SpinBox" parent="Debug/Control/HBoxContainer" unique_id=28052215]
+unique_name_in_owner = true
+layout_mode = 2
+prefix = "frame"
+
+[node name="Scrub" type="HSlider" parent="Debug/Control/HBoxContainer" unique_id=1824261620]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Record" type="Button" parent="Debug/Control/HBoxContainer" unique_id=732068905]
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+text = "record"
+
+[node name="Play" type="Button" parent="Debug/Control/HBoxContainer" unique_id=1743730287]
+layout_mode = 2
+text = "play"
+
+[connection signal="value_changed" from="Debug/Control/HBoxContainer/Scrub" to="." method="_on_scrub_value_changed"]
+[connection signal="toggled" from="Debug/Control/HBoxContainer/Record" to="." method="_on_record_toggled"]

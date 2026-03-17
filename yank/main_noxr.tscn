@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://7wv8ivdpab3"]
+
+[ext_resource type="Script" uid="uid://cfw8mfes1g4wq" path="res://free_look_camera.gd" id="4_iowe6"]
+[ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="14_lobby"]
+[ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_40fmg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_texture = ExtResource("14_lobby")
+uv1_scale = Vector3(50, 50, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+material = SubResource("StandardMaterial3D_1bvp3")
+size = Vector3(50, 1, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vivmo"]
+
+[sub_resource type="Sky" id="Sky_h2yge"]
+sky_material = SubResource("ProceduralSkyMaterial_vivmo")
+
+[sub_resource type="Environment" id="Environment_1bvp3"]
+background_mode = 2
+sky = SubResource("Sky_h2yge")
+
+[sub_resource type="BoxMesh" id="BoxMesh_gt3mh"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="Main" type="Node3D" unique_id=858080943]
+
+[node name="World" type="Node3D" parent="." unique_id=1711002190]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World" unique_id=998891937]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+collision_layer = 8388609
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D" unique_id=833803378]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D" unique_id=1037734184]
+shape = SubResource("BoxShape3D_7mycd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=410131671]
+transform = Transform3D(0.9332047, -0.20871378, 0.29251954, 0.026180245, 0.8513603, 0.5239278, -0.35839045, -0.48127362, 0.79995763, 0, 3.990271, 0)
+light_energy = 3.592
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=112167591]
+environment = SubResource("Environment_1bvp3")
+
+[node name="Snake" parent="." unique_id=1147104204 node_paths=PackedStringArray("target") instance=ExtResource("15_40fmg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7411308, 5.217908, -2.8472552)
+target = NodePath("../Camera3D/Target")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=116799239]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1256925, 0)
+script = ExtResource("4_iowe6")
+
+[node name="Target" type="Marker3D" parent="Camera3D" unique_id=2062707302]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.8085403)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D/Target" unique_id=1829630495]
+mesh = SubResource("BoxMesh_gt3mh")
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="." unique_id=1759952497]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=288072121]
+
+[editable path="Snake"]
