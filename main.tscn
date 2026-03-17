@@ -12,18 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="9_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
-[ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="11_074og"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
+[ext_resource type="Material" uid="uid://q4gjgwsj5ff3" path="res://assets_thirdparty/spare_textures/grey_box.tres" id="14_074og"]
 [ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_vivmo"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-albedo_texture = ExtResource("11_074og")
-uv1_scale = Vector3(50, 50, 50)
-
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
-material = SubResource("StandardMaterial3D_1bvp3")
+material = ExtResource("14_074og")
 size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
@@ -37,6 +33,19 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 2
 sky = SubResource("Sky_h2yge")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cegan"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_82xsv"]
+material = ExtResource("14_074og")
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ryguw"]
+size = Vector3(1, 2, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -93,15 +102,15 @@ enabled = false
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="World" unique_id=998891937]
+[node name="Floor" type="StaticBody3D" parent="World" unique_id=998891937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 8388609
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/StaticBody3D" unique_id=833803378]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Floor" unique_id=833803378]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("BoxMesh_lquwl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/StaticBody3D" unique_id=1037734184]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=1037734184]
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=410131671]
@@ -111,6 +120,27 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=112167591]
 environment = SubResource("Environment_1bvp3")
+
+[node name="Furniture" type="Node3D" parent="World" unique_id=142939096]
+
+[node name="Table1" type="StaticBody3D" parent="World/Furniture" unique_id=1953537167]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4630303, 0.5, -4.111409)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Table1" unique_id=106720632]
+shape = SubResource("CylinderShape3D_cegan")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Table1" unique_id=271947632]
+mesh = SubResource("CylinderMesh_82xsv")
+
+[node name="Fridge" type="StaticBody3D" parent="World/Furniture" unique_id=1950314042]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38938737, 1, -6.051605)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Fridge" unique_id=818338518]
+shape = SubResource("BoxShape3D_getpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Fridge" unique_id=1440077541]
+mesh = SubResource("BoxMesh_ryguw")
+surface_material_override/0 = ExtResource("14_074og")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 visible = false
