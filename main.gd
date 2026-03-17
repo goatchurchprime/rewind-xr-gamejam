@@ -20,14 +20,40 @@ func _process(delta):
 		await fadetween.finished
 		fadetween = null
 		
-		
-#	var tween = get_tree().create_tween()
-#	tween.tween_method(set_fade, 0.0, 1.0, 0.34)
-#	await tween.finished
-#	arvrorigin.transform = sfd["spawnpointtransform"]
-#	tween = get_tree().create_tween()
-#	tween.tween_method(set_fade, 1.0, 0.0, 0.34)
-#	PlayerConnection.spawninfoforclientprocessed()
-#	await tween.finished
-#
-#a		$PlayerBody.position = Vector3(0,0,5)
+
+
+var snakerows = null
+func _on_snake_head_target_action_pressed(pickable):
+	print("target pressed")
+	snakerows = [ ]
+	while snakerows != null:
+		var row : = PackedVector3Array()
+		row.resize(len($Snake.bodies))
+		for i in range(len($Snake.bodies)):
+			row[i] = $Snake.bodies[i].global_position
+		row.reverse()
+		snakerows.append(row)
+		await get_tree().create_timer(0.2).timeout
+
+func _on_snake_head_target_action_released(pickable):
+	print("target released ", len(snakerows))
+	$GSnake.Dsetsnaketexture(snakerows)
+	snakerows = null
+	$GSnake.global_transform = Transform3D()
+
+var tweensnakeout = null
+func _on_xr_controller_3d_left_button_pressed(name):
+	if name == "trigger_click":
+		$GSnake.animmaterial.set_shader_parameter("texvtime", 0)
+		tweensnakeout = get_tree().create_tween()
+		tweensnakeout.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, 4.0)
+
+var tweensnakerewind = null
+func _on_xr_controller_3d_left_button_released(name):
+	if name == "trigger_click" and tweensnakeout:
+		if tweensnakeout.is_running():
+			print("Snake reached destination")
+		tweensnakeout.kill()
+		tweensnakeout = null
+		tweensnakerewind = get_tree().create_tween()
+		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 2.0)

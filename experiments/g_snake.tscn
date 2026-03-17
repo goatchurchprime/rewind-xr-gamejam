@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ubbrt7lntlg2" path="res://experiments/g_snake.gd" id="1_hwi1r"]
 [ext_resource type="Shader" uid="uid://cvjp10he0rvm4" path="res://experiments/gsnake.gdshader" id="2_mphow"]
-[ext_resource type="Texture2D" uid="uid://0ip5sa0y3stq" path="res://experiments/gnsake.png" id="3_vwd7k"]
+[ext_resource type="Texture2D" uid="uid://0ip5sa0y3stq" path="res://experiments/gnsake.png" id="3_hwi1r"]
 [ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_cp1mo"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_82xsv"]
@@ -17,7 +17,7 @@ render_priority = 0
 shader = ExtResource("2_mphow")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("4_cp1mo")
-shader_parameter/animtexture = ExtResource("3_vwd7k")
+shader_parameter/animtexture = ExtResource("3_hwi1r")
 shader_parameter/snakerad = 0.1
 shader_parameter/snakeradperi = 0.0
 shader_parameter/timefac = 5.0

@@ -14,8 +14,9 @@
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="11_074og"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
+[ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_vivmo"]
-[ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="16_2cqfq"]
+[ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_texture = ExtResource("11_074og")
@@ -36,6 +37,15 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 2
 sky = SubResource("Sky_h2yge")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cegan"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82xsv"]
+albedo_color = Color(1, 1, 0, 1)
 
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
@@ -72,6 +82,7 @@ tracker = &"right_hand"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02, 0.05, -0.1)
 
 [node name="MovementJump" parent="XROrigin3D/XRController3D_right" unique_id=1805752777 instance=ExtResource("9_2cqfq")]
+jump_button_action = "ax_button"
 
 [node name="FunctionPickup" parent="XROrigin3D/XRController3D_right" unique_id=1914122785 instance=ExtResource("11_82xsv")]
 
@@ -106,12 +117,30 @@ visible = false
 
 [node name="Snake" parent="." unique_id=1147104204 node_paths=PackedStringArray("target") instance=ExtResource("15_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7411308, 5.217908, -2.8472552)
-speed = 2.0
-target = NodePath("../XROrigin3D/PlayerBody")
+target = NodePath("../SnakeHeadTarget")
 
-[node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("16_2cqfq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5234349, -0.5160241)
+[node name="SnakeHeadTarget" type="RigidBody3D" parent="." unique_id=705753038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28489375, 1.1463099, -0.94931394)
+collision_layer = 4
+collision_mask = 0
+freeze = true
+script = ExtResource("17_yaehf")
+metadata/_custom_type_script = "uid://bfrlpbsqg5lqr"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeHeadTarget" unique_id=706958160]
+shape = SubResource("BoxShape3D_074og")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SnakeHeadTarget" unique_id=1685468378]
+mesh = SubResource("BoxMesh_cegan")
+surface_material_override/0 = SubResource("StandardMaterial3D_82xsv")
+
+[node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("14_yaehf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49728644, -1.7905307)
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
+[connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
+[connection signal="button_released" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_released"]
+[connection signal="action_pressed" from="SnakeHeadTarget" to="." method="_on_snake_head_target_action_pressed"]
+[connection signal="action_released" from="SnakeHeadTarget" to="." method="_on_snake_head_target_action_released"]
 
 [editable path="Snake"]

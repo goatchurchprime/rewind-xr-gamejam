@@ -26,6 +26,16 @@ func _ready():
 	#animimage.save_png("res://experiments/gnsake.png")
 	animmaterial.set_shader_parameter("animtexture", animtexture)
 
+func Dsetsnaketexture(snakerows):
+	animwidth = len(snakerows[0])
+	animheight = len(snakerows)
+	var animdata = PackedVector3Array()
+	for row in snakerows:
+		animdata.append_array(row)
+	animimage = Image.create_from_data(animwidth, animheight, false, Image.FORMAT_RGBF, animdata.to_byte_array())
+	animtexture = ImageTexture.create_from_image(animimage)
+	animmaterial.set_shader_parameter("animtexture", animtexture)
+
 
 func Drunsnake():
 	var tween = get_tree().create_tween()

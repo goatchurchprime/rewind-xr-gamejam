@@ -21,7 +21,9 @@ const float reelrad = 0.3;
 vec3 texpos(float utime, float vtime) {
 	if (utime < 0.0) {
 		float th = -utime*16.0;
-		return vec3(-sin(th)*reelrad, (1.0-cos(th))*reelrad, 0.0);
+		vec3 p0 = texture(animtexture, vec2(0.0, vtime)).xyz;
+		vec3 rv = vec3(-sin(th)*reelrad, (1.0-cos(th))*reelrad, 0.0);
+		return p0 + rv;
 	}
 	vec3 p1 = texture(animtexture, vec2(utime, vtime)).xyz;
 	return p1;
