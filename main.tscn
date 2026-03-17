@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://bsiedtp4g4es1" path="res://assets_thirdparty/spare_textures/grid_black_512x512.png" id="11_074og"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
 [ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_vivmo"]
+[ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="16_2cqfq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
 albedo_texture = ExtResource("11_074og")
@@ -107,6 +108,9 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7411308, 5.217908, -2.8472552)
 speed = 2.0
 target = NodePath("../XROrigin3D/PlayerBody")
+
+[node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("16_2cqfq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5234349, -0.5160241)
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 

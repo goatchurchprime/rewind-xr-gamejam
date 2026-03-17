@@ -5,41 +5,44 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform ivec2 albedo_texture_size;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
+uniform sampler2D animtexture : repeat_disable;
 
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+// UV.x is around, UV.y < 0.5 is along
+uniform float snakerad = 0.05;
+uniform float snakeradperi = 0.01;
+uniform float timefac = 5.0;
+uniform float perialongfac = 60.0;
+uniform float texvtime = 0.0;
+uniform float texutime = 0.0;
+varying vec3 pnorm;
+const float udelta = 0.01;
+const float reelrad = 0.3;
 
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-
-uniform sampler2D animtexture;
-
+vec3 texpos(float utime, float vtime) {
+	if (utime < 0.0) {
+		float th = -utime*16.0;
+		return vec3(-sin(th)*reelrad, (1.0-cos(th))*reelrad, 0.0);
+	}
+	vec3 p1 = texture(animtexture, vec2(utime, vtime)).xyz;
+	return p1;
+}
+vec3 texvec(float utime, float vtime, vec3 p1) {
+	return normalize(p1 - texpos(utime - udelta, vtime));
+}
 void vertex() {
-	vec4 v = texture(animtexture, vec2(UV.y*1.8+0.05, UV.x));
-	VERTEX.x = VERTEX.x + v.g*0.1;
-	VERTEX.y = UV.y;
-	VERTEX.z = 0.0;
-	//UV = UV * uv1_scale.xy + uv1_offset.xy;
+	float utime = UV.y*2.0 - texutime;
+	vec3 p1 = texpos(utime, texvtime);
+	vec3 planenorm = texvec(utime, texvtime, p1);
+	vec3 planex = normalize(vec3(planenorm.z, 0.0, -planenorm.x));
+	vec3 planey = cross(planenorm, planex);
+	pnorm = planex*VERTEX.x + planey*VERTEX.z;
+	float rad = snakerad + snakeradperi*sin(TIME*timefac+UV.y*2.0*perialongfac);
+	VERTEX = p1 - pnorm*rad;
 }
 
 void fragment() {
-	vec2 base_uv = UV;
-
+	vec2 base_uv = vec2(UV.x, fract(UV.y*10.0));
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-	NORMAL = -NORMAL;
-	if (UV.x < 0.5)
-	    ALBEDO.rgb = vec3(1.0,0.0,0.0);
+	NORMAL = -pnorm;
 }
