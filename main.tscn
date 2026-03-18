@@ -22,10 +22,9 @@
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://djehrm378cbde" path="res://addons/player-networking/PlayerFrameLocal.tscn" id="18_1u8w0"]
 [ext_resource type="Script" uid="uid://d2oqgf6d408gy" path="res://level_editor/snake_drawing/snake_drawing.gd" id="22_xuqvo"]
-[ext_resource type="PackedScene" uid="uid://bikkxsbo8x7sd" path="res://addons/godot-xr-tools/audio/pickable_audio.tscn" id="23_a6jrf"]
 [ext_resource type="AudioStream" uid="uid://cmxsgymulrx0l" path="res://level_editor/snake_drawing/sounds/switch7.wav" id="24_xuqvo"]
+[ext_resource type="AudioStream" uid="uid://cewowdu3vkh8u" path="res://level_editor/snake_drawing/sounds/click04.wav" id="25_0odxb"]
 [ext_resource type="AudioStream" uid="uid://dqovsr2pln3qd" path="res://level_editor/snake_drawing/sounds/switch5.wav" id="25_qsp4k"]
-[ext_resource type="Script" uid="uid://dcdtk842mf1h5" path="res://addons/godot-xr-tools/audio/pickable_audio_type.gd" id="26_kq58d"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("14_074og")
@@ -82,15 +81,16 @@ size = Vector3(0.2, 0.2, 0.2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_82xsv"]
 albedo_color = Color(1, 1, 0, 1)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_lswn8"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+radial_segments = 10
+rings = 0
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a6jrf"]
 height = 0.2
 radius = 0.05
-
-[sub_resource type="Resource" id="Resource_0rl1p"]
-script = ExtResource("26_kq58d")
-grab_sound = ExtResource("25_qsp4k")
-drop_sound = ExtResource("24_xuqvo")
-metadata/_custom_type_script = "uid://dcdtk842mf1h5"
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_xuqvo"]
 top_radius = 0.05
@@ -100,8 +100,21 @@ height = 0.2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lswn8"]
 albedo_color = Color(1, 0.50980395, 0.19215687, 1)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_0odxb"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.02
+radial_segments = 8
+rings = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6jrf"]
+albedo_color = Color(1, 0.00999999, 0.00999999, 1)
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_lswn8"]
+
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
+webrtcroomname = "eeeeeee"
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=2104808566]
 
@@ -244,6 +257,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49728644, -1.7905307)
 
 [node name="SnakeDrawing" type="Node3D" parent="." unique_id=1401319208]
 script = ExtResource("22_xuqvo")
+grab_sound = ExtResource("25_qsp4k")
+release_sound = ExtResource("24_xuqvo")
+mark_sound = ExtResource("25_0odxb")
+
+[node name="ReelPoint" type="Node3D" parent="SnakeDrawing" unique_id=75625332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74483, 1.1097232, -1.6919404)
+visible = false
+
+[node name="ReelMesh" type="MeshInstance3D" parent="SnakeDrawing/ReelPoint" unique_id=1946322571]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.25, 0)
+mesh = SubResource("CylinderMesh_lswn8")
 
 [node name="SnakeHead" type="RigidBody3D" parent="SnakeDrawing" unique_id=423996981]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78194, 0.9344528, -1.2499684)
@@ -256,14 +280,22 @@ script = ExtResource("17_yaehf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeDrawing/SnakeHead" unique_id=778166378]
 shape = SubResource("CylinderShape3D_a6jrf")
 
-[node name="PickableAudio" parent="SnakeDrawing/SnakeHead" unique_id=1219173025 instance=ExtResource("23_a6jrf")]
-pickable_audio_type = SubResource("Resource_0rl1p")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SnakeDrawing/SnakeHead" unique_id=1817980958]
+[node name="MarkerMesh" type="MeshInstance3D" parent="SnakeDrawing/SnakeHead" unique_id=1817980958]
 mesh = SubResource("CylinderMesh_xuqvo")
 surface_material_override/0 = SubResource("StandardMaterial3D_lswn8")
 
+[node name="ActiveMesh" type="MeshInstance3D" parent="SnakeDrawing/SnakeHead" unique_id=669548070]
+visible = false
+mesh = SubResource("CylinderMesh_0odxb")
+surface_material_override/0 = SubResource("StandardMaterial3D_a6jrf")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="SnakeDrawing/SnakeHead" unique_id=865543773]
+stream = SubResource("AudioStreamPolyphonic_lswn8")
+autoplay = true
+
 [node name="SnakeNodes" type="Node3D" parent="SnakeDrawing" unique_id=869533853]
+
+[node name="SnakeJoints" type="Node3D" parent="SnakeDrawing" unique_id=1100033533]
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
@@ -272,6 +304,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_lswn8")
 [connection signal="action_released" from="SnakeHeadTarget" to="." method="_on_snake_head_target_action_released"]
 [connection signal="action_pressed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_pressed"]
 [connection signal="action_released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_released"]
+[connection signal="grabbed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_grabbed"]
+[connection signal="released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_released"]
 
 [editable path="NetworkGatewayViewport"]
 [editable path="Snake"]
