@@ -45,7 +45,6 @@ func _on_snake_head_action_pressed(pickable):
 		lastsegpos = $SnakeHead.global_position
 		$ReelPoint.global_position = lastsegpos
 		$ReelPoint.visible = true
-		get_node("../Snake").target = null
 		$SnakeHead/ActiveMesh.visible = true
 
 	else:
