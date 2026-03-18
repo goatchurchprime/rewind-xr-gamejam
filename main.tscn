@@ -198,11 +198,12 @@ collision_layer = 8388609
 shape = SubResource("BoxShape3D_getpj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Fridge" unique_id=1440077541]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2330633, 0, 0)
 mesh = SubResource("BoxMesh_ryguw")
 surface_material_override/0 = ExtResource("14_074og")
 
 [node name="NetworkGatewayViewport" parent="." unique_id=2145623234 instance=ExtResource("15_getpj")]
-transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -3.0820389, 1.255002, -2.7729235)
+transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -8.163665, 1.255002, -2.7729235)
 viewport_size = Vector2(700, 450)
 transparent = 1
 scene_properties_keys = PackedStringArray()
@@ -232,6 +233,7 @@ shape = SubResource("BoxShape3D_jq2sk")
 
 [node name="Snake" parent="." unique_id=1147104204 node_paths=PackedStringArray("target") instance=ExtResource("15_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7411308, 5.217908, -2.8472552)
+visible = false
 target = NodePath("../SnakeHeadTarget")
 
 [node name="Control" parent="Snake/Debug" parent_id_path=PackedInt32Array(1147104204, 525279070) index="0" unique_id=376478768]
