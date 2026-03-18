@@ -72,6 +72,10 @@ class BodyPart extends RigidBody3D:
 		capsule_shape.height = length
 		capsule_shape.radius = width
 		col.rotation_degrees.x = 90
+
+		physics_material_override = load("res://yank/link_physics_material.tres")
+		collision_layer = (1 << 23)
+		collision_mask = (1 << 23)
 		add_child(col)
 	
 	func _ready():
@@ -93,6 +97,11 @@ class Joint extends Generic6DOFJoint3D:
 		set("linear_spring_z/enabled", true)
 		
 func _ready():
+	print(get_node("/root"))
+	print(get_node("/root/Main/World/Floor").collision_layer)
+	print("%x" % (8388609))
+	print("%x" % (1 << 23))
+
 	var first_body = BodyPart.new()
 	first_body.position.z = 0
 	first_body.freeze = false

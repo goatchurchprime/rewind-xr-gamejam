@@ -125,6 +125,7 @@ environment = SubResource("Environment_1bvp3")
 
 [node name="Table1" type="StaticBody3D" parent="World/Furniture" unique_id=1953537167]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4630303, 0.5, -4.111409)
+collision_layer = 8388609
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Table1" unique_id=106720632]
 shape = SubResource("CylinderShape3D_cegan")
@@ -134,6 +135,7 @@ mesh = SubResource("CylinderMesh_82xsv")
 
 [node name="Fridge" type="StaticBody3D" parent="World/Furniture" unique_id=1950314042]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38938737, 1, -6.051605)
+collision_layer = 8388609
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Fridge" unique_id=818338518]
 shape = SubResource("BoxShape3D_getpj")
