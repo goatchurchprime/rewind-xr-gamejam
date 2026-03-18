@@ -15,8 +15,12 @@
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
 [ext_resource type="Material" uid="uid://q4gjgwsj5ff3" path="res://assets_thirdparty/spare_textures/grey_box.tres" id="14_074og"]
 [ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="14_yaehf"]
+[ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
 [ext_resource type="PackedScene" uid="uid://bme8t8qae1vra" path="res://yank/snake.tscn" id="15_vivmo"]
+[ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="16_ryguw"]
+[ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="17_d13ii"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://djehrm378cbde" path="res://addons/player-networking/PlayerFrameLocal.tscn" id="18_1u8w0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("14_074og")
@@ -46,6 +50,23 @@ size = Vector3(1, 2, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_ryguw"]
 size = Vector3(1, 2, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_0odxb"]
+resource_local_to_scene = true
+size = Vector2(3, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lswn8"]
+viewport_path = NodePath("NetworkGatewayViewport/Viewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a6jrf"]
+transparency = 1
+cull_mode = 2
+albedo_texture = SubResource("ViewportTexture_lswn8")
+texture_filter = 1
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xuqvo"]
+resource_local_to_scene = true
+size = Vector3(3, 2, 0.02)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_074og"]
 size = Vector3(0.2, 0.2, 0.2)
@@ -144,12 +165,41 @@ shape = SubResource("BoxShape3D_getpj")
 mesh = SubResource("BoxMesh_ryguw")
 surface_material_override/0 = ExtResource("14_074og")
 
+[node name="NetworkGatewayViewport" parent="." unique_id=2145623234 instance=ExtResource("15_getpj")]
+transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -3.0820389, 1.255002, -2.7729235)
+viewport_size = Vector2(700, 450)
+transparent = 1
+scene_properties_keys = PackedStringArray()
+
+[node name="Viewport" parent="NetworkGatewayViewport" index="0"]
+size = Vector2i(700, 450)
+
+[node name="NetworkGateway" parent="NetworkGatewayViewport/Viewport" index="0" unique_id=407170005 instance=ExtResource("16_ryguw")]
+playersnodepath = NodePath("../../../PlayerAvatars")
+localplayerscene = ""
+
+[node name="Screen" parent="NetworkGatewayViewport" index="1"]
+mesh = SubResource("QuadMesh_0odxb")
+surface_material_override/0 = SubResource("StandardMaterial3D_a6jrf")
+
+[node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
+viewport_size = Vector2(700, 450)
+
+[node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_xuqvo")
+
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
-visible = false
+
+[node name="VRPlayerAvatar" parent="PlayerAvatars" unique_id=1613864373 instance=ExtResource("17_d13ii")]
+
+[node name="PlayerFrame" parent="PlayerAvatars/VRPlayerAvatar" unique_id=880201821 instance=ExtResource("18_1u8w0")]
 
 [node name="Snake" parent="." unique_id=1147104204 node_paths=PackedStringArray("target") instance=ExtResource("15_vivmo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7411308, 5.217908, -2.8472552)
 target = NodePath("../SnakeHeadTarget")
+
+[node name="Control" parent="Snake/Debug" parent_id_path=PackedInt32Array(1147104204, 525279070) index="0" unique_id=376478768]
+visible = false
 
 [node name="SnakeHeadTarget" type="RigidBody3D" parent="." unique_id=705753038]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28489375, 1.1463099, -0.94931394)
@@ -175,4 +225,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49728644, -1.7905307)
 [connection signal="action_pressed" from="SnakeHeadTarget" to="." method="_on_snake_head_target_action_pressed"]
 [connection signal="action_released" from="SnakeHeadTarget" to="." method="_on_snake_head_target_action_released"]
 
+[editable path="NetworkGatewayViewport"]
 [editable path="Snake"]
