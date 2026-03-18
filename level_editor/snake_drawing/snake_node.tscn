@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bq1tavj1fi71g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rfh50"]
+albedo_color = Color(1, 0.050980393, 1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_d6y3f"]
+material = SubResource("StandardMaterial3D_rfh50")
+size = Vector3(0.1, 0.1, 0.2)
+
+[node name="SnakeNode" type="MeshInstance3D" unique_id=1844854314]
+mesh = SubResource("PrismMesh_d6y3f")

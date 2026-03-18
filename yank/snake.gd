@@ -46,7 +46,7 @@ func _physics_process(delta):
 	if is_recording:
 		save_frame()
 	
-	if head:
+	if head and target:
 		var direction = (target.global_position - head.global_position).normalized()
 		head.linear_velocity = direction * speed
 		
