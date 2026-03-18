@@ -72,6 +72,9 @@ class BodyPart extends RigidBody3D:
 		capsule_shape.height = length
 		capsule_shape.radius = width
 		col.rotation_degrees.x = 90
+		physics_material_override = load("res://yank/link_physics_material.tres")
+		collision_layer = (1 << 23)
+		collision_mask = (1 << 23)
 		add_child(col)
 	
 	func _ready():
