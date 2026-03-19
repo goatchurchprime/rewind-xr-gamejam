@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bl2wb02uryurb"
-path="res://.godot/imported/gnsake0.png-53c1cf17729a443b6bcb6a70a4812ad3.ctex"
+uid="uid://8rcy2ryaoubs"
+path="res://.godot/imported/gnsake_spiral.exr-a87fabaef31b8fa01aae560fed9e22ea.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_editor/snakepngs/gnsake0.png"
-dest_files=["res://.godot/imported/gnsake0.png-53c1cf17729a443b6bcb6a70a4812ad3.ctex"]
+source_file="res://snakemonster/gnsake_spiral.exr"
+dest_files=["res://.godot/imported/gnsake_spiral.exr-a87fabaef31b8fa01aae560fed9e22ea.ctex"]
 
 [params]
 

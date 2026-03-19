@@ -23,6 +23,8 @@
 [ext_resource type="Script" uid="uid://d2oqgf6d408gy" path="res://level_editor/snake_drawing/snake_drawing.gd" id="22_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cmxsgymulrx0l" path="res://level_editor/snake_drawing/sounds/switch7.wav" id="24_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cewowdu3vkh8u" path="res://level_editor/snake_drawing/sounds/click04.wav" id="25_0odxb"]
+[ext_resource type="Script" uid="uid://dbbwlr0ejgtro" path="res://snakemonster/snake_monsters.gd" id="25_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://c8kfpaya2kruf" path="res://snakemonster/gsnake.tscn" id="25_lswn8"]
 [ext_resource type="AudioStream" uid="uid://dqovsr2pln3qd" path="res://level_editor/snake_drawing/sounds/switch5.wav" id="25_qsp4k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
@@ -57,20 +59,20 @@ size = Vector3(1, 2, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0odxb"]
 data = PackedVector3Array(-0.25, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.6, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.6, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, 0.2, -0.25, -0.09325695, -0.2, -0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, -0.25, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.2, -0.25, -0.6, 0.25, -0.2, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.25, -0.25, -0.6, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, 0.1591527, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, -0.25, -0.6, 0.25, -0.25, 0.6, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.25, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.1591527, -0.25, 0.6, 0.25, -0.25, 0.6, 0.1591527, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.25, 0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.6, -0.25, 0.2, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.25, -0.6, -0.25, 0.25, -0.6, -0.2, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.25, 0.25, -0.0059263706, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.0059263706, -0.25, 0.25, -0.09325695, -0.2, 0.25, -0.6, 0.2, 0.2, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.25, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.2, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, -0.6, 0.25, 0.25, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, -0.2, 0.25, -0.09325695, 0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.25, 0.25, -0.6, 0.25, 0.25, 0.6, 0.25, 0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, 0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.0059263706, 0.15915273, 0.25, -0.09325695, 0.2, 0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.15915273, 0.25, 0.6, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.09325695, 0.2, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, 0.1591527, -0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, 0.6, 0.1591527, -0.25, -0.0059263706, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, 0.15915273, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, 0.6, 0.15915273, -8.742278e-08, 0.6, 0.19874883, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, 0.15915273, 0.25, 0.6, 0.15915273, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.2, -0.25, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.09325695, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.6, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.6, -0.2, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.2, 0.25, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.25, -0.2, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.2, -0.2, -0.6, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.25, 0.2, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.6, 0.25)
 
-[sub_resource type="QuadMesh" id="QuadMesh_1u8w0"]
+[sub_resource type="QuadMesh" id="QuadMesh_xuqvo"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_0odxb"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qsp4k"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuqvo"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq58d"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_0odxb")
+albedo_texture = SubResource("ViewportTexture_qsp4k")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qsp4k"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_seu75"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -262,14 +264,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_1u8w0")
-surface_material_override/0 = SubResource("StandardMaterial3D_xuqvo")
+mesh = SubResource("QuadMesh_xuqvo")
+surface_material_override/0 = SubResource("StandardMaterial3D_kq58d")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_qsp4k")
+shape = SubResource("BoxShape3D_seu75")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -278,6 +280,7 @@ shape = SubResource("BoxShape3D_qsp4k")
 [node name="PlayerFrame" parent="PlayerAvatars/VRPlayerAvatar" unique_id=880201821 instance=ExtResource("18_1u8w0")]
 
 [node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("14_yaehf")]
+visible = false
 
 [node name="SnakeDrawing" type="Node3D" parent="." unique_id=1401319208]
 script = ExtResource("22_xuqvo")
@@ -337,7 +340,10 @@ autoplay = true
 
 [node name="SnakeJoints" type="Node3D" parent="SnakeDrawing" unique_id=1100033533]
 
-[node name="BlockoutDepression" parent="." unique_id=655625158]
+[node name="SnakeMonsters" type="Node3D" parent="." unique_id=563263574]
+script = ExtResource("25_a6jrf")
+
+[node name="GSnake0" parent="SnakeMonsters" unique_id=1321012479 instance=ExtResource("25_lswn8")]
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]

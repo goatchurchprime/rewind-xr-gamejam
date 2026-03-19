@@ -199,7 +199,9 @@ func advancesnakepulling(delta):
 					snakepulling = 1
 				else:
 					if snakerows:
-						get_node("../GSnake").Dsetsnaketexture(snakerows, "res://level_editor/snakepngs/gnsake%d.png" % snakeN)
+						var fexr = "res://level_editor/snakeexrs/gnsake%d.exr" % snakeN
+						GSnakeClass.snakerowstoimage(snakerows).save_exr(fexr)
+						get_node("../SnakeMonsters/GSnake0").loadsnakemotionimg(fexr)
 						snakeN += 1
 						snakerows = [ ]
 					snakepulling = 0

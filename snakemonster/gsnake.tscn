@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c8kfpaya2kruf"]
+
+[ext_resource type="Script" uid="uid://cpf0533wcr2u1" path="res://snakemonster/gsnake.gd" id="1_gu154"]
+[ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="2_gu154"]
+[ext_resource type="Texture2D" uid="uid://0ip5sa0y3stq" path="res://experiments/gnsake.png" id="3_wqaro"]
+[ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_kaqc7"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_82xsv"]
+radius = 1.0
+sections = 50
+section_length = 0.02
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_getpj"]
+render_priority = 0
+shader = ExtResource("2_gu154")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("4_kaqc7")
+shader_parameter/animtexture = ExtResource("3_wqaro")
+shader_parameter/snakerad = 0.1
+shader_parameter/snakeradperi = 0.0
+shader_parameter/timefac = 5.0
+shader_parameter/perialongfac = 60.0
+shader_parameter/texvtime = 0.3
+shader_parameter/texutime = 0.4
+
+[node name="GSnake" type="Node3D" unique_id=1286430818]
+script = ExtResource("1_gu154")
+
+[node name="GSnakeMesh" type="MeshInstance3D" parent="." unique_id=1166400016]
+extra_cull_margin = 20.0
+mesh = SubResource("TubeTrailMesh_82xsv")
+surface_material_override/0 = SubResource("ShaderMaterial_getpj")
