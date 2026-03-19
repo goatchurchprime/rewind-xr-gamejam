@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://cpf0533wcr2u1" path="res://snakemonster/gsnake.gd" id="1_gu154"]
 [ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="2_gu154"]
-[ext_resource type="Texture2D" uid="uid://0ip5sa0y3stq" path="res://experiments/gnsake.png" id="3_wqaro"]
 [ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_kaqc7"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
 
@@ -19,7 +18,6 @@ render_priority = 0
 shader = ExtResource("2_gu154")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("4_kaqc7")
-shader_parameter/animtexture = ExtResource("3_wqaro")
 shader_parameter/snakerad = 0.1
 shader_parameter/snakeradperi = 0.0
 shader_parameter/timefac = 5.0
