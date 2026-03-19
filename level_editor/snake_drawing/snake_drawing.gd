@@ -44,6 +44,7 @@ func _on_snake_head_action_pressed(pickable):
 		lastsegpos = $SnakeHead.global_position
 		var headrodtrans = Transform3D(Basis(), lastsegpos)
 		$ReelBox.global_transform = headrodtrans*$ReelBox/ReelPoint.transform.inverse()
+		print("set reelbox trans ", $ReelBox.global_transform)
 		$ReelBox.visible = true
 		$ReelBox.enabled = true
 		print("Reel box ", $ReelBox.global_transform)
@@ -72,6 +73,7 @@ func _on_snake_head_action_released(pickable):
 
 var Csnakerod = preload("res://level_editor/snake_drawing/snake_rod.tscn")
 func _process(delta):
+	#print($ReelBox.get_global_rotation_degrees())
 	if lastsegpos != null:
 		var segpos = $SnakeHead.global_position
 		if lastsegpos.distance_to(segpos) > snakenodedistance:
@@ -104,7 +106,8 @@ func startsnakepulling():
 	var sla = snakelocationarray()
 	snakeupdatetimer = 0.0
 	snakefulllength = slalength(sla)
-	snakerowwidth = clampi(snakefulllength/0.33, 5, 200)
+	print("start snake pulling length ", snakefulllength)
+	snakerowwidth = clampi(int(snakefulllength/0.33), 5, 200)
 	var srow = calcsnakerow(sla)
 	snakerows = [ srow ]
 
@@ -192,7 +195,7 @@ func advancesnakepulling(delta):
 				$SnakeNodes.remove_child(sn0)
 				sn0.queue_free()
 				if $SnakeNodes.get_child_count() != 0:
-					snakepulling == 1
+					snakepulling = 1
 				else:
 					if snakerows:
 						get_node("../GSnake").Dsetsnaketexture(snakerows)

@@ -63,6 +63,6 @@ func _on_xr_controller_3d_left_button_released(name):
 		tweensnakeout.kill()
 		tweensnakeout = null
 		tweensnakerewind = get_tree().create_tween()
-		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 0.4)
+		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 3.4)
 		var u0 = $GSnake.animmaterial.get_shader_parameter("texutime")
 		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texutime", x), u0, 1.0, 0.4)
