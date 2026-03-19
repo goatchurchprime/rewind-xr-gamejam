@@ -197,14 +197,13 @@ shape = SubResource("CylinderShape3D_cegan")
 mesh = SubResource("CylinderMesh_82xsv")
 
 [node name="Fridge" type="StaticBody3D" parent="World/Furniture" unique_id=1950314042]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.38938737, 1, -6.051605)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2637808, 1, -6.051605)
 collision_layer = 8388609
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Fridge" unique_id=818338518]
 shape = SubResource("BoxShape3D_getpj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Fridge" unique_id=1440077541]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2330633, 0, 0)
 mesh = SubResource("BoxMesh_ryguw")
 surface_material_override/0 = ExtResource("14_1u8w0")
 
@@ -337,6 +336,8 @@ autoplay = true
 [node name="SnakeNodes" type="Node3D" parent="SnakeDrawing" unique_id=869533853]
 
 [node name="SnakeJoints" type="Node3D" parent="SnakeDrawing" unique_id=1100033533]
+
+[node name="BlockoutDepression" parent="." unique_id=655625158]
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
