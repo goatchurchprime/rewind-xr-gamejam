@@ -34,28 +34,31 @@ func createsnakejoints():
 		rodB.freeze = false
 
 func _on_snake_head_action_pressed(pickable):
-	if lastsegpos == null and $ReelPoint.visible:
-		if snakepulling != 0:
-			$ReelPoint.visible = false
-		else:
-			snakepulling = 1
+	if lastsegpos == null and $ReelBox.visible:
+		snakepulling = 0
+		$ReelBox.visible = false
+		$ReelBox.enabled = false
 
 	elif lastsegpos == null:
 		clearsnake()
 		lastsegpos = $SnakeHead.global_position
-		$ReelPoint.global_position = lastsegpos
-		$ReelPoint.visible = true
+		var headrodtrans = Transform3D(Basis(), lastsegpos)
+		$ReelBox.global_transform = headrodtrans*$ReelBox/ReelPoint.transform.inverse()
+		$ReelBox.visible = true
+		$ReelBox.enabled = true
+		print("Reel box ", $ReelBox.global_transform)
 		$SnakeHead/ActiveMesh.visible = true
 
 	else:
 		lastsegpos = null
 		$SnakeHead/ActiveMesh.visible = false
-		var firstlastleng = $SnakeHead.global_position.distance_to($ReelPoint.global_position)
+		var firstlastleng = $SnakeHead.global_position.distance_to($ReelBox/ReelPoint.global_position)
 		if firstlastleng > snakenodedistance:
 			createsnakejoints()
 		else:
 			clearsnake()
-			$ReelPoint.visible = false
+			$ReelBox.visible = false
+			$ReelBox.enabled = false
 
 "sdfsf"
 func _on_snake_head_grabbed(pickable, by):
@@ -88,14 +91,16 @@ func _physics_process(delta):
 		return
 	if $SnakeNodes.get_child_count() == 0:
 		snakepulling = 0
-		$ReelPoint.visible = false
+		$ReelBox.visible = false
+		$ReelBox.enabled = false
 		return
 	var sn0 = $SnakeNodes.get_child(0)
 	sn0.freeze = true
 	
+	var rt = $ReelBox/ReelPoint.global_transform
 	if snakepulling == 1 or snakepulling == 3:
 		var sn0end = sn0.global_transform*Vector3(0,0,-snakenodedistance*0.5 if snakepulling == 1 else snakenodedistance*0.5)
-		var vecm0 : Vector3 = $ReelPoint.global_position - sn0end
+		var vecm0 : Vector3 = rt.origin - sn0end
 		var vecm0len = vecm0.length()
 		var drod = rodvelocity*delta
 		if vecm0len <= drod:
@@ -112,14 +117,25 @@ func _physics_process(delta):
 		else:
 			sn0.global_position += vecm0*(drod/vecm0len)
 	elif snakepulling == 2:
-		var rotdiff = acos($ReelPoint.global_transform.basis.z.dot(sn0.global_transform.basis.z))
-		var rotperp = $ReelPoint.global_transform.basis.z.cross(sn0.global_transform.basis.z).normalized()
+		var rotdiff = acos(rt.basis.z.dot(sn0.global_transform.basis.z))
+		var rotperp = rt.basis.z.cross(sn0.global_transform.basis.z).normalized()
 		var drot = rodangvel*delta
 		sn0.global_transform.basis = sn0.global_transform.basis.rotated(rotperp, -min(rotdiff, drot))
 		var sn0end = sn0.global_transform*Vector3(0,0,-snakenodedistance*0.5)
-		var vecm0 : Vector3 = $ReelPoint.global_position - sn0end
+		var vecm0 : Vector3 = rt.origin - sn0end
 		sn0.global_position += vecm0
 
 		if rotdiff <= drot:
 			snakepulling = 3
 		
+func _on_reel_box_highlight_updated(pickable, enable):
+	$ReelBox/ReelPoint/ReelDir.get_surface_override_material(0).albedo_color = Color.RED if enable else Color.CYAN
+
+func _on_reel_box_action_pressed(pickable):
+	if $ReelBox.visible and snakepulling == 0 and $SnakeNodes.get_child_count() != 0:
+		if lastsegpos != null: 
+			lastsegpos = null
+			$SnakeHead/ActiveMesh.visible = false
+			var firstlastleng = $SnakeHead.global_position.distance_to($ReelBox/ReelPoint.global_position)
+			createsnakejoints()
+		snakepulling = 1

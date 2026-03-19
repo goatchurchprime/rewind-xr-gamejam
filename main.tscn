@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="9_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
-[ext_resource type="Material" uid="uid://q4gjgwsj5ff3" path="res://assets_thirdparty/spare_textures/grey_box.tres" id="14_074og"]
+[ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="14_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
 [ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="16_ryguw"]
@@ -26,7 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://dqovsr2pln3qd" path="res://level_editor/snake_drawing/sounds/switch5.wav" id="25_qsp4k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
-material = ExtResource("14_074og")
+material = ExtResource("14_1u8w0")
 size = Vector3(50, 1, 50)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
@@ -45,7 +45,7 @@ sky = SubResource("Sky_h2yge")
 height = 1.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_82xsv"]
-material = ExtResource("14_074og")
+material = ExtResource("14_1u8w0")
 height = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
@@ -54,22 +54,29 @@ size = Vector3(1, 2, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ryguw"]
 size = Vector3(1, 2, 1)
 
-[sub_resource type="QuadMesh" id="QuadMesh_kq58d"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0odxb"]
+data = PackedVector3Array(-0.25, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.6, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.6, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, 0.2, -0.25, -0.09325695, -0.2, -0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, -0.25, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.2, -0.25, -0.6, 0.25, -0.2, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.25, -0.25, -0.6, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, 0.1591527, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, -0.25, -0.6, 0.25, -0.25, 0.6, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.25, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.1591527, -0.25, 0.6, 0.25, -0.25, 0.6, 0.1591527, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.25, 0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.6, -0.25, 0.2, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.25, -0.6, -0.25, 0.25, -0.6, -0.2, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.25, 0.25, -0.0059263706, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.0059263706, -0.25, 0.25, -0.09325695, -0.2, 0.25, -0.6, 0.2, 0.2, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.25, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.2, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, -0.6, 0.25, 0.25, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, -0.2, 0.25, -0.09325695, 0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.25, 0.25, -0.6, 0.25, 0.25, 0.6, 0.25, 0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, 0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.0059263706, 0.15915273, 0.25, -0.09325695, 0.2, 0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.15915273, 0.25, 0.6, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.09325695, 0.2, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, 0.1591527, -0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, 0.6, 0.1591527, -0.25, -0.0059263706, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, 0.15915273, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, 0.6, 0.15915273, -8.742278e-08, 0.6, 0.19874883, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, 0.15915273, 0.25, 0.6, 0.15915273, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.2, -0.25, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.09325695, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.6, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.6, -0.2, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.2, 0.25, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.25, -0.2, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.2, -0.2, -0.6, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.25, 0.2, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.6, 0.25)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1u8w0"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_seu75"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0odxb"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htxhm"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xuqvo"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_seu75")
+albedo_texture = SubResource("ViewportTexture_0odxb")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_jq2sk"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_qsp4k"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1u8w0"]
+height = 0.1
+radius = 0.25
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_lswn8"]
 top_radius = 0.25
@@ -77,6 +84,12 @@ bottom_radius = 0.25
 height = 0.1
 radial_segments = 10
 rings = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_1u8w0"]
+size = Vector3(0.01, 0.01, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1u8w0"]
+albedo_color = Color(0.08627451, 1, 1, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a6jrf"]
 height = 0.2
@@ -126,6 +139,8 @@ tracker = &"left_hand"
 [node name="MovementDirect" parent="XROrigin3D/XRController3D_left" unique_id=264777544 instance=ExtResource("4_4c57u")]
 strafe = true
 
+[node name="FunctionPickup" parent="XROrigin3D/XRController3D_left" unique_id=123309529 instance=ExtResource("11_82xsv")]
+
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
 tracker = &"right_hand"
@@ -146,6 +161,7 @@ jump_button_action = "ax_button"
 enabled = false
 
 [node name="PlayerBody" parent="XROrigin3D" unique_id=337536217 instance=ExtResource("9_ycdy4")]
+collision_mask = 1019
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
 
@@ -190,7 +206,7 @@ shape = SubResource("BoxShape3D_getpj")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Fridge" unique_id=1440077541]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2330633, 0, 0)
 mesh = SubResource("BoxMesh_ryguw")
-surface_material_override/0 = ExtResource("14_074og")
+surface_material_override/0 = ExtResource("14_1u8w0")
 
 [node name="Bench" type="StaticBody3D" parent="World/Furniture" unique_id=168053193]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.16594148, 0.42203808, -5.045845)
@@ -201,7 +217,37 @@ shape = SubResource("BoxShape3D_getpj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Bench" unique_id=458416978]
 mesh = SubResource("BoxMesh_ryguw")
-surface_material_override/0 = ExtResource("14_074og")
+surface_material_override/0 = ExtResource("14_1u8w0")
+
+[node name="Chair" type="RigidBody3D" parent="World/Furniture" unique_id=1326902844]
+transform = Transform3D(0.021954462, 0, 0.9997589, 0, 1, 0, -0.9997589, 0, 0.021954462, 0, 0.58634305, -1.5910909)
+collision_layer = 8388612
+collision_mask = 196608
+freeze = true
+script = ExtResource("17_yaehf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Chair" unique_id=1459948438]
+shape = SubResource("ConcavePolygonShape3D_0odxb")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Furniture/Chair" unique_id=1333236080]
+size = Vector3(0.5, 1.2, 0.5)
+material = ExtResource("14_1u8w0")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="World/Furniture/Chair/CSGBox3D" unique_id=1244154460]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9940736, -1.8012512)
+operation = 2
+radius = 2.0
+sides = 20
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Furniture/Chair/CSGBox3D" unique_id=1480196565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59325695, 0)
+operation = 2
+size = Vector3(1, 1, 0.4)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Furniture/Chair/CSGBox3D" unique_id=378388764]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.59325695, 0)
+operation = 2
+size = Vector3(0.4, 1, 1)
 
 [node name="NetworkGatewayViewport" parent="." unique_id=2145623234 instance=ExtResource("15_getpj")]
 transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -8.163665, 1.255002, -2.7729235)
@@ -217,14 +263,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_kq58d")
-surface_material_override/0 = SubResource("StandardMaterial3D_htxhm")
+mesh = SubResource("QuadMesh_1u8w0")
+surface_material_override/0 = SubResource("StandardMaterial3D_xuqvo")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_jq2sk")
+shape = SubResource("BoxShape3D_qsp4k")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -242,13 +288,29 @@ grab_sound = ExtResource("25_qsp4k")
 release_sound = ExtResource("24_xuqvo")
 mark_sound = ExtResource("25_0odxb")
 
-[node name="ReelPoint" type="Node3D" parent="SnakeDrawing" unique_id=75625332]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.74483, 1.1097232, -1.6919404)
+[node name="ReelBox" type="RigidBody3D" parent="SnakeDrawing" unique_id=185342223]
+transform = Transform3D(0.75194335, 0.6592277, 0, -0.6592277, 0.75194335, 0, 0, 0, 1, 1.6449049, 1.7598772, -0.99560976)
 visible = false
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("17_yaehf")
+enabled = false
 
-[node name="ReelMesh" type="MeshInstance3D" parent="SnakeDrawing/ReelPoint" unique_id=1946322571]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.25, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeDrawing/ReelBox" unique_id=1607193018]
+shape = SubResource("CylinderShape3D_1u8w0")
+
+[node name="ReelMesh" type="MeshInstance3D" parent="SnakeDrawing/ReelBox" unique_id=1946322571]
 mesh = SubResource("CylinderMesh_lswn8")
+
+[node name="ReelPoint" type="Marker3D" parent="SnakeDrawing/ReelBox" unique_id=197743797]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="ReelDir" type="MeshInstance3D" parent="SnakeDrawing/ReelBox/ReelPoint" unique_id=478496638]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.125)
+mesh = SubResource("BoxMesh_1u8w0")
+surface_material_override/0 = SubResource("StandardMaterial3D_1u8w0")
 
 [node name="SnakeHead" type="RigidBody3D" parent="SnakeDrawing" unique_id=423996981]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78194, 0.9344528, -1.2499684)
@@ -281,6 +343,8 @@ autoplay = true
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="button_pressed" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_pressed"]
 [connection signal="button_released" from="XROrigin3D/XRController3D_left" to="." method="_on_xr_controller_3d_left_button_released"]
+[connection signal="action_pressed" from="SnakeDrawing/ReelBox" to="SnakeDrawing" method="_on_reel_box_action_pressed"]
+[connection signal="highlight_updated" from="SnakeDrawing/ReelBox" to="SnakeDrawing" method="_on_reel_box_highlight_updated"]
 [connection signal="action_pressed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_pressed"]
 [connection signal="action_released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_released"]
 [connection signal="grabbed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_grabbed"]

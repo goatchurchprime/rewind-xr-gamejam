@@ -9,6 +9,6 @@ func _plugging():
 	plug("GodotVR/godot-xr-tools", {"tag": "4.5.1"})
 	plug("goatchurchprime/godot-vr-simulator", {"branch": "compatxrtools45"})
 	plug("goatchurchprime/godot-mqtt", {"branch": "main"})
-	plug("goatchurchprime/godot_multiplayer_networking_workbench", {"include": ["addons/player-networking"], "branch":"main"})
+	plug("goatchurchprime/godot_multiplayer_networking_workbench", {"include": ["addons/player-networking"], "branch":"main", "rev":"b110c819c0369165981dbb950cabff3db1dd016e"})
 	plug("goatchurchprime/two-voip-addon", {"branch": "v4.1"})
 	plug("goatchurchprime/godot-webrtc-addon", {"branch": "v1.1.0"})
