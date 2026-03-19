@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamSynchronized" format=3 uid="uid://73c7a0g3s6n0"]
+
+[ext_resource type="AudioStream" uid="uid://0ngx7gks626s" path="res://audio/music/song_boss/drums.ogg" id="1_ku57s"]
+[ext_resource type="AudioStream" uid="uid://bdp37ti6hfr8x" path="res://audio/music/song_boss/bass.ogg" id="2_3x5ga"]
+[ext_resource type="AudioStream" uid="uid://bwvtc4a363i8f" path="res://audio/music/song_boss/drums_xtra.ogg" id="3_py7hm"]
+[ext_resource type="AudioStream" uid="uid://ig17gy726raq" path="res://audio/music/song_boss/percs.ogg" id="4_lx2jt"]
+
+[resource]
+stream_count = 4
+stream_0/stream = ExtResource("1_ku57s")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_3x5ga")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_py7hm")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("4_lx2jt")
+stream_3/volume = 0.0

@@ -1,0 +1,17 @@
+[gd_resource type="AudioStreamSynchronized" format=3 uid="uid://75uxcjhj0vbn"]
+
+[ext_resource type="AudioStream" uid="uid://b2qdguoldmfon" path="res://audio/music/song_2/drums.ogg" id="1_vv1v1"]
+[ext_resource type="AudioStream" uid="uid://dwjhhebfnpmqo" path="res://audio/music/song_2/bass.ogg" id="2_axvo2"]
+[ext_resource type="AudioStream" uid="uid://crr4b4eqtu6jc" path="res://audio/music/song_2/synth.ogg" id="3_d1ofn"]
+[ext_resource type="AudioStream" uid="uid://bel5v0kb5nlm1" path="res://audio/music/song_2/piano.ogg" id="4_mnl11"]
+
+[resource]
+stream_count = 4
+stream_0/stream = ExtResource("1_vv1v1")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_axvo2")
+stream_1/volume = 0.0
+stream_2/stream = ExtResource("3_d1ofn")
+stream_2/volume = 0.0
+stream_3/stream = ExtResource("4_mnl11")
+stream_3/volume = 0.0
