@@ -178,6 +178,7 @@ func snakelocationarray():
 			res.append(sniendfar)
 	return res
 
+var snakeN = 0
 func advancesnakepulling(delta):
 	var sn0 = $SnakeNodes.get_child(0)
 	sn0.freeze = true
@@ -198,7 +199,8 @@ func advancesnakepulling(delta):
 					snakepulling = 1
 				else:
 					if snakerows:
-						get_node("../GSnake").Dsetsnaketexture(snakerows)
+						get_node("../GSnake").Dsetsnaketexture(snakerows, "res://level_editor/snakepngs/gnsake%d.png" % snakeN)
+						snakeN += 1
 						snakerows = [ ]
 					snakepulling = 0
 		else:

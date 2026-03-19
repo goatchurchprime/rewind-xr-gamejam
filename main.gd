@@ -44,18 +44,23 @@ func _on_snake_head_target_action_pressed(pickable):
 
 func _on_snake_head_target_action_released(pickable):
 	print("target released ", len(snakerows))
-	$GSnake.Dsetsnaketexture(snakerows)
+	$GSnake.Dsetsnaketexture(snakerows, null)
 	snakerows = null
 	$GSnake.global_transform = Transform3D()
 
 var tweensnakeout = null
+var windbackspeed = 2.0
+var windoutspeed = 4.0
+var tweensnakerewind = null
 func _on_xr_controller_3d_left_button_pressed(name):
 	if name == "trigger_click":
-		$GSnake.animmaterial.set_shader_parameter("texvtime", 0)
+		if tweensnakerewind and tweensnakerewind.is_running():
+			tweensnakerewind.kill()
+			tweensnakerewind = null
+		$GSnake.animmaterial.set_shader_parameter("texvtime", 0.0)
 		tweensnakeout = get_tree().create_tween()
-		tweensnakeout.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, 4.0)
+		tweensnakeout.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, windoutspeed)
 
-var tweensnakerewind = null
 func _on_xr_controller_3d_left_button_released(name):
 	if name == "trigger_click" and tweensnakeout:
 		if tweensnakeout.is_running():
@@ -63,6 +68,5 @@ func _on_xr_controller_3d_left_button_released(name):
 		tweensnakeout.kill()
 		tweensnakeout = null
 		tweensnakerewind = get_tree().create_tween()
-		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 3.4)
 		var u0 = $GSnake.animmaterial.get_shader_parameter("texutime")
-		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texutime", x), u0, 1.0, 0.4)
+		tweensnakerewind.tween_method(func (x): $GSnake.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, (1.0-u0)*windbackspeed)

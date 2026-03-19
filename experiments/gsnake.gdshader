@@ -33,6 +33,10 @@ vec3 texvec(float utime, float vtime, vec3 p1) {
 }
 void vertex() {
 	float utime = UV.y*2.0 - texutime;
+	if (texvtime != 0.0) {
+		if (utime <= texvtime*0.9)
+			utime -= texvtime*0.9;
+	}
 	vec3 p1 = texpos(utime, texvtime);
 	vec3 planenorm = texvec(utime, texvtime, p1);
 	vec3 planex = normalize(vec3(planenorm.z, 0.0, -planenorm.x));
