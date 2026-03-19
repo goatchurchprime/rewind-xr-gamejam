@@ -13,6 +13,7 @@ cap_top = false
 cap_bottom = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_getpj"]
+resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_gu154")
 shader_parameter/albedo = Color(1, 1, 1, 1)
@@ -25,6 +26,20 @@ shader_parameter/perialongfac = 60.0
 shader_parameter/texvtime = 0.3
 shader_parameter/texutime = 0.4
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_gu154"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3bct"]
+albedo_color = Color(1, 1, 0.45882353, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wqaro"]
+size = Vector3(0.01, 0.01, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kaqc7"]
+albedo_color = Color(0.08627451, 1, 1, 1)
+
 [node name="GSnake" type="Node3D" unique_id=1286430818]
 script = ExtResource("1_gu154")
 
@@ -32,3 +47,16 @@ script = ExtResource("1_gu154")
 extra_cull_margin = 20.0
 mesh = SubResource("TubeTrailMesh_82xsv")
 surface_material_override/0 = SubResource("ShaderMaterial_getpj")
+
+[node name="ReelCyl" type="MeshInstance3D" parent="." unique_id=27187725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0429366, -1.1096728)
+mesh = SubResource("CylinderMesh_gu154")
+surface_material_override/0 = SubResource("StandardMaterial3D_i3bct")
+
+[node name="ReelPoint" type="Marker3D" parent="ReelCyl" unique_id=158272117]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="ReelDir" type="MeshInstance3D" parent="ReelCyl/ReelPoint" unique_id=1681834432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.125)
+mesh = SubResource("BoxMesh_wqaro")
+surface_material_override/0 = SubResource("StandardMaterial3D_kaqc7")

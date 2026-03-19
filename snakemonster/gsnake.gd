@@ -34,7 +34,12 @@ static func snakerowstoimage(snakerows):
 
 func loadsnakemotionimg(fname):
 	animimage = Image.load_from_file(fname)
-	print(animimage.get_format())
+	assert (animimage.get_format() == Image.FORMAT_RGBF)
 	animtexture = ImageTexture.create_from_image(animimage)
 	animmaterial = $GSnakeMesh.get_surface_override_material(0)
 	animmaterial.set_shader_parameter("animtexture", animtexture)
+
+	var c00 = animimage.get_pixel(0,0)
+	var p00 = Vector3(c00.r, c00.g, c00.b)
+	var sntrans = Transform3D(Basis(), p00)
+	$ReelCyl.global_transform = sntrans*$ReelCyl/ReelPoint.transform.inverse()
