@@ -4,6 +4,7 @@
 [ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="2_gu154"]
 [ext_resource type="Texture2D" uid="uid://0ip5sa0y3stq" path="res://experiments/gnsake.png" id="3_wqaro"]
 [ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_kaqc7"]
+[ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_82xsv"]
 radius = 1.0
@@ -34,6 +35,10 @@ height = 0.1
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3bct"]
 albedo_color = Color(1, 1, 0.45882353, 1)
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wqaro"]
+height = 0.1
+radius = 0.25
+
 [sub_resource type="BoxMesh" id="BoxMesh_wqaro"]
 size = Vector3(0.01, 0.01, 0.25)
 
@@ -48,10 +53,19 @@ extra_cull_margin = 20.0
 mesh = SubResource("TubeTrailMesh_82xsv")
 surface_material_override/0 = SubResource("ShaderMaterial_getpj")
 
-[node name="ReelCyl" type="MeshInstance3D" parent="." unique_id=27187725]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0429366, -1.1096728)
+[node name="ReelCyl" type="RigidBody3D" parent="." unique_id=1131590527]
+collision_layer = 4
+collision_mask = 196615
+freeze = true
+freeze_mode = 1
+script = ExtResource("5_i3bct")
+
+[node name="Mesh" type="MeshInstance3D" parent="ReelCyl" unique_id=27187725]
 mesh = SubResource("CylinderMesh_gu154")
 surface_material_override/0 = SubResource("StandardMaterial3D_i3bct")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReelCyl" unique_id=1730922910]
+shape = SubResource("CylinderShape3D_wqaro")
 
 [node name="ReelPoint" type="Marker3D" parent="ReelCyl" unique_id=158272117]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.25, 0, 0)
@@ -60,3 +74,5 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.25
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.125)
 mesh = SubResource("BoxMesh_wqaro")
 surface_material_override/0 = SubResource("StandardMaterial3D_kaqc7")
+
+[connection signal="action_pressed" from="ReelCyl" to="." method="_on_reel_cyl_action_pressed"]

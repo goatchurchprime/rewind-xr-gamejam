@@ -43,3 +43,12 @@ func loadsnakemotionimg(fname):
 	var p00 = Vector3(c00.r, c00.g, c00.b)
 	var sntrans = Transform3D(Basis(), p00)
 	$ReelCyl.global_transform = sntrans*$ReelCyl/ReelPoint.transform.inverse()
+
+var tweentest = null
+func _on_reel_cyl_action_pressed(pickable):
+	if tweentest and tweentest.is_running():
+		tweentest.kill()
+	tweentest = get_tree().create_tween()
+	animmaterial.set_shader_parameter("texvtime", 0.0)
+	tweentest.tween_method(func (x): animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, 2.0)
+	tweentest.tween_method(func (x): animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 2.0)
