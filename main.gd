@@ -5,7 +5,6 @@ func _ready():
 	if webrtcroomname:
 		await get_tree().create_timer(randf()*0.2 + 0.2).timeout
 		$NetworkGatewayViewport/Viewport/NetworkGateway.initialstatemqttwebrtc($NetworkGatewayViewport/Viewport/NetworkGateway.NETWORK_OPTIONS_MQTT_WEBRTC.AS_NECESSARY, webrtcroomname, null)
-		
 
 func _on_start_xr_xr_failed_to_initialize():
 	$XROrigin3D/XRSimulator.enabled = true
@@ -26,27 +25,6 @@ func _process(delta):
 		fadetween.tween_method(Dset_fade, 1.0, 0.0, 0.34)
 		await fadetween.finished
 		fadetween = null
-		
-
-
-var snakerows = null
-func _on_snake_head_target_action_pressed(pickable):
-	print("target pressed")
-	snakerows = [ ]
-	while snakerows != null:
-		var row : = PackedVector3Array()
-		row.resize(len($Snake.bodies))
-		for i in range(len($Snake.bodies)):
-			row[i] = $Snake.bodies[i].global_position
-		row.reverse()
-		snakerows.append(row)
-		await get_tree().create_timer(0.2).timeout
-
-func _on_snake_head_target_action_released(pickable):
-	print("target released ", len(snakerows))
-	#$GSnake.Dsetsnaketexture(snakerows, null)
-	snakerows = null
-	$GSnake.global_transform = Transform3D()
 
 var tweensnakeout = null
 var windbackspeed = 2.0

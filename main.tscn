@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
 [ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="14_1u8w0"]
-[ext_resource type="PackedScene" uid="uid://bwcl20hn6r5lg" path="res://experiments/g_snake.tscn" id="14_yaehf"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
 [ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="16_ryguw"]
 [ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="17_d13ii"]
@@ -280,8 +279,6 @@ shape = SubResource("BoxShape3D_kq58d")
 [node name="VRPlayerAvatar" parent="PlayerAvatars" unique_id=1613864373 instance=ExtResource("17_d13ii")]
 
 [node name="PlayerFrame" parent="PlayerAvatars/VRPlayerAvatar" unique_id=880201821 instance=ExtResource("18_1u8w0")]
-
-[node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("14_yaehf")]
 
 [node name="SnakeDrawing" type="Node3D" parent="." unique_id=1401319208]
 script = ExtResource("22_xuqvo")
