@@ -12,16 +12,18 @@ func _on_start_xr_xr_failed_to_initialize():
 
 var fadetween = null
 func Dset_fade(p_value : float):
-	XRToolsFade.set_fade("spawnpoint", Color(0.3, 0, 0, p_value))
-
+	XRToolsFade.set_fade("spawnpoint", Color(0.1, 0.1, 0.1, p_value))
+func fadeteleport(trans):
+	fadetween = get_tree().create_tween()
+	fadetween.tween_method(Dset_fade, 0.0, 1.0, 0.34)
+	await fadetween.finished
+	$XROrigin3D.transform = trans
+	$XROrigin3D/PlayerBody.velocity = Vector3(0,0,0)
+	fadetween = get_tree().create_tween()
+	fadetween.tween_method(Dset_fade, 1.0, 0.0, 0.34)
+	await fadetween.finished
+	fadetween = null
+	
 func _process(delta):
 	if $XROrigin3D.position.y < -50 and not fadetween:
-		fadetween = get_tree().create_tween()
-		fadetween.tween_method(Dset_fade, 0.0, 1.0, 0.34)
-		await fadetween.finished
-		$XROrigin3D.position = Vector3(0,1,0)
-		$XROrigin3D/PlayerBody.velocity = Vector3(0,0,0)
-		fadetween = get_tree().create_tween()
-		fadetween.tween_method(Dset_fade, 1.0, 0.0, 0.34)
-		await fadetween.finished
-		fadetween = null
+		fadeteleport(Transform3D(Basis(), Vector3(0,1,0)))

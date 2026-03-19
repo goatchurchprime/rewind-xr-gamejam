@@ -67,3 +67,42 @@ func _on_reel_cyl_action_released(pickable):
 			tweensnakerewind = get_tree().create_tween()
 			var u0 = animmaterial.get_shader_parameter("texutime")
 			tweensnakerewind.tween_method(func (x): animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, (1.0-u0)*windbackspeed)
+
+func setsnakepos(u, v):
+	animmaterial.set_shader_parameter("texutime", u)
+	animmaterial.set_shader_parameter("texvtime", v)
+
+enum {  SNAKE_HIBERNATING, SNAKE_EMERGING, SNAKE_RETRACTING, SNAKE_PLUGGED, SNAKE_DEAD }
+var state = SNAKE_HIBERNATING
+var emergeextent = 0.0
+var retractionprogress = 0.0
+var timecountdown = 0.0
+var emergerate = 0.5
+var retractrate = 1.5
+func resetsnake():
+	state = SNAKE_HIBERNATING
+	emergeextent = 0.0
+	retractionprogress = 0.0
+	timecountdown = randf_range(1, 3)
+	setsnakepos(1-emergeextent, retractionprogress)
+
+func processsnake(delta):
+	if state == SNAKE_HIBERNATING:
+		timecountdown -= delta
+		if timecountdown < 0:
+			state = SNAKE_EMERGING
+			retractionprogress = 0.0
+	elif state == SNAKE_EMERGING:
+		emergeextent += delta*emergerate
+		if emergeextent >= 1.0:
+			emergeextent = 1.0
+			state = SNAKE_RETRACTING
+		setsnakepos(1-emergeextent, retractionprogress)
+	elif state == SNAKE_RETRACTING:
+		retractionprogress += retractrate*delta
+		if retractionprogress >= 1.0:
+			retractionprogress = 1.0
+			state = SNAKE_HIBERNATING
+			emergeextent = 0.0
+			timecountdown = randf_range(1, 3)
+		setsnakepos(1-emergeextent, retractionprogress)

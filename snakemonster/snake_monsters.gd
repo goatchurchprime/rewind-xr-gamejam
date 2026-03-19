@@ -34,3 +34,19 @@ func loadintogsnake0(fexr):
 		sn.loadsnakemotionimg(fexr)
 		sn.animmaterial.set_shader_parameter("texutime", 0.0)
 		sn.animmaterial.set_shader_parameter("texvtime", 0.0)
+
+var snakesplaying = false
+func _on_game_playing_button_button_pressed(button):
+	for sn in get_children():
+		sn.resetsnake()
+	snakesplaying = true
+	
+func _process(delta):
+	if snakesplaying:
+		for sn in get_children():
+			sn.processsnake(delta)
+
+
+
+func _on_game_playing_button_button_released(button):
+	snakesplaying = true

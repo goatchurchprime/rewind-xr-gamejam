@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
 [ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="14_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://5a7tn4j677nk" path="res://audio/code/music.tscn" id="14_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
 [ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="16_ryguw"]
 [ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="17_d13ii"]
@@ -27,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://dxtq7yrwuy505" path="res://snakemonster/snake_monsters.tscn" id="25_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://dh3gap8vnjcq" path="res://assets/Scenes/factory_heavy_pipe.tscn" id="26_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://c2dvcq46p2ba6" path="res://assets/Scenes/factory_support.tscn" id="27_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="29_qsp4k"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("14_1u8w0")
@@ -60,20 +62,20 @@ size = Vector3(1, 2, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0odxb"]
 data = PackedVector3Array(-0.25, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.6, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.6, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, 0.2, -0.25, -0.09325695, -0.2, -0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, -0.25, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.2, -0.25, -0.6, 0.25, -0.2, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.25, -0.25, -0.6, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, 0.1591527, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, -0.25, -0.6, 0.25, -0.25, 0.6, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.25, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.1591527, -0.25, 0.6, 0.25, -0.25, 0.6, 0.1591527, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.25, 0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.6, -0.25, 0.2, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.25, -0.6, -0.25, 0.25, -0.6, -0.2, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.25, 0.25, -0.0059263706, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.0059263706, -0.25, 0.25, -0.09325695, -0.2, 0.25, -0.6, 0.2, 0.2, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.25, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.2, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, -0.6, 0.25, 0.25, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, -0.2, 0.25, -0.09325695, 0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.25, 0.25, -0.6, 0.25, 0.25, 0.6, 0.25, 0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, 0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.0059263706, 0.15915273, 0.25, -0.09325695, 0.2, 0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.15915273, 0.25, 0.6, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.09325695, 0.2, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, 0.1591527, -0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, 0.6, 0.1591527, -0.25, -0.0059263706, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, 0.15915273, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, 0.6, 0.15915273, -8.742278e-08, 0.6, 0.19874883, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, 0.15915273, 0.25, 0.6, 0.15915273, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.2, -0.25, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.09325695, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.6, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.6, -0.2, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.2, 0.25, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.25, -0.2, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.2, -0.2, -0.6, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.25, 0.2, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.6, 0.25)
 
-[sub_resource type="QuadMesh" id="QuadMesh_a6jrf"]
+[sub_resource type="QuadMesh" id="QuadMesh_qsp4k"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xuqvo"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_kq58d"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsp4k"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seu75"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_xuqvo")
+albedo_texture = SubResource("ViewportTexture_kq58d")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kq58d"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_htxhm"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -117,6 +119,15 @@ rings = 0
 albedo_color = Color(1, 0.00999999, 0.00999999, 1)
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_lswn8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_seu75"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_htxhm"]
+size = Vector3(0.2, 0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsp4k"]
+albedo_color = Color(0.13333334, 1, 0.07450981, 1)
 
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
@@ -167,6 +178,9 @@ enabled = false
 collision_mask = 1019
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
+
+[node name="Music" parent="World" unique_id=464198334 instance=ExtResource("14_xuqvo")]
+volume_db = -20.0
 
 [node name="Floor" type="StaticBody3D" parent="World" unique_id=998891937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -265,14 +279,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_a6jrf")
-surface_material_override/0 = SubResource("StandardMaterial3D_qsp4k")
+mesh = SubResource("QuadMesh_qsp4k")
+surface_material_override/0 = SubResource("StandardMaterial3D_seu75")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_kq58d")
+shape = SubResource("BoxShape3D_htxhm")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -390,6 +404,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -13)
 [node name="Factory_Support9" parent="FactoryScene" unique_id=876685993 instance=ExtResource("27_a6jrf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -19)
 
+[node name="GamePlayingButton" parent="." unique_id=500991475 instance=ExtResource("29_qsp4k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22748893, 0.82265663, -0.765675)
+collision_layer = 4
+collision_mask = 131076
+button = NodePath("CollisionShape3D/MeshInstance3D")
+displacement = Vector3(0, -0.1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GamePlayingButton" unique_id=1833742543]
+shape = SubResource("BoxShape3D_seu75")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GamePlayingButton/CollisionShape3D" unique_id=784503828]
+mesh = SubResource("BoxMesh_htxhm")
+surface_material_override/0 = SubResource("StandardMaterial3D_qsp4k")
+
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="action_pressed" from="SnakeDrawing/ReelBox" to="SnakeDrawing" method="_on_reel_box_action_pressed"]
 [connection signal="highlight_updated" from="SnakeDrawing/ReelBox" to="SnakeDrawing" method="_on_reel_box_highlight_updated"]
@@ -397,5 +425,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -19)
 [connection signal="action_released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_released"]
 [connection signal="grabbed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_grabbed"]
 [connection signal="released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_released"]
+[connection signal="button_pressed" from="GamePlayingButton" to="SnakeMonsters" method="_on_game_playing_button_button_pressed"]
+[connection signal="button_released" from="GamePlayingButton" to="SnakeMonsters" method="_on_game_playing_button_button_released"]
 
 [editable path="NetworkGatewayViewport"]

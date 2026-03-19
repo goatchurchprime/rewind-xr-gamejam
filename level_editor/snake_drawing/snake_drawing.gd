@@ -10,6 +10,8 @@ var Csnakenode = preload("res://level_editor/snake_drawing/snake_node.tscn")
 var Csnakejoint = preload("res://level_editor/snake_drawing/snake_6dof_joint.tscn")
 const snakenodedistance = 0.5
 
+
+
 var snakepulling = 0
 func clearsnake():
 	for Ds in $SnakeNodes.get_children():
