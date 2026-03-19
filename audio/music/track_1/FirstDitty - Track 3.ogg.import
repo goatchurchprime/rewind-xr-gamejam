@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://iuukndt8xt6f"
+path="res://.godot/imported/FirstDitty - Track 3.ogg-00b0dc8f63c5f1e422ce790cf6081a07.oggvorbisstr"
+
+[deps]
+
+source_file="res://audio/music/track_1/FirstDitty - Track 3.ogg"
+dest_files=["res://.godot/imported/FirstDitty - Track 3.ogg-00b0dc8f63c5f1e422ce790cf6081a07.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
