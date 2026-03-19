@@ -86,6 +86,65 @@ func _process(delta):
 
 const rodvelocity = 1.0
 const rodangvel = deg_to_rad(140)
+
+var snakerows = [ ]
+var snakerowwidth = 100
+var snakefulllength = 0.0
+var snakeupdatetimer = 0.0
+var snakeupdatetimeframe = 0.25
+
+func slalength(sla):
+	var res = 0.0
+	for i in range(1, len(sla)):
+		res += sla[i-1].distance_to(sla[i])
+	return res
+	
+func startsnakepulling():
+	snakepulling = 1
+	var sla = snakelocationarray()
+	snakeupdatetimer = 0.0
+	snakefulllength = slalength(sla)
+	snakerowwidth = clampi(snakefulllength/0.33, 5, 200)
+	var srow = calcsnakerow(sla)
+	snakerows = [ srow ]
+
+	if false:  # of calcsnakerow
+		var Dsnakerow = get_node_or_null("DSnakeRow")
+		if Dsnakerow:
+			remove_child(Dsnakerow)
+			Dsnakerow.queue_free()
+		Dsnakerow = Node3D.new()
+		Dsnakerow.name = "DSnakeRow"
+		add_child(Dsnakerow)
+		for p in srow:
+			var m = MeshInstance3D.new()
+			m.mesh = BoxMesh.new()
+			m.scale *= 0.3
+			Dsnakerow.add_child(m)
+			m.global_position = p
+
+func calcsnakerow(sla):
+	var i = len(sla) - 2
+	var lam = 1.0
+	var lstep = snakefulllength/(snakerowwidth - 1)
+	var srow = [ sla[-1] ]
+	var lstepremain = lstep
+	while len(srow) < snakerowwidth and i >= 0:
+		var seglen = sla[i].distance_to(sla[i+1])
+		var lamstep = lstepremain/seglen
+		if lam < lamstep:
+			lstepremain -= lam*seglen
+			i -= 1
+			lam = 1.0
+		else:
+			lam -= lamstep
+			srow.append(lerp(sla[i], sla[i+1], lam))
+			lstepremain = lstep
+	while len(srow) < snakerowwidth:
+		srow.append(sla[0])
+	srow.reverse()
+	return srow
+
 func _physics_process(delta):
 	if snakepulling == 0:
 		return
@@ -94,9 +153,31 @@ func _physics_process(delta):
 		$ReelBox.visible = false
 		$ReelBox.enabled = false
 		return
+
+	advancesnakepulling(delta)
+	if snakerows:
+		snakeupdatetimer += delta
+		if snakeupdatetimer >= snakeupdatetimeframe:
+			var sla = snakelocationarray()
+			var srow = calcsnakerow(sla)
+			snakerows.append(srow)
+			snakeupdatetimer -= snakeupdatetimeframe
+
+func snakelocationarray():
+	var res = [ $ReelBox/ReelPoint.global_transform.origin ]
+	for i in range($SnakeNodes.get_child_count()):
+		var sni = $SnakeNodes.get_child(i)
+		var sniendnear = sni.global_transform*Vector3(0,0,-snakenodedistance*0.5)
+		var sniendfar = sni.global_transform*Vector3(0,0,snakenodedistance*0.5)
+		if i != 0 and not res[-1].is_equal_approx(sniendnear):
+			res.append(sniendnear)
+		if not res[-1].is_equal_approx(sniendfar):
+			res.append(sniendfar)
+	return res
+
+func advancesnakepulling(delta):
 	var sn0 = $SnakeNodes.get_child(0)
 	sn0.freeze = true
-	
 	var rt = $ReelBox/ReelPoint.global_transform
 	if snakepulling == 1 or snakepulling == 3:
 		var sn0end = sn0.global_transform*Vector3(0,0,-snakenodedistance*0.5 if snakepulling == 1 else snakenodedistance*0.5)
@@ -111,8 +192,11 @@ func _physics_process(delta):
 				$SnakeNodes.remove_child(sn0)
 				sn0.queue_free()
 				if $SnakeNodes.get_child_count() != 0:
-					snakepulling = 1
+					snakepulling == 1
 				else:
+					if snakerows:
+						get_node("../GSnake").Dsetsnaketexture(snakerows)
+						snakerows = [ ]
 					snakepulling = 0
 		else:
 			sn0.global_position += vecm0*(drod/vecm0len)
@@ -124,10 +208,9 @@ func _physics_process(delta):
 		var sn0end = sn0.global_transform*Vector3(0,0,-snakenodedistance*0.5)
 		var vecm0 : Vector3 = rt.origin - sn0end
 		sn0.global_position += vecm0
-
 		if rotdiff <= drot:
 			snakepulling = 3
-		
+
 func _on_reel_box_highlight_updated(pickable, enable):
 	$ReelBox/ReelPoint/ReelDir.get_surface_override_material(0).albedo_color = Color.RED if enable else Color.CYAN
 
@@ -138,4 +221,4 @@ func _on_reel_box_action_pressed(pickable):
 			$SnakeHead/ActiveMesh.visible = false
 			var firstlastleng = $SnakeHead.global_position.distance_to($ReelBox/ReelPoint.global_position)
 			createsnakejoints()
-		snakepulling = 1
+		startsnakepulling()

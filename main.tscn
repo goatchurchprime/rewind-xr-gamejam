@@ -279,8 +279,6 @@ shape = SubResource("BoxShape3D_qsp4k")
 [node name="PlayerFrame" parent="PlayerAvatars/VRPlayerAvatar" unique_id=880201821 instance=ExtResource("18_1u8w0")]
 
 [node name="GSnake" parent="." unique_id=1286430818 instance=ExtResource("14_yaehf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49728644, -1.7905307)
-visible = false
 
 [node name="SnakeDrawing" type="Node3D" parent="." unique_id=1401319208]
 script = ExtResource("22_xuqvo")
