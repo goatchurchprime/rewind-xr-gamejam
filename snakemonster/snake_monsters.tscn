@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dxtq7yrwuy505"]
+
+[ext_resource type="Script" uid="uid://dbbwlr0ejgtro" path="res://snakemonster/snake_monsters.gd" id="1_1fr22"]
+[ext_resource type="PackedScene" uid="uid://c8kfpaya2kruf" path="res://snakemonster/gsnake.tscn" id="2_bluob"]
+
+[node name="SnakeMonsters" type="Node3D" unique_id=1755609400]
+script = ExtResource("1_1fr22")
+
+[node name="GSnake0" parent="." unique_id=1286430818 instance=ExtResource("2_bluob")]
