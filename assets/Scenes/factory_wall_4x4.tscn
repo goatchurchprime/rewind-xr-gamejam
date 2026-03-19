@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://wcjcesjsux7m"]
+
+[ext_resource type="PackedScene" uid="uid://mngb0bqljcml" path="res://assets/Factory_Wall_4x4.glb" id="1_0mfwo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v2mmn"]
+points = PackedVector3Array(3, 3, 0.19996086, 3, 3, -0.19999999, -1, 3, 0.19996086, 3, -1, 0.19996086, 3, -1, -0.19999999, -1, 3, -0.19999999, -1, -1, 0.19996086, -1, -1, -0.19999999)
+
+[node name="Factory_Wall_4x4" unique_id=2099905970 instance=ExtResource("1_0mfwo")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Cube_001" parent_id_path=PackedInt32Array(1497924585) index="0" unique_id=1699309500]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cube_001/StaticBody3D" index="0" unique_id=1553630786]
+shape = SubResource("ConvexPolygonShape3D_v2mmn")

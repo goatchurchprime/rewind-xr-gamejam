@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c2dvcq46p2ba6"]
+
+[ext_resource type="PackedScene" uid="uid://ccyqf1ssj5aed" path="res://assets/Factory_Support.glb" id="1_m8xd8"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mbgem"]
+points = PackedVector3Array(-1, 0, -0.4, 1, 0, -0.4, -1, 0, 0.4, -1, 10, -0.4, 1, 0, 0.4, 1, 10, -0.4, -1, 10, 0.4, 1, 10, 0.4)
+
+[node name="Factory_Support2" unique_id=1834334623 instance=ExtResource("1_m8xd8")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Support" parent_id_path=PackedInt32Array(1083444548) index="0" unique_id=1122386616]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Support/StaticBody3D" index="0" unique_id=1650474843]
+shape = SubResource("ConvexPolygonShape3D_mbgem")
