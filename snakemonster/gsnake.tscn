@@ -74,3 +74,4 @@ mesh = SubResource("BoxMesh_wqaro")
 surface_material_override/0 = SubResource("StandardMaterial3D_kaqc7")
 
 [connection signal="action_pressed" from="ReelCyl" to="." method="_on_reel_cyl_action_pressed"]
+[connection signal="action_released" from="ReelCyl" to="." method="_on_reel_cyl_action_released"]

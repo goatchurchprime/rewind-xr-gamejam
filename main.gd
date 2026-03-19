@@ -25,29 +25,3 @@ func _process(delta):
 		fadetween.tween_method(Dset_fade, 1.0, 0.0, 0.34)
 		await fadetween.finished
 		fadetween = null
-
-var tweensnakeout = null
-var windbackspeed = 2.0
-var windoutspeed = 4.0
-var tweensnakerewind = null
-func _on_xr_controller_3d_left_button_pressed(name):
-	if name == "trigger_click":
-		if tweensnakerewind and tweensnakerewind.is_running():
-			tweensnakerewind.kill()
-			tweensnakerewind = null
-		if has_node("SnakeMonsters/GSnake0"):
-			$SnakeMonsters/GSnake0.animmaterial.set_shader_parameter("texvtime", 0.0)
-			tweensnakeout = get_tree().create_tween()
-			tweensnakeout.tween_method(func (x): $SnakeMonsters/GSnake0.animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, windoutspeed)
-
-func _on_xr_controller_3d_left_button_released(name):
-	if name == "trigger_click" and tweensnakeout:
-		if tweensnakeout and tweensnakeout.is_running():
-			print("Snake reached destination")
-			tweensnakeout.kill()
-			tweensnakeout = null
-		if has_node("SnakeMonsters/GSnake0"):
-			tweensnakerewind = get_tree().create_tween()
-			var u0 = $SnakeMonsters/GSnake0.animmaterial.get_shader_parameter("texutime")
-			tweensnakerewind.tween_method(func (x): $SnakeMonsters/GSnake0.animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, (1.0-u0)*windbackspeed)
-				

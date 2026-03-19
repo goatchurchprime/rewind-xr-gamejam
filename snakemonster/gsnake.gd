@@ -44,11 +44,26 @@ func loadsnakemotionimg(fname):
 	var sntrans = Transform3D(Basis(), p00)
 	$ReelCyl.global_transform = sntrans*$ReelCyl/ReelPoint.transform.inverse()
 
-var tweentest = null
+
+
+var tweensnakeout = null
+var windbackspeed = 2.0
+var windoutspeed = 4.0
+var tweensnakerewind = null
 func _on_reel_cyl_action_pressed(pickable):
-	if tweentest and tweentest.is_running():
-		tweentest.kill()
-	tweentest = get_tree().create_tween()
+	if tweensnakerewind and tweensnakerewind.is_running():
+		tweensnakerewind.kill()
+		tweensnakerewind = null
 	animmaterial.set_shader_parameter("texvtime", 0.0)
-	tweentest.tween_method(func (x): animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, 2.0)
-	tweentest.tween_method(func (x): animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, 2.0)
+	tweensnakeout = get_tree().create_tween()
+	tweensnakeout.tween_method(func (x): animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, windoutspeed)
+
+func _on_reel_cyl_action_released(pickable):
+	if tweensnakeout:
+		if tweensnakeout.is_running():
+			print("Snake reached destination")
+			tweensnakeout.kill()
+			tweensnakeout = null
+			tweensnakerewind = get_tree().create_tween()
+			var u0 = animmaterial.get_shader_parameter("texutime")
+			tweensnakerewind.tween_method(func (x): animmaterial.set_shader_parameter("texvtime", x), 0.0, 1.0, (1.0-u0)*windbackspeed)
