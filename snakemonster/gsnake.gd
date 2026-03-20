@@ -32,11 +32,13 @@ static func snakerowstoimage(snakerows):
 	print("bytedatalength ", len(animdata.to_byte_array()))
 	return Image.create_from_data(len(snakerows[0]), len(snakerows), false, Image.FORMAT_RGBF, animdata.to_byte_array())
 
-func loadsnakemotionimg(fname):
-	#animimage = Image.load_from_file(fname)
-	#animtexture = ImageTexture.create_from_image(animimage)
-	animtexture = ResourceLoader.load(fname)
-	animimage = animtexture.get_image()
+func loadsnakemotionimg(fname, fromresourceloader):
+	if fromresourceloader:
+		animtexture = ResourceLoader.load(fname)
+		animimage = animtexture.get_image()
+	else:
+		animimage = Image.load_from_file(fname)
+		animtexture = ImageTexture.create_from_image(animimage)
 	assert (animimage.get_format() == Image.FORMAT_RGBF)
 	animmaterial = $GSnakeMesh.get_surface_override_material(0)
 	animmaterial.set_shader_parameter("animtexture", animtexture)

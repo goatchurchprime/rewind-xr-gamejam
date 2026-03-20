@@ -180,7 +180,6 @@ func snakelocationarray():
 			res.append(sniendfar)
 	return res
 
-var snakeN = 0
 func advancesnakepulling(delta):
 	var sn0 = $SnakeNodes.get_child(0)
 	sn0.freeze = true
@@ -201,11 +200,7 @@ func advancesnakepulling(delta):
 					snakepulling = 1
 				else:
 					if snakerows:
-						#get_node("../GSnake").Dsetsnaketexture(snakerows, "res://level_editor/snakepngs/gnsake%d.png" % snakeN)
-						var fexr = "res://level_editor/snakeexrs/gnsake%d.exr" % snakeN
-						GSnakeClass.snakerowstoimage(snakerows).save_exr(fexr)
-						get_node("../SnakeMonsters").loadintogsnake0(fexr)
-						snakeN += 1
+						get_node("../SnakeMonsters").newsnakeimage(GSnakeClass.snakerowstoimage(snakerows))
 						snakerows = [ ]
 					snakepulling = 0
 		else:
@@ -225,6 +220,9 @@ func _on_reel_box_highlight_updated(pickable, enable):
 	$ReelBox/ReelPoint/ReelDir.get_surface_override_material(0).albedo_color = Color.RED if enable else Color.CYAN
 
 func _on_reel_box_action_pressed(pickable):
+	makesnake()
+	
+func makesnake():
 	if $ReelBox.visible and snakepulling == 0 and $SnakeNodes.get_child_count() != 0:
 		if lastsegpos != null: 
 			lastsegpos = null

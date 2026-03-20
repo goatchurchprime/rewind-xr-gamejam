@@ -1,53 +1,92 @@
 extends Node3D
 
-func _ready():
-	#GSnakeClass.snakerowstoimage(GSnakeClass.Dmakespiralsnakerows(100, 40)).save_exr("res://snakemonster/gnsake_spiral.exr")
-	if false:
-		$GSnake0.loadsnakemotionimg("res://snakemonster/gnsake_spiral.exr")
-	else:
-		loadsnakeexrs("res://level_editor/snakeexrs")
+var snakesplaying = false
+var usercontrolpanel : Control = null
+var snakelist : OptionButton = null
+var playsnakesbutton : CheckButton = null
+var makesnakebutton : Button = null
+var deletesnakebutton : Button = null
 
 var Csnake = load("res://snakemonster/gsnake.tscn")
-func loadsnakeexrs(edir):
-	print(ResourceLoader.list_directory(edir))
+var edir = "res://level_editor/snakeexrs"
+var fromresourceloader = true
+@onready var SnakeDrawing = get_node("../SnakeDrawing")
+
+func loadsnakeexrs():
 	for sn in get_children():
 		remove_child(sn)
 		sn.queue_free()
-	for fn in ResourceLoader.list_directory(edir):
+	for fn in DirAccess.open(edir).get_files():
 		if fn.get_extension() == "exr":
 			var sn = Csnake.instantiate()
 			sn.name = fn.get_basename()
 			add_child(sn)
-			sn.loadsnakemotionimg(edir.path_join(fn))
+			sn.loadsnakemotionimg(edir.path_join(fn), fromresourceloader)
 			sn.setsnakepos(0.0, 0.0)
-
-func loadintogsnake0(fexr):
-	if not has_node("GSnake0"):
-		var sn = Csnake.instantiate()
-		sn.name = "GSnake0"
-		add_child(sn)
-		sn.loadsnakemotionimg(fexr)
-		sn.setsnakepos(0.0, 0.0)
+	updatesnakelist()
 
 
-var snakesplaying = false
+func animatesnake():
+	pass
 
-func _input(event):
-	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_6:
+func playsnakes(toggled):
+	if toggled:
 		for sn in get_children():
 			sn.resetsnake()
-		snakesplaying = true
+	snakesplaying = toggled
 
-func _on_game_playing_button_button_pressed(button):
-	for sn in get_children():
-		sn.resetsnake()
-	snakesplaying = true
+func makesnake():
+	SnakeDrawing.makesnake()
+
+func setusercontrolpanel(lusercontrolpanel):
+	usercontrolpanel = lusercontrolpanel
+	print(lusercontrolpanel.get_path())
+	snakelist = usercontrolpanel.get_node("VBox/SnakeEntities")
+	usercontrolpanel.get_node("VBox/HBox/AnimateSnake").connect("pressed", animatesnake)
+	playsnakesbutton = usercontrolpanel.get_node("VBox/HBox2/PlaySnakes")
+	playsnakesbutton.connect("toggled", playsnakes)
+	makesnakebutton = usercontrolpanel.get_node("VBox/HBox/MakeSnake")
+	makesnakebutton.connect("pressed", makesnake)
+	deletesnakebutton = usercontrolpanel.get_node("VBox/HBox/DeleteSnake")
+	deletesnakebutton.connect("pressed", deletesnake)
+	updatesnakelist()
+
+func newsnakeimage(lsnakeimage : Image):
+	var fn
+	for i in range(100):
+		fn = edir.path_join("gnsake%d.exr" % i)
+		if not FileAccess.file_exists(fn):
+			break
+	lsnakeimage.save_exr(fn)
+	fromresourceloader = false  # now we have unimported resources
+	loadsnakeexrs()
+
+func deletesnake():
+	var fn = edir.path_join(snakelist.get_item_text(snakelist.selected)+".exr")
+	print("Deleting ", fn)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(fn))
+	fromresourceloader = false  # now we have unimported resources
+	loadsnakeexrs()
+
+
+func updatesnakelist():
+	if snakelist:
+		snakelist.clear()
+		for sn in get_children():
+			snakelist.add_item(sn.get_name())
+
+func _input(event):
+	if event is InputEventKey and event.is_pressed():
+		if event.keycode == KEY_P:
+			playsnakesbutton.button_pressed = not playsnakesbutton.button_pressed
+		if event.keycode == KEY_O:
+			makesnakebutton.pressed.emit()
+		if event.keycode == KEY_L:
+			snakelist.select((snakelist.selected+1) % snakelist.item_count) 
+		if event.keycode == KEY_K:
+			deletesnakebutton.pressed.emit()
 	
 func _process(delta):
 	if snakesplaying:
 		for sn in get_children():
 			sn.processsnake(delta)
-
-func _on_game_playing_button_button_released(button):
-	print("stop snakes playing")
-	snakesplaying = false

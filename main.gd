@@ -8,6 +8,9 @@ func _ready():
 	else:
 		$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(false)
 		$PlayerAvatars.visible = false
+	$SnakeMonsters.setusercontrolpanel(%UserControlPanel)
+	$SnakeMonsters.edir = "res://level_editor/snakeexrs"
+	$SnakeMonsters.loadsnakeexrs()
 
 func _on_start_xr_xr_failed_to_initialize():
 	$XROrigin3D/XRSimulator.enabled = true
