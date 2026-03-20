@@ -4,10 +4,6 @@ func _ready():
 	#GSnakeClass.snakerowstoimage(GSnakeClass.Dmakespiralsnakerows(100, 40)).save_exr("res://snakemonster/gnsake_spiral.exr")
 	if false:
 		$GSnake0.loadsnakemotionimg("res://snakemonster/gnsake_spiral.exr")
-		var tween = get_tree().create_tween()
-		$GSnake0.animmaterial.set_shader_parameter("texvtime", 0.1)
-		tween.tween_method(func (x): $GSnake0.animmaterial.set_shader_parameter("texutime", x), 1.0, 0.0, 5)
-		tween.tween_method(func (x): $GSnake0.animmaterial.set_shader_parameter("texutime", x), 0.0, 1.0, 6.0)
 	else:
 		loadsnakeexrs("res://level_editor/snakeexrs")
 
@@ -23,8 +19,7 @@ func loadsnakeexrs(edir):
 			sn.name = fn.get_basename()
 			add_child(sn)
 			sn.loadsnakemotionimg(edir.path_join(fn))
-			sn.animmaterial.set_shader_parameter("texutime", 0.0)
-			sn.animmaterial.set_shader_parameter("texvtime", 0.0)
+			sn.setsnakepos(0.0, 0.0)
 
 func loadintogsnake0(fexr):
 	if not has_node("GSnake0"):
@@ -32,10 +27,17 @@ func loadintogsnake0(fexr):
 		sn.name = "GSnake0"
 		add_child(sn)
 		sn.loadsnakemotionimg(fexr)
-		sn.animmaterial.set_shader_parameter("texutime", 0.0)
-		sn.animmaterial.set_shader_parameter("texvtime", 0.0)
+		sn.setsnakepos(0.0, 0.0)
+
 
 var snakesplaying = false
+
+func _input(event):
+	if event is InputEventKey and event.is_pressed() and event.keycode == KEY_6:
+		for sn in get_children():
+			sn.resetsnake()
+		snakesplaying = true
+
 func _on_game_playing_button_button_pressed(button):
 	for sn in get_children():
 		sn.resetsnake()
@@ -46,7 +48,6 @@ func _process(delta):
 		for sn in get_children():
 			sn.processsnake(delta)
 
-
-
 func _on_game_playing_button_button_released(button):
-	snakesplaying = true
+	print("stop snakes playing")
+	snakesplaying = false

@@ -5,7 +5,9 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_sc
 
 uniform vec4 albedo : source_color;
 uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform sampler2D texture_albedo_sick : source_color, filter_linear_mipmap, repeat_enable;
 uniform sampler2D animtexture : repeat_disable;
+uniform float sickfac = 0.0;
 
 // UV.x is around, UV.y < 0.5 is along
 uniform float snakerad = 0.05;
@@ -49,6 +51,10 @@ void vertex() {
 void fragment() {
 	vec2 base_uv = vec2(UV.x, fract(UV.y*10.0));
 	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	if (sickfac != 0.0) {
+		vec4 albedo_tex_sick = texture(texture_albedo_sick, base_uv);
+		albedo_tex = mix(albedo_tex, albedo_tex_sick, sickfac);
+	}
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 	NORMAL = -pnorm;
 }

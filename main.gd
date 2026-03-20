@@ -5,6 +5,9 @@ func _ready():
 	if webrtcroomname:
 		await get_tree().create_timer(randf()*0.2 + 0.2).timeout
 		$NetworkGatewayViewport/Viewport/NetworkGateway.initialstatemqttwebrtc($NetworkGatewayViewport/Viewport/NetworkGateway.NETWORK_OPTIONS_MQTT_WEBRTC.AS_NECESSARY, webrtcroomname, null)
+	else:
+		$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(false)
+		$PlayerAvatars.visible = false
 
 func _on_start_xr_xr_failed_to_initialize():
 	$XROrigin3D/XRSimulator.enabled = true
