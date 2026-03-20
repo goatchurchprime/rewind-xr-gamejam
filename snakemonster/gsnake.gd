@@ -104,6 +104,7 @@ var emergerate = 0.5*0.1
 var retractrate = 1.5*0.1
 func resetsnake():
 	state = SNAKE_HIBERNATING
+	$ReelCyl/ReelSound.stop()
 	emergeextent = 0.0
 	retractionprogress = 0.0
 	timecountdown = randf_range(1, 3)
@@ -121,6 +122,7 @@ func processsnake(delta):
 			setsnakepos(1-emergeextent, retractionprogress)
 			$ReelCyl/ReelSound.play()
 			$ReelCyl/ReelSound.volume_db = -10.0
+			$ReelCyl/ReelSound.pitch_scale = 1.0
 	elif state == SNAKE_EMERGING:
 		emergeextent += delta*emergerate
 		if emergeextent >= 1.0:
