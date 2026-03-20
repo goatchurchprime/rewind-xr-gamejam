@@ -6,6 +6,7 @@ var snakelist : OptionButton = null
 var playsnakesbutton : CheckButton = null
 var makesnakebutton : Button = null
 var deletesnakebutton : Button = null
+var playsnakesfastbutton : CheckButton = null
 
 var Csnake = load("res://snakemonster/gsnake.tscn")
 var edir = "res://level_editor/snakeexrs"
@@ -30,10 +31,16 @@ func animatesnake():
 	pass
 
 func playsnakes(toggled):
+	snakesplaying = toggled
 	if toggled:
+		var fac = 1.0 if playsnakesfastbutton.button_pressed else 0.1
 		for sn in get_children():
 			sn.resetsnake()
-	snakesplaying = toggled
+			sn.emergerate = 0.5*fac
+			sn.retractrate = 1.5*fac
+	else:
+		for sn in get_children():
+			sn.get_node("ReelCyl/ReelSound").stop()
 
 func makesnake():
 	SnakeDrawing.makesnake()
@@ -49,6 +56,7 @@ func setusercontrolpanel(lusercontrolpanel):
 	makesnakebutton.connect("pressed", makesnake)
 	deletesnakebutton = usercontrolpanel.get_node("VBox/HBox/DeleteSnake")
 	deletesnakebutton.connect("pressed", deletesnake)
+	playsnakesfastbutton = usercontrolpanel.get_node("VBox/HBox2/PlayFast")
 	updatesnakelist()
 
 func newsnakeimage(lsnakeimage : Image):

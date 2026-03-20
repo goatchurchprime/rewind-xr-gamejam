@@ -18,7 +18,8 @@ uniform float texvtime = 0.0;
 uniform float texutime = 0.0;
 varying vec3 pnorm;
 const float udelta = 0.01;
-const float reelrad = 0.3;
+const float reelrad = 0.2;
+const float plugrad = 0.05;
 
 vec3 texpos(float utime, float vtime) {
 	if (utime < 0.0) {
@@ -45,6 +46,9 @@ void vertex() {
 	vec3 planey = cross(planenorm, planex);
 	pnorm = planex*VERTEX.x + planey*VERTEX.z;
 	float rad = snakerad + snakeradperi*sin(TIME*timefac+UV.y*2.0*perialongfac);
+	if (UV.y > 0.45) {
+		rad = mix(plugrad, snakerad, max(0.0, (0.475 - UV.y))/0.025);
+	}
 	VERTEX = p1 - pnorm*rad;
 }
 

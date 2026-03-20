@@ -33,7 +33,6 @@ func createsnakejoints():
 		joint.look_at(rodA.global_position)
 		joint.node_a = rodA.get_path()
 		joint.node_b = rodB.get_path()
-		rodB.freeze = false
 
 func _on_snake_head_action_pressed(pickable):
 	if lastsegpos == null and $ReelBox.visible:
@@ -55,13 +54,9 @@ func _on_snake_head_action_pressed(pickable):
 	else:
 		lastsegpos = null
 		$SnakeHead/ActiveMesh.visible = false
-		var firstlastleng = $SnakeHead.global_position.distance_to($ReelBox/ReelPoint.global_position)
-		if firstlastleng > snakenodedistance:
-			createsnakejoints()
-		else:
-			clearsnake()
-			$ReelBox.visible = false
-			$ReelBox.enabled = false
+		clearsnake()
+		$ReelBox.visible = false
+		$ReelBox.enabled = false
 
 "sdfsf"
 func _on_snake_head_grabbed(pickable, by):
@@ -104,6 +99,11 @@ func slalength(sla):
 	return res
 	
 func startsnakepulling():
+	for i in range(1, $SnakeNodes.get_child_count()):
+		var rodB = $SnakeNodes.get_child(i)
+		rodB.freeze = false
+		rodB.linear_velocity = (rodB.global_transform.basis.z + Vector3(0,1.5,0))*(0.5 + i/$SnakeNodes.get_child_count())
+
 	snakepulling = 1
 	var sla = snakelocationarray()
 	snakeupdatetimer = 0.0
@@ -216,12 +216,6 @@ func advancesnakepulling(delta):
 		if rotdiff <= drot:
 			snakepulling = 3
 
-func _on_reel_box_highlight_updated(pickable, enable):
-	$ReelBox/ReelPoint/ReelDir.get_surface_override_material(0).albedo_color = Color.RED if enable else Color.CYAN
-
-func _on_reel_box_action_pressed(pickable):
-	makesnake()
-	
 func makesnake():
 	if $ReelBox.visible and snakepulling == 0 and $SnakeNodes.get_child_count() != 0:
 		if lastsegpos != null: 

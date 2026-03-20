@@ -95,7 +95,7 @@ func _on_reel_cyl_action_released(pickable):
 			var u0 = animmaterial.get_shader_parameter("texutime")
 			tweensnakerewind.tween_method(func (x): setsnakepos(u0, x), 0.0, 1.0, (1.0-u0)*windbackspeed)
 
-enum {  SNAKE_HIBERNATING, SNAKE_EMERGING, SNAKE_RETRACTING, SNAKE_PLUGGED, SNAKE_DEAD }
+enum {  SNAKE_HIBERNATING, SNAKE_EMERGING, SNAKE_RETRACTING, SNAKE_DYING, SNAKE_PLUGGED, SNAKE_DEAD }
 var state = SNAKE_HIBERNATING
 var emergeextent = 0.0
 var retractionprogress = 0.0
@@ -111,7 +111,8 @@ func resetsnake():
 	print("timecountdown ", timecountdown)
 	setsnakepos(1-emergeextent, retractionprogress)
 	animmaterial.set_shader_parameter("sickfac", 0.0)
-
+	$ReelCyl/ReelSound.stop()
+	
 func processsnake(delta):
 	if state == SNAKE_HIBERNATING:
 		timecountdown -= delta
@@ -129,23 +130,30 @@ func processsnake(delta):
 			emergeextent = 1.0
 			state = SNAKE_RETRACTING
 		setsnakepos(1-emergeextent, retractionprogress)
-	elif state == SNAKE_RETRACTING:
-		retractionprogress += retractrate*delta
+	elif state == SNAKE_RETRACTING or state == SNAKE_DYING:
+		retractionprogress += retractrate*delta * (0.2 if state == SNAKE_DYING else 1.0)
 		$ReelCyl/ReelSound.volume_db = 0
 		$ReelCyl/ReelSound.pitch_scale = 2.1-8*(retractionprogress-0.5)*(retractionprogress-0.5)
 		if retractionprogress >= 1.0:
 			retractionprogress = 1.0
 			$ReelCyl/ReelSound.stop()
-			state = SNAKE_HIBERNATING
+			state = SNAKE_DEAD if state == SNAKE_DYING else SNAKE_HIBERNATING
 			emergeextent = 0.0
 			timecountdown = randf_range(1, 3)
 		setsnakepos(1-emergeextent, retractionprogress)
 
-
-
+var timecooldown = Time.get_ticks_msec()
 func _on_snake_head_area_area_entered(area):
-	print("area ", area.get_path(), )
-	if state == SNAKE_EMERGING:
-		animmaterial.set_shader_parameter("sickfac", 0.5)
-		state = SNAKE_RETRACTING
-		$SnakeHeadArea/BopSound.play()
+	if area.checksnakehit($SnakeHeadArea.global_transform.basis.z):
+		if state == SNAKE_EMERGING:
+			animmaterial.set_shader_parameter("sickfac", 0.25)
+			state = SNAKE_RETRACTING
+			$SnakeHeadArea/BopSound.pitch_scale = 1.0
+			$SnakeHeadArea/BopSound.play()
+			timecooldown = Time.get_ticks_msec() + 500
+		if state == SNAKE_RETRACTING and timecooldown < Time.get_ticks_msec():
+			var tween = get_tree().create_tween()
+			tween.tween_method(func(x): animmaterial.set_shader_parameter("sickfac", x), 0.25, 1.0, 2.0)
+			state = SNAKE_DYING
+			$SnakeHeadArea/BopSound.pitch_scale = 0.5
+			$SnakeHeadArea/BopSound.play()
