@@ -68,7 +68,6 @@ func deletesnake():
 	fromresourceloader = false  # now we have unimported resources
 	loadsnakeexrs()
 
-
 func updatesnakelist():
 	if snakelist:
 		snakelist.clear()
@@ -85,7 +84,7 @@ func _input(event):
 			snakelist.select((snakelist.selected+1) % snakelist.item_count) 
 		if event.keycode == KEY_K:
 			deletesnakebutton.pressed.emit()
-	
+
 func _process(delta):
 	if snakesplaying:
 		for sn in get_children():

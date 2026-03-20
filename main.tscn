@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="9_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
+[ext_resource type="Script" uid="uid://bgwy54ngtjmy3" path="res://snake_head_hitter.gd" id="13_qsp4k"]
 [ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="14_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://5a7tn4j677nk" path="res://audio/code/music.tscn" id="14_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
@@ -29,22 +30,33 @@
 [ext_resource type="PackedScene" uid="uid://dh3gap8vnjcq" path="res://assets/Scenes/factory_heavy_pipe.tscn" id="26_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://c2dvcq46p2ba6" path="res://assets/Scenes/factory_support.tscn" id="27_a6jrf"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_qsp4k"]
+[sub_resource type="QuadMesh" id="QuadMesh_kq58d"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kq58d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_seu75"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seu75"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_htxhm"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_kq58d")
+albedo_texture = SubResource("ViewportTexture_seu75")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_htxhm"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jq2sk"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
+
+[sub_resource type="SphereMesh" id="SphereMesh_htxhm"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq2sk"]
+transparency = 1
+albedo_color = Color(1, 0.09803922, 0.20392157, 0.1764706)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4k2k6"]
+radius = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("14_1u8w0")
@@ -78,20 +90,20 @@ size = Vector3(1, 2, 1)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0odxb"]
 data = PackedVector3Array(-0.25, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.2, -0.2, -0.6, -0.2, -0.2, -0.6, -0.25, -0.25, -0.6, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.6, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.6, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, -0.2, -0.25, -0.6, -0.25, -0.2, -0.09325695, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.09325695, 0.2, -0.25, -0.09325695, -0.2, -0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, -0.25, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.2, -0.25, -0.6, 0.25, -0.2, -0.6, 0.25, -0.2, -0.6, 0.2, -0.25, -0.6, 0.25, -0.25, -0.6, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.25, -0.25, -0.0059263706, -0.25, -0.25, -0.0059263706, 0.1591527, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, -0.25, -0.6, 0.25, -0.25, 0.6, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -0.25, -0.09325695, 0.2, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.25, -0.25, -0.0059263706, 0.1591527, -0.25, 0.6, 0.1591527, -0.25, 0.6, 0.25, -0.25, 0.6, 0.1591527, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.25, -0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.25, 0.25, -0.0059263706, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.6, -0.25, 0.2, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.6, -0.2, 0.25, -0.6, -0.2, 0.25, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.25, -0.6, -0.25, 0.25, -0.6, -0.2, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.25, 0.25, -0.0059263706, -0.25, 0.2, -0.09325695, -0.25, 0.25, -0.0059263706, -0.25, 0.25, -0.6, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.0059263706, -0.25, 0.25, -0.09325695, -0.2, 0.25, -0.6, 0.2, 0.2, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.25, -0.6, 0.2, 0.2, -0.6, 0.25, 0.25, -0.6, 0.25, 0.2, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, -0.6, 0.25, 0.25, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, -0.2, 0.25, -0.09325695, 0.2, 0.25, -0.0059263706, 0.15915273, 0.25, -0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.25, 0.25, -0.6, 0.25, 0.25, 0.6, 0.25, 0.25, -0.09325695, 0.2, -0.25, 0.6, 0.25, 0.25, 0.6, 0.25, 0.2, -0.09325695, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.0059263706, 0.15915273, 0.25, -0.09325695, 0.2, 0.25, 0.6, 0.25, -8.742278e-08, 0.6, 0.19874883, 0.25, 0.6, 0.15915273, 0.25, 0.6, 0.25, 0.25, 0.6, 0.15915273, 0.25, -0.09325695, 0.2, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, -0.0059263706, 0.1591527, -0.25, -0.0059263706, -0.25, -8.742278e-08, -0.0059263706, 0.19874883, -0.25, 0.6, 0.1591527, -0.25, -0.0059263706, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, -8.742278e-08, 0.6, 0.19874883, -0.25, 0.6, 0.1591527, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, -0.25, 0.25, -0.0059263706, 0.15915273, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, 0.6, 0.15915273, -8.742278e-08, 0.6, 0.19874883, -8.742278e-08, -0.0059263706, 0.19874883, 0.25, -0.0059263706, 0.15915273, 0.25, 0.6, 0.15915273, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.2, -0.25, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.6, -0.2, -0.25, -0.09325695, -0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.2, -0.25, -0.09325695, 0.2, -0.25, -0.6, 0.2, -0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.2, -0.09325695, -0.2, -0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.6, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.25, -0.09325695, -0.2, 0.25, -0.6, -0.2, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.2, 0.25, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.25, -0.09325695, 0.2, 0.25, -0.09325695, -0.2, 0.2, -0.09325695, 0.2, 0.25, -0.6, 0.2, 0.25, -0.09325695, 0.2, -0.2, -0.09325695, -0.2, -0.2, -0.6, -0.25, -0.2, -0.6, -0.2, -0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.6, -0.25, -0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.2, -0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.25, -0.2, -0.6, 0.2, -0.2, -0.6, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.6, 0.2, -0.2, -0.09325695, 0.25, -0.2, -0.09325695, 0.2, -0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, -0.25, 0.2, -0.6, -0.25, 0.2, -0.09325695, -0.25, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.2, 0.2, -0.6, -0.2, 0.2, -0.09325695, -0.25, -0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.6, 0.25, 0.2, -0.6, 0.2, 0.2, -0.09325695, 0.2, 0.2, -0.09325695, 0.25, 0.2, -0.6, 0.25)
 
-[sub_resource type="QuadMesh" id="QuadMesh_jq2sk"]
+[sub_resource type="QuadMesh" id="QuadMesh_4k2k6"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4k2k6"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0rl1p"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rl1p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ok6jj"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_4k2k6")
+albedo_texture = SubResource("ViewportTexture_0rl1p")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ok6jj"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_facbu"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -169,9 +181,6 @@ screen_size = Vector2(0.3, 0.1)
 transparent = 1
 scene_properties_keys = PackedStringArray()
 
-[node name="Viewport" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="0"]
-size = Vector2i(300, 100)
-
 [node name="UserControlPanel" type="Control" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport" index="0" unique_id=1323247276]
 unique_name_in_owner = true
 layout_mode = 3
@@ -217,15 +226,19 @@ layout_mode = 2
 layout_mode = 2
 text = "Play"
 
+[node name="PlayFast" type="CheckButton" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox2" unique_id=995144890]
+layout_mode = 2
+text = "Fast"
+
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_qsp4k")
-surface_material_override/0 = SubResource("StandardMaterial3D_seu75")
+mesh = SubResource("QuadMesh_kq58d")
+surface_material_override/0 = SubResource("StandardMaterial3D_htxhm")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_htxhm")
+shape = SubResource("BoxShape3D_jq2sk")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
@@ -243,6 +256,18 @@ jump_button_action = "ax_button"
 
 [node name="FunctionPickup" parent="XROrigin3D/XRController3D_right" unique_id=1914122785 instance=ExtResource("11_82xsv")]
 grab_collision_mask = 851972
+
+[node name="SnakeHeadHitter" type="Area3D" parent="XROrigin3D/XRController3D_right" unique_id=374798313]
+collision_layer = 4194304
+collision_mask = 4194304
+script = ExtResource("13_qsp4k")
+
+[node name="RedZone" type="MeshInstance3D" parent="XROrigin3D/XRController3D_right/SnakeHeadHitter" unique_id=1559547338]
+mesh = SubResource("SphereMesh_htxhm")
+surface_material_override/0 = SubResource("StandardMaterial3D_jq2sk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="XROrigin3D/XRController3D_right/SnakeHeadHitter" unique_id=1992677892]
+shape = SubResource("SphereShape3D_4k2k6")
 
 [node name="XRSimulator" parent="XROrigin3D" unique_id=1311045107 instance=ExtResource("5_lquwl")]
 enabled = false
@@ -352,14 +377,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_jq2sk")
-surface_material_override/0 = SubResource("StandardMaterial3D_0rl1p")
+mesh = SubResource("QuadMesh_4k2k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ok6jj")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_ok6jj")
+shape = SubResource("BoxShape3D_facbu")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 

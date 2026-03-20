@@ -71,7 +71,7 @@ func setsnakepos(u, v):
 	var pc = p0l*(1-fu) + p1l*fu
 	var vc = p1l - p0l
 	$SnakeHead.look_at_from_position(pc, pc+vc)
-	$Area3D.transform = $SnakeHead.transform
+	$SnakeHeadArea.look_at_from_position(pc, pc+vc)
 	
 var tweensnakeout = null
 var windbackspeed = 2.0
@@ -109,6 +109,7 @@ func resetsnake():
 	timecountdown = randf_range(1, 3)
 	print("timecountdown ", timecountdown)
 	setsnakepos(1-emergeextent, retractionprogress)
+	animmaterial.set_shader_parameter("sickfac", 0.0)
 
 func processsnake(delta):
 	if state == SNAKE_HIBERNATING:
@@ -118,6 +119,8 @@ func processsnake(delta):
 			retractionprogress = 0.0
 			emergeextent = 0.0
 			setsnakepos(1-emergeextent, retractionprogress)
+			$ReelCyl/ReelSound.play()
+			$ReelCyl/ReelSound.volume_db = -10.0
 	elif state == SNAKE_EMERGING:
 		emergeextent += delta*emergerate
 		if emergeextent >= 1.0:
@@ -126,24 +129,21 @@ func processsnake(delta):
 		setsnakepos(1-emergeextent, retractionprogress)
 	elif state == SNAKE_RETRACTING:
 		retractionprogress += retractrate*delta
+		$ReelCyl/ReelSound.volume_db = 0
+		$ReelCyl/ReelSound.pitch_scale = 2.1-8*(retractionprogress-0.5)*(retractionprogress-0.5)
 		if retractionprogress >= 1.0:
 			retractionprogress = 1.0
+			$ReelCyl/ReelSound.stop()
 			state = SNAKE_HIBERNATING
 			emergeextent = 0.0
 			timecountdown = randf_range(1, 3)
 		setsnakepos(1-emergeextent, retractionprogress)
 
-func _on_snake_head_body_entered(body):
-	print("snake head ", get_path(), " entered ", body.get_path())
 
 
-func _on_snake_head_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
-	print("snake head shape ", get_path(), " entered ", body.get_path())
-
-func _on_area_3d_body_entered(body):
-	print("body ", body)
+func _on_snake_head_area_area_entered(area):
+	print("area ", area.get_path(), )
 	if state == SNAKE_EMERGING:
 		animmaterial.set_shader_parameter("sickfac", 0.5)
 		state = SNAKE_RETRACTING
-		$Area3D/AudioStreamPlayer3D.play()
-		
+		$SnakeHeadArea/BopSound.play()

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cnsiuwqn8w0qg" path="res://snakemonster/redtexture.png" id="2_wqaro"]
 [ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_kaqc7"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
+[ext_resource type="AudioStream" uid="uid://cixk8st64jhy7" path="res://audio/sfx/reel.wav" id="6_b8ltl"]
 [ext_resource type="AudioStream" uid="uid://dlhy7dcdl2tln" path="res://audio/sfx/wrong.wav" id="6_kaqc7"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_82xsv"]
@@ -47,13 +48,13 @@ size = Vector3(0.01, 0.01, 0.25)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kaqc7"]
 albedo_color = Color(0.08627451, 1, 1, 1)
 
-[sub_resource type="TorusMesh" id="TorusMesh_gu154"]
-inner_radius = 0.1
-outer_radius = 0.2
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gu154"]
 height = 0.1
 radius = 0.2
+
+[sub_resource type="TorusMesh" id="TorusMesh_gu154"]
+inner_radius = 0.1
+outer_radius = 0.2
 
 [node name="GSnake" type="Node3D" unique_id=1286430818]
 script = ExtResource("1_gu154")
@@ -86,6 +87,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.125)
 mesh = SubResource("BoxMesh_wqaro")
 surface_material_override/0 = SubResource("StandardMaterial3D_kaqc7")
 
+[node name="ReelSound" type="AudioStreamPlayer3D" parent="ReelCyl" unique_id=1549136595]
+stream = ExtResource("6_b8ltl")
+
 [node name="SnakeHead" type="RigidBody3D" parent="." unique_id=731574432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8018334, 0)
 collision_layer = 524288
@@ -95,27 +99,25 @@ contact_monitor = true
 script = ExtResource("5_i3bct")
 metadata/_custom_type_script = "uid://bfrlpbsqg5lqr"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SnakeHead" unique_id=861626294]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
-mesh = SubResource("TorusMesh_gu154")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeHead" unique_id=1301880898]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_gu154")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=2079907710]
-collision_layer = 524289
-collision_mask = 524289
+[node name="SnakeHeadArea" type="Area3D" parent="." unique_id=2079907710]
+collision_layer = 0
+collision_mask = 4194304
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1816347143]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SnakeHeadArea" unique_id=1816347143]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("CylinderShape3D_gu154")
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Area3D" unique_id=592519523]
+[node name="BopSound" type="AudioStreamPlayer3D" parent="SnakeHeadArea" unique_id=592519523]
 stream = ExtResource("6_kaqc7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SnakeHeadArea" unique_id=861626294]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("TorusMesh_gu154")
 
 [connection signal="action_pressed" from="ReelCyl" to="." method="_on_reel_cyl_action_pressed"]
 [connection signal="action_released" from="ReelCyl" to="." method="_on_reel_cyl_action_released"]
-[connection signal="body_entered" from="SnakeHead" to="." method="_on_snake_head_body_entered"]
-[connection signal="body_shape_entered" from="SnakeHead" to="." method="_on_snake_head_body_shape_entered"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="area_entered" from="SnakeHeadArea" to="." method="_on_snake_head_area_area_entered"]
