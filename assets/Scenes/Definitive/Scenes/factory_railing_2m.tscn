@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cybup7pyajkv3"]
+
+[ext_resource type="PackedScene" uid="uid://b20hwx82hmqn2" path="res://assets/Scenes/Definitive/Factory_Railing_2m.glb" id="1_fnrkk"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4k80m"]
+points = PackedVector3Array(-0.023324728, 1.0004945, 0.090657145, 0.043981194, -0.07702768, -0.077739686, -2.010223, 1.0004945, -0.077739686, -2.010223, -0.07702768, 0.090657145, 0.010222793, -0.07702768, 0.090657145, -1.9429168, 1.0004945, 0.090657145, 0.010222793, 1.0004945, -0.077739686, -2.0437703, -0.07702768, -0.077739686, -2.010223, 0.9667624, 0.090657145, 0.03818195, 0.91707563, -0.009737458, -0.12726586, 1.0252393, -0.009103143, -2.0437703, 0.89941025, -0.077739686, -2.0382285, -0.056041434, 0.02267152, 0.010222793, 0.9667624, 0.090657145, 0.03822848, -0.05604144, 0.02267152, 0.043981194, 0.89941025, -0.077739686, -2.0362852, 0.91630524, -0.009707867)
+
+[node name="Factory_Railing_2m2" unique_id=1557167277 instance=ExtResource("1_fnrkk")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Railing_2m" parent_id_path=PackedInt32Array(1983251816) index="0" unique_id=391853277]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Railing_2m/StaticBody3D" index="0" unique_id=6476055]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_4k80m")

@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://6s81or36awkf"]
+
+[ext_resource type="PackedScene" uid="uid://cqq0gmgf22fdj" path="res://assets/Scenes/Definitive/Factory_Walkway_1x2m.glb" id="1_ueqeo"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ravi0"]
+points = PackedVector3Array(1.9325967, 0.09059047, 1.0231872, -1.9325967, -0.030196823, -1.0301967, -1.9325967, 0.09059047, -1.0301967, 1.9325967, -0.030196823, -1.0301967, -1.9325967, -0.030196823, 1.0231872, -1.9325967, 0.09059047, 1.0231872, 1.9325967, 0.09059047, -1.0301967, 1.9325967, -0.030196823, 1.0231872)
+
+[node name="Factory_Walkway_1x2m2" unique_id=333703568 instance=ExtResource("1_ueqeo")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Walkway_1x2m" parent_id_path=PackedInt32Array(960707064) index="0" unique_id=1145622953]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Walkway_1x2m/StaticBody3D" index="0" unique_id=846811310]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_ravi0")

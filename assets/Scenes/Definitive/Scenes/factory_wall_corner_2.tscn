@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cs8h8d5hpm40u"]
+
+[ext_resource type="PackedScene" uid="uid://djgnbd6y04l4t" path="res://assets/Scenes/Definitive/Factory_Wall_Corner.glb" id="1_rw5jp"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_h3asf"]
+points = PackedVector3Array(1.057056, 4.0309505, -0.20645484, 0.19999999, 0.11413166, -0.9999131, 0.16825393, -0.030950546, -0.1428571, 1.057056, -0.030950546, -0.1428571, 0.16825393, 4.0309505, -0.1428571, 0.23185167, 4.0309505, -1.0316591, 0.23185167, -0.030950546, -1.0316591, 1.057056, 4.0309505, -0.1428571, 1.057056, -0.030950546, -0.20645484, 0.19999999, 3.8858683, -0.9999131)
+
+[node name="Factory_Wall_Corner2" unique_id=1101704837 instance=ExtResource("1_rw5jp")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Wall_Corner" parent_id_path=PackedInt32Array(2098602954) index="0" unique_id=1933993868]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Wall_Corner/StaticBody3D" index="0" unique_id=2125292992]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_h3asf")

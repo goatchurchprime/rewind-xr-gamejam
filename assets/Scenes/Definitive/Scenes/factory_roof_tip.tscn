@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://drt0x8i8ravvm"]
+
+[ext_resource type="PackedScene" uid="uid://bgl2x8e5qx5i2" path="res://assets/Scenes/Definitive/Factory_Roof_Tip.glb" id="1_q710m"]
+
+[node name="Factory_Roof_Tip2" unique_id=1554546478 instance=ExtResource("1_q710m")]

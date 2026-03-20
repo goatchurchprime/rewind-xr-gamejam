@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://er78upx80xf5"]
+
+[ext_resource type="PackedScene" uid="uid://bfhevyfvkd2ib" path="res://assets/Scenes/Definitive/Factory_Floor_2x2m.glb" id="1_5b2id"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v250c"]
+points = PackedVector3Array(-1, 0, -1, -1, 0.099999964, -1, 1, 0, -1, -1, 0, 1, -1, 0.099999964, 1, 1, 0.099999964, -1, 1, 0, 1, 1, 0.099999964, 1)
+
+[node name="Factory_Floor_2x2m" unique_id=621731457 instance=ExtResource("1_5b2id")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Floor_2x2" parent_id_path=PackedInt32Array(1416762736) index="0" unique_id=1026075768]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Floor_2x2/StaticBody3D" index="0" unique_id=1939587347]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_v250c")

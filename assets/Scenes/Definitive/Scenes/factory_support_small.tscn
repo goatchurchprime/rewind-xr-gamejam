@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cxsr1kcr00tjd"]
+
+[ext_resource type="PackedScene" uid="uid://dugyrm61bfrn6" path="res://assets/Scenes/Definitive/Factory_Support_Small.glb" id="1_bykgd"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0hu4u"]
+points = PackedVector3Array(0.04195276, 2.123887, 0.04195276, -0.035995707, -0.006287098, -0.035995707, -0.035995707, -0.006287098, 0.04195276, -0.035995707, 2.123887, -0.035995707, 0.04195276, -0.006287098, -0.035995707, 0.04195276, -0.006287098, 0.04195276, -0.035995707, 2.123887, 0.04195276, 0.04195276, 2.123887, -0.035995707)
+
+[node name="Factory_Support_Small" unique_id=1764049671 instance=ExtResource("1_bykgd")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Factory_Support_Small_2m" parent_id_path=PackedInt32Array(967107879) index="0" unique_id=1803082788]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Factory_Support_Small_2m/StaticBody3D" index="0" unique_id=1077064852]
+visible = false
+shape = SubResource("ConvexPolygonShape3D_0hu4u")
