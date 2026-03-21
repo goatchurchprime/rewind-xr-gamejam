@@ -1,6 +1,5 @@
 extends Node3D
 
-var snakesplaying = false
 var usercontrolpanel : Control = null
 var snakelist : OptionButton = null
 var playsnakesbutton : CheckButton = null
@@ -30,10 +29,13 @@ func loadsnakeexrs():
 func animatesnake():
 	pass
 
+var snakesplaying = false
+var maxsnakesemerging = 1
 func playsnakes(toggled):
 	snakesplaying = toggled
 	if toggled:
-		var fac = 1.0 if playsnakesfastbutton.button_pressed else 0.1
+		countdowntimeremerging = -1000
+		var fac = 0.2 if playsnakesfastbutton.button_pressed else 0.1
 		for sn in get_children():
 			sn.resetsnake()
 			sn.emergerate = 0.5*fac
@@ -41,6 +43,33 @@ func playsnakes(toggled):
 	else:
 		for sn in get_children():
 			sn.get_node("ReelCyl/ReelSound").stop()
+
+var countdowntimeremerging = -1000
+func _process(delta):
+	if not snakesplaying:
+		return
+	
+	var nemerging = 0
+	var snakes_hibernating = [ ]
+	for sn in get_children():
+		if sn.state == sn.SNAKE_EMERGING:
+			nemerging += 1
+		if sn.state == sn.SNAKE_HIBERNATING:
+			snakes_hibernating.append(sn)
+			
+	if nemerging < maxsnakesemerging:
+		if countdowntimeremerging == -1000:
+			countdowntimeremerging = randf_range(2, 4)
+		else:
+			countdowntimeremerging -= delta
+			if countdowntimeremerging < 0:
+				if len(snakes_hibernating) != 0:
+					snakes_hibernating[randi() % len(snakes_hibernating)].processsnake_startemerge()
+				countdowntimeremerging = -1000
+
+	for sn in get_children():
+		sn.processsnake(delta)
+
 
 func makesnake():
 	SnakeDrawing.makesnake()
@@ -92,8 +121,3 @@ func _input(event):
 			snakelist.select((snakelist.selected+1) % snakelist.item_count) 
 		if event.keycode == KEY_K:
 			deletesnakebutton.pressed.emit()
-
-func _process(delta):
-	if snakesplaying:
-		for sn in get_children():
-			sn.processsnake(delta)

@@ -115,17 +115,18 @@ func resetsnake():
 	setsnakepos(1-emergeextent, retractionprogress)
 	animmaterial.set_shader_parameter("sickfac", 0.0)
 	
+func processsnake_startemerge():
+	state = SNAKE_EMERGING
+	retractionprogress = 0.0
+	emergeextent = 0.0
+	setsnakepos(1-emergeextent, retractionprogress)
+	$ReelCyl/ReelSound.volume_db = -30.0
+	$ReelCyl/ReelSound.pitch_scale = 1.0
+	$ReelCyl/ReelSound.play()
+
 func processsnake(delta):
 	if state == SNAKE_HIBERNATING:
-		timecountdown -= delta
-		if timecountdown < 0:
-			state = SNAKE_EMERGING
-			retractionprogress = 0.0
-			emergeextent = 0.0
-			setsnakepos(1-emergeextent, retractionprogress)
-			$ReelCyl/ReelSound.volume_db = -30.0
-			$ReelCyl/ReelSound.pitch_scale = 1.0
-			$ReelCyl/ReelSound.play()
+		pass
 	elif state == SNAKE_EMERGING:
 		emergeextent += delta*emergerate
 		if emergeextent >= 1.0:
