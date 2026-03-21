@@ -29,20 +29,20 @@
 [ext_resource type="PackedScene" uid="uid://dxtq7yrwuy505" path="res://snakemonster/snake_monsters.tscn" id="25_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://uam1uggmvii8" path="res://llazloscene/workshop_c.glb" id="27_a6jrf"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_qsp4k"]
+[sub_resource type="QuadMesh" id="QuadMesh_xuqvo"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kq58d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qsp4k"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_seu75"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq58d"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_kq58d")
+albedo_texture = SubResource("ViewportTexture_qsp4k")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_htxhm"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_seu75"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
 
@@ -78,20 +78,20 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 
-[sub_resource type="QuadMesh" id="QuadMesh_jq2sk"]
+[sub_resource type="QuadMesh" id="QuadMesh_htxhm"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4k2k6"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jq2sk"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rl1p"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k2k6"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_4k2k6")
+albedo_texture = SubResource("ViewportTexture_jq2sk")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ok6jj"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rl1p"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -219,14 +219,14 @@ layout_mode = 2
 text = "Fast"
 
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_qsp4k")
-surface_material_override/0 = SubResource("StandardMaterial3D_seu75")
+mesh = SubResource("QuadMesh_xuqvo")
+surface_material_override/0 = SubResource("StandardMaterial3D_kq58d")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_htxhm")
+shape = SubResource("BoxShape3D_seu75")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
@@ -298,14 +298,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_jq2sk")
-surface_material_override/0 = SubResource("StandardMaterial3D_0rl1p")
+mesh = SubResource("QuadMesh_htxhm")
+surface_material_override/0 = SubResource("StandardMaterial3D_4k2k6")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_ok6jj")
+shape = SubResource("BoxShape3D_0rl1p")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 

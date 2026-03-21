@@ -30,14 +30,15 @@ shader_parameter/timefac = 5.0
 shader_parameter/perialongfac = 60.0
 shader_parameter/texvtime = 0.3
 shader_parameter/texutime = 0.4
+shader_parameter/zcyldir = Vector3(-1, 0, 0)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_gu154"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.1
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b8ltl"]
+albedo_color = Color(0.3764706, 0.16470589, 0.16470589, 1)
+metallic = 0.57
+roughness = 0.43
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3bct"]
-albedo_color = Color(1, 1, 0.45882353, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwxym"]
+albedo_color = Color(0.12408299, 0.12408296, 0.12408296, 1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wqaro"]
 height = 0.1
@@ -110,10 +111,26 @@ collision_mask = 196615
 freeze = true
 freeze_mode = 1
 script = ExtResource("5_i3bct")
+enabled = false
 
-[node name="Mesh" type="MeshInstance3D" parent="ReelCyl" unique_id=27187725]
-mesh = SubResource("CylinderMesh_gu154")
-surface_material_override/0 = SubResource("StandardMaterial3D_i3bct")
+[node name="CSGTorus3D" type="CSGTorus3D" parent="ReelCyl" unique_id=1395702879]
+inner_radius = 0.1
+outer_radius = 0.35
+sides = 20
+ring_sides = 10
+material = SubResource("StandardMaterial3D_b8ltl")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="ReelCyl/CSGTorus3D" unique_id=629786146]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24070203, 0, 0)
+operation = 2
+size = Vector3(0.4, 0.2, 1)
+material = SubResource("StandardMaterial3D_nwxym")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="ReelCyl/CSGTorus3D" unique_id=1245123179]
+transform = Transform3D(0.0008361689, -0.9999909, -0.004188062, 0.9999955, 0.0008241419, 0.0028775001, -0.0028740284, -0.0041904454, 0.9999871, 0.29009295, 0, 0)
+operation = 2
+radius = 0.09
+height = 0.2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReelCyl" unique_id=1730922910]
 shape = SubResource("CylinderShape3D_wqaro")
@@ -162,6 +179,8 @@ mesh = SubResource("TorusMesh_gu154")
 [node name="node-0" type="MeshInstance3D" parent="SnakeHeadArea" unique_id=90889913]
 transform = Transform3D(-1.5, 0, -1.3113416e-07, 0, 1.5, 0, 1.3113416e-07, 0, -1.5, 0, 0, 0)
 mesh = SubResource("ArrayMesh_josyk")
+
+[node name="ReelDirectionMarker3D" type="Marker3D" parent="." unique_id=484436285]
 
 [connection signal="action_pressed" from="ReelCyl" to="." method="_on_reel_cyl_action_pressed"]
 [connection signal="action_released" from="ReelCyl" to="." method="_on_reel_cyl_action_released"]

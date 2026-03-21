@@ -44,9 +44,12 @@ func loadsnakemotionimg(fname, fromresourceloader):
 	animmaterial.set_shader_parameter("animtexture", animtexture)
 
 	var c00 = animimage.get_pixel(0,0)
+	var c01 = animimage.get_pixel(1,0)
 	var p00 = Vector3(c00.r, c00.g, c00.b)
-	var sntrans = Transform3D(Basis(), p00)
-	$ReelCyl.global_transform = sntrans*$ReelCyl/ReelPoint.transform.inverse()
+	var p01f = Vector3(c01.r, c00.g, c01.b)
+	$ReelDirectionMarker3D.look_at_from_position(p00, p00 - (p01f - p00))
+	$ReelCyl.global_transform = $ReelDirectionMarker3D.global_transform*$ReelCyl/ReelPoint.transform.inverse()
+	animmaterial.set_shader_parameter("zcyldir", $ReelCyl.global_transform.basis.z)
 
 # All materials to be set through this so we can calculate the position of the head
 func setsnakepos(u, v):
@@ -111,7 +114,6 @@ func resetsnake():
 	print("timecountdown ", timecountdown)
 	setsnakepos(1-emergeextent, retractionprogress)
 	animmaterial.set_shader_parameter("sickfac", 0.0)
-	$ReelCyl/ReelSound.stop()
 	
 func processsnake(delta):
 	if state == SNAKE_HIBERNATING:
@@ -135,7 +137,7 @@ func processsnake(delta):
 		$ReelCyl/ReelSound.volume_db = 0
 		$ReelCyl/ReelSound.pitch_scale = 2.1-8*(retractionprogress-0.5)*(retractionprogress-0.5)
 		if retractionprogress >= 1.0:
-			retractionprogress = 1.0
+			retractionprogress = 0.0 # reset to start
 			$ReelCyl/ReelSound.stop()
 			state = SNAKE_DEAD if state == SNAKE_DYING else SNAKE_HIBERNATING
 			emergeextent = 0.0

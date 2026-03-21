@@ -21,11 +21,13 @@ const float udelta = 0.01;
 const float reelrad = 0.2;
 const float plugrad = 0.05;
 
+uniform vec3 zcyldir = vec3(-1.0, 0.0, 0.0);
+
 vec3 texpos(float utime, float vtime) {
 	if (utime < 0.0) {
 		float th = -utime*16.0;
 		vec3 p0 = texture(animtexture, vec2(0.0, vtime)).xyz;
-		vec3 rv = vec3(-sin(th)*reelrad, (1.0-cos(th))*reelrad, 0.0);
+		vec3 rv = -zcyldir*sin(th)*reelrad + vec3(0.0, (1.0-cos(th))*reelrad, 0.0);
 		return p0 + rv;
 	}
 	vec3 p1 = texture(animtexture, vec2(utime, vtime)).xyz;
