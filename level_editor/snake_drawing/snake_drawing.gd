@@ -102,7 +102,7 @@ func startsnakepulling():
 	for i in range(1, $SnakeNodes.get_child_count()):
 		var rodB = $SnakeNodes.get_child(i)
 		rodB.freeze = false
-		rodB.linear_velocity = (rodB.global_transform.basis.z + Vector3(0,1.5,0))*(0.5 + i/$SnakeNodes.get_child_count())
+		rodB.linear_velocity = (-rodB.global_transform.basis.z + Vector3(0,1.5,0))*(0.5 + i/$SnakeNodes.get_child_count())
 
 	snakepulling = 1
 	var sla = snakelocationarray()

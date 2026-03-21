@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://5a7tn4j677nk" path="res://audio/code/music.tscn" id="14_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://clujaf3u776a3" path="res://addons/godot-xr-tools/objects/viewport_2d_in_3d.tscn" id="15_getpj"]
 [ext_resource type="PackedScene" uid="uid://cfmoahalri06d" path="res://addons/player-networking/NetworkGateway.tscn" id="16_ryguw"]
+[ext_resource type="Script" uid="uid://cjfu28jmrajlo" path="res://addons/godot-xr-tools/overrides/ground_physics_settings.gd" id="16_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="17_d13ii"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://djehrm378cbde" path="res://addons/player-networking/PlayerFrameLocal.tscn" id="18_1u8w0"]
@@ -55,6 +56,11 @@ albedo_color = Color(0.012617188, 0.0001226544, 0.0004332717, 0.1764706)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4k2k6"]
 radius = 0.1
+
+[sub_resource type="Resource" id="Resource_qsp4k"]
+script = ExtResource("16_xuqvo")
+move_drag = 25.0
+metadata/_custom_type_script = "uid://cjfu28jmrajlo"
 
 [sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("14_1u8w0")
@@ -256,6 +262,7 @@ enabled = false
 
 [node name="PlayerBody" parent="XROrigin3D" unique_id=337536217 instance=ExtResource("9_ycdy4")]
 collision_mask = 1019
+physics = SubResource("Resource_qsp4k")
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
 
