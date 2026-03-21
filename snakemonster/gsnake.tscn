@@ -128,7 +128,6 @@ mesh = SubResource("TubeTrailMesh_82xsv")
 surface_material_override/0 = ExtResource("2_wqaro")
 
 [node name="ReelCyl" type="RigidBody3D" parent="." unique_id=1131590527]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18621206, 0)
 collision_layer = 4
 collision_mask = 196615
 freeze = true
@@ -137,7 +136,7 @@ script = ExtResource("5_i3bct")
 enabled = false
 
 [node name="CSGTorus3D" type="CSGTorus3D" parent="ReelCyl" unique_id=1395702879]
-inner_radius = 0.1
+inner_radius = 0.08
 outer_radius = 0.35
 sides = 20
 ring_sides = 10

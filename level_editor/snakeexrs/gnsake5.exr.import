@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://00oogccye1jw"
-path="res://.godot/imported/gnsake0.exr-92a14482d21e95d0a28e9c1b495fac16.ctex"
+uid="uid://cgj0h4qxmud7n"
+path="res://.godot/imported/gnsake5.exr-a8acf308bdc17d0149f99c3245de7c99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_editor/snakeexrs/gnsake0.exr"
-dest_files=["res://.godot/imported/gnsake0.exr-92a14482d21e95d0a28e9c1b495fac16.ctex"]
+source_file="res://level_editor/snakeexrs/gnsake5.exr"
+dest_files=["res://.godot/imported/gnsake5.exr-a8acf308bdc17d0149f99c3245de7c99.ctex"]
 
 [params]
 

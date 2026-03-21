@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var webrtcroomname : String = "rewindgame"
-var makingsnakes = true
+var makingsnakes = false
 func _ready():
 	if webrtcroomname:
 		await get_tree().create_timer(randf()*0.2 + 0.2).timeout
@@ -16,8 +16,10 @@ func _ready():
 		$SnakeMonsters.edir = "res://level_editor/snakeexrs"
 		$SnakeMonsters.loadsnakeexrs()
 	else:
+		$SnakeDrawing/SnakeHead.enabled = false
+		$SnakeDrawing.visible = false
 		$GameLevel.scenelist.select(0)
-		
+		$GameLevel.scenelist.item_selected.emit(0)
 
 
 func _on_start_xr_xr_failed_to_initialize():

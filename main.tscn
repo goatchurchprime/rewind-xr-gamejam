@@ -9,10 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://wtpox7m5vu2b" path="res://addons/godot-xr-tools/effects/fade.tscn" id="4_yaehf"]
 [ext_resource type="PackedScene" uid="uid://ctltchlf2j2r4" path="res://addons/xr-simulator/XRSimulator.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b6bk2pj8vbj28" path="res://addons/godot-xr-tools/functions/movement_turn.tscn" id="6_efxa6"]
+[ext_resource type="PackedScene" uid="uid://clt88d5d1dje4" path="res://addons/godot-xr-tools/functions/movement_crouch.tscn" id="7_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://cqhw276realc" path="res://addons/godot-xr-tools/functions/function_pointer.tscn" id="7_dg77c"]
 [ext_resource type="PackedScene" uid="uid://c2q5phg8w08o" path="res://addons/godot-xr-tools/functions/movement_jump.tscn" id="9_2cqfq"]
 [ext_resource type="PackedScene" uid="uid://cm3se6ug70ls1" path="res://snake_head_hitter.tscn" id="9_kq58d"]
 [ext_resource type="PackedScene" uid="uid://diyu06cw06syv" path="res://addons/godot-xr-tools/player/player_body.tscn" id="9_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://kyhaogt0a4q8" path="res://addons/godot-xr-tools/functions/movement_flight.tscn" id="11_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://b4ysuy43poobf" path="res://addons/godot-xr-tools/functions/function_pickup.tscn" id="11_82xsv"]
 [ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="14_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://5a7tn4j677nk" path="res://audio/code/music.tscn" id="14_xuqvo"]
@@ -30,22 +32,24 @@
 [ext_resource type="Texture2D" uid="uid://bp4mot31pu7sr" path="res://assets_thirdparty/spare_textures/rope2_normal.jpg" id="29_seu75"]
 [ext_resource type="Script" uid="uid://burawd1atrvna" path="res://game_level.gd" id="30_htxhm"]
 [ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="30_seu75"]
+[ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="32_0rl1p"]
 [ext_resource type="PackedScene" uid="uid://ds8x4vl5kmare" path="res://llazloscene/level_llazz.tscn" id="32_jq2sk"]
+[ext_resource type="Script" uid="uid://b15qba0ch13uw" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="33_ok6jj"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_htxhm"]
+[sub_resource type="QuadMesh" id="QuadMesh_seu75"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jq2sk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_htxhm"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k2k6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq2sk"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_jq2sk")
+albedo_texture = SubResource("ViewportTexture_htxhm")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0rl1p"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4k2k6"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
 
@@ -70,20 +74,20 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 
-[sub_resource type="QuadMesh" id="QuadMesh_ok6jj"]
+[sub_resource type="QuadMesh" id="QuadMesh_0rl1p"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_facbu"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ok6jj"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1qrp"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_facbu"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_facbu")
+albedo_texture = SubResource("ViewportTexture_ok6jj")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_come4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_b1qrp"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -137,9 +141,19 @@ radius = 0.1
 radius = 0.1
 height = 0.2
 
+[sub_resource type="Resource" id="Resource_facbu"]
+script = ExtResource("33_ok6jj")
+magnitude = 0.7
+metadata/_custom_type_script = "uid://b15qba0ch13uw"
+
+[sub_resource type="Resource" id="Resource_4k2k6"]
+script = ExtResource("33_ok6jj")
+magnitude = 0.7
+metadata/_custom_type_script = "uid://b15qba0ch13uw"
+
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
-webrtcroomname = ""
+webrtcroomname = "plugz"
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=2104808566]
 
@@ -160,6 +174,10 @@ tracker = &"left_hand"
 
 [node name="MovementDirect" parent="XROrigin3D/XRController3D_left" unique_id=264777544 instance=ExtResource("4_4c57u")]
 strafe = true
+
+[node name="MovementCrouch" parent="XROrigin3D/XRController3D_left" unique_id=1578576818 instance=ExtResource("7_4k2k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39859813, 0.008318543, 0.0077424645)
+crouch_height = 0.5
 
 [node name="FunctionPickup" parent="XROrigin3D/XRController3D_left" unique_id=123309529 instance=ExtResource("11_82xsv")]
 grab_collision_mask = 851972
@@ -234,16 +252,21 @@ popup/item_2/text = "tavi"
 popup/item_2/id = 2
 
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_htxhm")
-surface_material_override/0 = SubResource("StandardMaterial3D_4k2k6")
+mesh = SubResource("QuadMesh_seu75")
+surface_material_override/0 = SubResource("StandardMaterial3D_jq2sk")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_0rl1p")
+shape = SubResource("BoxShape3D_4k2k6")
 
 [node name="SnakeHeadHitter" parent="XROrigin3D/XRController3D_left" unique_id=1032796558 instance=ExtResource("9_kq58d")]
+
+[node name="RedZone" parent="XROrigin3D/XRController3D_left/SnakeHeadHitter" index="0" unique_id=1239144076 node_paths=PackedStringArray("target")]
+target = NodePath("../..")
+
+[node name="MovementFlight" parent="XROrigin3D/XRController3D_left" unique_id=1344474433 instance=ExtResource("11_0rl1p")]
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
@@ -264,11 +287,15 @@ grab_collision_mask = 851972
 
 [node name="SnakeHeadHitter" parent="XROrigin3D/XRController3D_right" unique_id=1887191168 instance=ExtResource("9_kq58d")]
 
+[node name="RedZone" parent="XROrigin3D/XRController3D_right/SnakeHeadHitter" index="0" unique_id=1239144076 node_paths=PackedStringArray("target")]
+target = NodePath("../..")
+
 [node name="XRSimulator" parent="XROrigin3D" unique_id=1311045107 instance=ExtResource("5_lquwl")]
 enabled = false
 
 [node name="PlayerBody" parent="XROrigin3D" unique_id=337536217 instance=ExtResource("9_ycdy4")]
 collision_mask = 1019
+player_calibrate_height = false
 physics = SubResource("Resource_qsp4k")
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
@@ -301,14 +328,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_ok6jj")
-surface_material_override/0 = SubResource("StandardMaterial3D_b1qrp")
+mesh = SubResource("QuadMesh_0rl1p")
+surface_material_override/0 = SubResource("StandardMaterial3D_facbu")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_come4")
+shape = SubResource("BoxShape3D_b1qrp")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -388,7 +415,8 @@ script = ExtResource("30_htxhm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4105232, -0.92957306)
 
 [node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote" unique_id=1941433459]
-text = "Level complete:"
+text = "Level complete:
+N"
 
 [node name="InteractableAreaButtonNext" parent="GameLevel/EndLevelNote" unique_id=216242984 instance=ExtResource("30_seu75")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5472777, -0.29546213, 0)
@@ -399,8 +427,11 @@ displacement = Vector3(0, 0.08, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext" unique_id=530805250]
 shape = SubResource("SphereShape3D_h8e4i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext" unique_id=848187752]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext" unique_id=848187752 node_paths=PackedStringArray("target")]
 mesh = SubResource("SphereMesh_4lmeg")
+script = ExtResource("32_0rl1p")
+event = SubResource("Resource_facbu")
+target = NodePath("../../../../XROrigin3D/XRController3D_left")
 
 [node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext/MeshInstance3D" unique_id=1634216477]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2077707, 0)
@@ -415,8 +446,11 @@ displacement = Vector3(0, 0.08, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain" unique_id=91152965]
 shape = SubResource("SphereShape3D_h8e4i")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain" unique_id=122526830]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain" unique_id=122526830 node_paths=PackedStringArray("target")]
 mesh = SubResource("SphereMesh_4lmeg")
+script = ExtResource("32_0rl1p")
+event = SubResource("Resource_4k2k6")
+target = NodePath("../../../../XROrigin3D/XRController3D_right")
 
 [node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain/MeshInstance3D" unique_id=1281516293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2077707, 0)
@@ -424,7 +458,7 @@ text = "Play again"
 
 [node name="LevelLlazz" parent="GameLevel" unique_id=612926994 instance=ExtResource("32_jq2sk")]
 
-[node name="Collision" parent="GameLevel/LevelLlazz/workshop_c/BakedMesh_001/Root_001" parent_id_path=PackedInt32Array(612926994, 1290395546, 1207568934) index="0" unique_id=1335331947]
+[node name="Collision" parent="GameLevel/LevelLlazz/workshop_c/BakedMesh_001/Root_001" parent_id_path=PackedInt32Array(612926994, 1290395546, 1223807145) index="0" unique_id=226331919]
 collision_layer = 8388609
 collision_mask = 8388609
 
@@ -437,6 +471,9 @@ collision_mask = 8388609
 [connection signal="button_pressed" from="GameLevel/EndLevelNote/InteractableAreaButtonAgain" to="GameLevel" method="_on_interactable_area_button_stay_2_button_pressed"]
 
 [editable path="XROrigin3D/XRController3D_left/Viewport2Din3D"]
+[editable path="XROrigin3D/XRController3D_left/SnakeHeadHitter"]
+[editable path="XROrigin3D/XRController3D_right/SnakeHeadHitter"]
+[editable path="XROrigin3D/PlayerBody"]
 [editable path="NetworkGatewayViewport"]
 [editable path="GameLevel/LevelLlazz"]
 [editable path="GameLevel/LevelLlazz/workshop_c"]

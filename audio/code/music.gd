@@ -23,7 +23,7 @@ func _ready():
 
 func on_song_finished():
 	current_song += 1
-	if current_song > songs.size():
+	if current_song >= songs.size():
 		current_song = 0
 	stream = songs[current_song]
 	play()

@@ -49,6 +49,7 @@ func loadsnakemotionimg(fname, fromresourceloader):
 	var p01f = Vector3(c01.r, c00.g, c01.b)
 	$ReelDirectionMarker3D.look_at_from_position(p00, p00 - (p01f - p00))
 	$ReelCyl.global_transform = $ReelDirectionMarker3D.global_transform*$ReelCyl/ReelPoint.transform.inverse()
+	$ReelCyl.global_position.y += -0.05
 	animmaterial.set_shader_parameter("zcyldir", $ReelCyl.global_transform.basis.z)
 
 	var c0E = animimage.get_pixel(animimage.get_width()-1,0)
