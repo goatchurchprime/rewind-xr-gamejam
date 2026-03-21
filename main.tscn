@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://bgw2tanm4il3j" path="res://avatars/tunnelvrplayeravatar/VRPlayerAvatar.tscn" id="17_d13ii"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="17_yaehf"]
 [ext_resource type="PackedScene" uid="uid://djehrm378cbde" path="res://addons/player-networking/PlayerFrameLocal.tscn" id="18_1u8w0"]
-[ext_resource type="Script" uid="uid://xof2pijcwvyd" path="res://game_loop.gd" id="21_htxhm"]
 [ext_resource type="Script" uid="uid://d2oqgf6d408gy" path="res://level_editor/snake_drawing/snake_drawing.gd" id="22_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cmxsgymulrx0l" path="res://level_editor/snake_drawing/sounds/switch7.wav" id="24_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cewowdu3vkh8u" path="res://level_editor/snake_drawing/sounds/click04.wav" id="25_0odxb"]
@@ -260,9 +259,6 @@ physics = SubResource("Resource_qsp4k")
 
 [node name="World" type="Node3D" parent="." unique_id=1711002190]
 
-[node name="Music" parent="World" unique_id=464198334 instance=ExtResource("14_xuqvo")]
-volume_db = -20.0
-
 [node name="Floor" type="StaticBody3D" parent="World" unique_id=998891937]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 collision_layer = 8388609
@@ -276,9 +272,6 @@ shape = SubResource("BoxShape3D_7mycd")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=112167591]
 environment = SubResource("Environment_1bvp3")
-
-[node name="GameLoop" type="Node3D" parent="." unique_id=1573564021]
-script = ExtResource("21_htxhm")
 
 [node name="NetworkGatewayViewport" parent="." unique_id=2145623234 instance=ExtResource("15_getpj")]
 transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -8.163665, 1.255002, -2.7729235)
@@ -374,6 +367,8 @@ autoplay = true
 
 [node name="GameLevel" type="Node3D" parent="." unique_id=5616413]
 script = ExtResource("30_htxhm")
+
+[node name="Music" parent="GameLevel" unique_id=464198334 instance=ExtResource("14_xuqvo")]
 
 [node name="LevelLlazz" parent="GameLevel" unique_id=612926994 instance=ExtResource("32_jq2sk")]
 
