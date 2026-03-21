@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://clrmgokyqp5dh"]
+
+[ext_resource type="Material" uid="uid://4xygtvtpf1dp" path="res://level_editor/snake_drawing/greybox.material" id="1_fugw3"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cegan"]
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_82xsv"]
+material = ExtResource("1_fugw3")
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ryguw"]
+size = Vector3(1, 2, 1)
+
+[node name="Furniture" type="Node3D" unique_id=869904543]
+
+[node name="Table1" type="StaticBody3D" parent="." unique_id=688219719]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.317309, 0.5, -4.111409)
+collision_layer = 8388609
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table1" unique_id=765060791]
+shape = SubResource("CylinderShape3D_cegan")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Table1" unique_id=2050382288]
+mesh = SubResource("CylinderMesh_82xsv")
+
+[node name="Fridge" type="StaticBody3D" parent="." unique_id=886508430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.125536, 1, -6.051605)
+collision_layer = 8388609
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Fridge" unique_id=1870304126]
+shape = SubResource("BoxShape3D_getpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Fridge" unique_id=1188415828]
+mesh = SubResource("BoxMesh_ryguw")
+surface_material_override/0 = ExtResource("1_fugw3")
+
+[node name="Bench" type="StaticBody3D" parent="." unique_id=328378577]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 6.674865, 0.42203808, -5.045845)
+collision_layer = 8388608
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bench" unique_id=1274729149]
+shape = SubResource("BoxShape3D_getpj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Bench" unique_id=54417319]
+mesh = SubResource("BoxMesh_ryguw")
+surface_material_override/0 = ExtResource("1_fugw3")
