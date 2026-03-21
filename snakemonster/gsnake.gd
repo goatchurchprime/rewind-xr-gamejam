@@ -141,8 +141,10 @@ func processsnake(delta):
 			$ReelCyl/ReelSound.stop()
 			state = SNAKE_DEAD if state == SNAKE_DYING else SNAKE_HIBERNATING
 			emergeextent = 0.0
+			setsnakepos(1-emergeextent, retractionprogress)
 			timecountdown = randf_range(1, 3)
-		setsnakepos(1-emergeextent, retractionprogress)
+		else:
+			setsnakepos(1-emergeextent, retractionprogress)
 
 var timecooldown = Time.get_ticks_msec()
 func _on_snake_head_area_area_entered(area):
