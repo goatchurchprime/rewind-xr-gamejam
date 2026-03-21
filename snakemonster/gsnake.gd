@@ -127,6 +127,7 @@ func processsnake_startemerge():
 	$ReelCyl/ReelSound.pitch_scale = 1.0
 	$ReelCyl/ReelSound.play()
 
+var retractrateextentcorrection = 1.0 
 func processsnake(delta):
 	if state == SNAKE_HIBERNATING:
 		pass
@@ -134,16 +135,20 @@ func processsnake(delta):
 		emergeextent += delta*emergerate
 		if emergeextent >= 1.0:
 			emergeextent = 1.0
-			state = SNAKE_RETRACTING
+			animmaterial.set_shader_parameter("albedo", Color.GREEN)
+			state = SNAKE_PLUGGED
 		setsnakepos(1-emergeextent, retractionprogress)
 	elif state == SNAKE_RETRACTING or state == SNAKE_DYING:
-		retractionprogress += retractrate*delta * (0.2 if state == SNAKE_DYING else 1.0)
+		retractionprogress += retractrateextentcorrection*retractrate*delta
 		$ReelCyl/ReelSound.volume_db = 0
 		$ReelCyl/ReelSound.pitch_scale = 2.1-8*(retractionprogress-0.5)*(retractionprogress-0.5)
 		if retractionprogress >= 1.0:
 			retractionprogress = 0.0 # reset to start
 			$ReelCyl/ReelSound.stop()
-			state = SNAKE_DEAD if state == SNAKE_DYING else SNAKE_HIBERNATING
+			if state == SNAKE_DYING:
+				state = SNAKE_DEAD 
+			else:
+				state = SNAKE_HIBERNATING
 			emergeextent = 0.0
 			setsnakepos(1-emergeextent, retractionprogress)
 		else:
@@ -153,16 +158,19 @@ var timecooldown = Time.get_ticks_msec()
 func _on_snake_head_area_area_entered(area):
 	if not (state == SNAKE_EMERGING or state == SNAKE_RETRACTING):
 		return
-	if area.checksnakehit($SnakeHeadArea.global_transform.basis.z):
+	if (area == null) or area.checksnakehit($SnakeHeadArea.global_transform.basis.z):
 		if state == SNAKE_EMERGING:
 			animmaterial.set_shader_parameter("sickfac", 0.25)
 			state = SNAKE_RETRACTING
+			retractrateextentcorrection = 1.0/(emergeextent + 0.5)
 			$SnakeHeadArea/BopSound.pitch_scale = 1.0
 			$SnakeHeadArea/BopSound.play()
 			timecooldown = Time.get_ticks_msec() + 500
 		if state == SNAKE_RETRACTING and timecooldown < Time.get_ticks_msec():
 			var tween = get_tree().create_tween()
 			tween.tween_method(func(x): animmaterial.set_shader_parameter("sickfac", x), 0.25, 1.0, 2.0)
+			animmaterial.set_shader_parameter("albedo", Color.DARK_BLUE)
 			state = SNAKE_DYING
+			retractrateextentcorrection = 0.5*1.0/(emergeextent + 0.5)
 			$SnakeHeadArea/BopSound.pitch_scale = 0.5
 			$SnakeHeadArea/BopSound.play()

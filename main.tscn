@@ -29,22 +29,23 @@
 [ext_resource type="PackedScene" uid="uid://dxtq7yrwuy505" path="res://snakemonster/snake_monsters.tscn" id="25_xuqvo"]
 [ext_resource type="Texture2D" uid="uid://bp4mot31pu7sr" path="res://assets_thirdparty/spare_textures/rope2_normal.jpg" id="29_seu75"]
 [ext_resource type="Script" uid="uid://burawd1atrvna" path="res://game_level.gd" id="30_htxhm"]
+[ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="30_seu75"]
 [ext_resource type="PackedScene" uid="uid://ds8x4vl5kmare" path="res://llazloscene/level_llazz.tscn" id="32_jq2sk"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_0rl1p"]
+[sub_resource type="QuadMesh" id="QuadMesh_htxhm"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ok6jj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jq2sk"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_facbu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k2k6"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_ok6jj")
+albedo_texture = SubResource("ViewportTexture_jq2sk")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_b1qrp"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rl1p"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
 
@@ -69,20 +70,20 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 
-[sub_resource type="QuadMesh" id="QuadMesh_come4"]
+[sub_resource type="QuadMesh" id="QuadMesh_ok6jj"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_h8e4i"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_facbu"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4lmeg"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1qrp"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_h8e4i")
+albedo_texture = SubResource("ViewportTexture_facbu")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0cp0l"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_come4"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -128,6 +129,13 @@ rings = 0
 albedo_color = Color(1, 0.00999999, 0.00999999, 1)
 
 [sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_lswn8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h8e4i"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_4lmeg"]
+radius = 0.1
+height = 0.2
 
 [node name="Main" type="Node3D" unique_id=858080943]
 script = ExtResource("1_w48qg")
@@ -200,6 +208,10 @@ text = "MakeSnake"
 layout_mode = 2
 text = "Delete"
 
+[node name="HitSnake" type="Button" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox" unique_id=250146978]
+layout_mode = 2
+text = "HitSnake"
+
 [node name="HBox2" type="HBoxContainer" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox" unique_id=1562209238]
 layout_mode = 2
 
@@ -213,21 +225,23 @@ text = "Fast"
 
 [node name="SceneChoice" type="OptionButton" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox2" unique_id=1304584298]
 layout_mode = 2
-item_count = 2
+item_count = 3
 popup/item_0/text = "lobby"
 popup/item_0/id = 0
 popup/item_1/text = "llazlo"
 popup/item_1/id = 1
+popup/item_2/text = "tavi"
+popup/item_2/id = 2
 
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_0rl1p")
-surface_material_override/0 = SubResource("StandardMaterial3D_facbu")
+mesh = SubResource("QuadMesh_htxhm")
+surface_material_override/0 = SubResource("StandardMaterial3D_4k2k6")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_b1qrp")
+shape = SubResource("BoxShape3D_0rl1p")
 
 [node name="SnakeHeadHitter" parent="XROrigin3D/XRController3D_left" unique_id=1032796558 instance=ExtResource("9_kq58d")]
 
@@ -287,14 +301,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_come4")
-surface_material_override/0 = SubResource("StandardMaterial3D_4lmeg")
+mesh = SubResource("QuadMesh_ok6jj")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1qrp")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_0cp0l")
+shape = SubResource("BoxShape3D_come4")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -370,6 +384,44 @@ script = ExtResource("30_htxhm")
 
 [node name="Music" parent="GameLevel" unique_id=464198334 instance=ExtResource("14_xuqvo")]
 
+[node name="EndLevelNote" type="Node3D" parent="GameLevel" unique_id=1558696005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4105232, -0.92957306)
+
+[node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote" unique_id=1941433459]
+text = "Level complete:"
+
+[node name="InteractableAreaButtonNext" parent="GameLevel/EndLevelNote" unique_id=216242984 instance=ExtResource("30_seu75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5472777, -0.29546213, 0)
+collision_mask = 4325376
+button = NodePath("MeshInstance3D")
+displacement = Vector3(0, 0.08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext" unique_id=530805250]
+shape = SubResource("SphereShape3D_h8e4i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext" unique_id=848187752]
+mesh = SubResource("SphereMesh_4lmeg")
+
+[node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonNext/MeshInstance3D" unique_id=1634216477]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2077707, 0)
+text = "Go next"
+
+[node name="InteractableAreaButtonAgain" parent="GameLevel/EndLevelNote" unique_id=815262024 instance=ExtResource("30_seu75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.40343523, -0.29546213, 0)
+collision_mask = 4325376
+button = NodePath("MeshInstance3D")
+displacement = Vector3(0, 0.08, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain" unique_id=91152965]
+shape = SubResource("SphereShape3D_h8e4i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain" unique_id=122526830]
+mesh = SubResource("SphereMesh_4lmeg")
+
+[node name="Label3D" type="Label3D" parent="GameLevel/EndLevelNote/InteractableAreaButtonAgain/MeshInstance3D" unique_id=1281516293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2077707, 0)
+text = "Play again"
+
 [node name="LevelLlazz" parent="GameLevel" unique_id=612926994 instance=ExtResource("32_jq2sk")]
 
 [node name="Collision" parent="GameLevel/LevelLlazz/workshop_c/BakedMesh_001/Root_001" parent_id_path=PackedInt32Array(612926994, 1290395546, 1207568934) index="0" unique_id=1335331947]
@@ -381,6 +433,8 @@ collision_mask = 8388609
 [connection signal="action_released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_released"]
 [connection signal="grabbed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_grabbed"]
 [connection signal="released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_released"]
+[connection signal="button_pressed" from="GameLevel/EndLevelNote/InteractableAreaButtonNext" to="GameLevel" method="_on_interactable_area_button_next_button_pressed"]
+[connection signal="button_pressed" from="GameLevel/EndLevelNote/InteractableAreaButtonAgain" to="GameLevel" method="_on_interactable_area_button_stay_2_button_pressed"]
 
 [editable path="XROrigin3D/XRController3D_left/Viewport2Din3D"]
 [editable path="NetworkGatewayViewport"]

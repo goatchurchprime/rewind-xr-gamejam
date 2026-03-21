@@ -5,6 +5,7 @@ var snakelist : OptionButton = null
 var playsnakesbutton : CheckButton = null
 var makesnakebutton : Button = null
 var deletesnakebutton : Button = null
+var hitsnakebutton : Button = null
 var playsnakesfastbutton : CheckButton = null
 
 var Csnake = load("res://snakemonster/gsnake.tscn")
@@ -44,19 +45,29 @@ func playsnakes(toggled):
 		for sn in get_children():
 			sn.get_node("ReelCyl/ReelSound").stop()
 
+
 var countdowntimeremerging = -1000
 func _process(delta):
 	if not snakesplaying:
 		return
-	
+
 	var nemerging = 0
+	var nplugged = 0
+	var ndead = 0
 	var snakes_hibernating = [ ]
 	for sn in get_children():
 		if sn.state == sn.SNAKE_EMERGING:
 			nemerging += 1
 		if sn.state == sn.SNAKE_HIBERNATING:
 			snakes_hibernating.append(sn)
+		if sn.state == sn.SNAKE_DEAD:
+			ndead += 1
+		if sn.state == sn.SNAKE_PLUGGED:
+			nplugged += 1
 			
+		if nplugged + ndead == get_child_count():
+			get_node("../GameLevel").showendlevelnote(nplugged, ndead)
+
 	if nemerging < maxsnakesemerging:
 		if countdowntimeremerging == -1000:
 			countdowntimeremerging = randf_range(2, 4)
@@ -85,8 +96,11 @@ func setusercontrolpanel(lusercontrolpanel):
 	makesnakebutton.connect("pressed", makesnake)
 	deletesnakebutton = usercontrolpanel.get_node("VBox/HBox/DeleteSnake")
 	deletesnakebutton.connect("pressed", deletesnake)
+	hitsnakebutton = usercontrolpanel.get_node("VBox/HBox/HitSnake")
+	hitsnakebutton.connect("pressed", hitsnake)
 	playsnakesfastbutton = usercontrolpanel.get_node("VBox/HBox2/PlayFast")
 	updatesnakelist()
+
 
 func newsnakeimage(lsnakeimage : Image):
 	var fn
@@ -105,6 +119,11 @@ func deletesnake():
 	fromresourceloader = false  # now we have unimported resources
 	loadsnakeexrs()
 
+func hitsnake():
+	var snn = snakelist.get_item_text(snakelist.selected)
+	var sn = get_node(snn)
+	sn._on_snake_head_area_area_entered(null)
+
 func updatesnakelist():
 	if snakelist:
 		snakelist.clear()
@@ -121,3 +140,5 @@ func _input(event):
 			snakelist.select((snakelist.selected+1) % snakelist.item_count) 
 		if event.keycode == KEY_K:
 			deletesnakebutton.pressed.emit()
+		if event.keycode == KEY_H:
+			hitsnakebutton.pressed.emit()
