@@ -1,0 +1,33 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://b1hy5shuvvmec"]
+
+[ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="1_um6ab"]
+[ext_resource type="Texture2D" uid="uid://cwkkrk7o5t8ie" path="res://assets_thirdparty/spare_textures/rope2_metal.jpg" id="2_4qcl7"]
+[ext_resource type="Texture2D" uid="uid://bslc04wevqsn4" path="res://assets_thirdparty/spare_textures/rope2_albedo.jpg" id="3_y3gc2"]
+[ext_resource type="Texture2D" uid="uid://cnsiuwqn8w0qg" path="res://snakemonster/redtexture.png" id="4_iovpo"]
+[ext_resource type="Texture2D" uid="uid://bp4mot31pu7sr" path="res://assets_thirdparty/spare_textures/rope2_normal.jpg" id="5_eh8tf"]
+[ext_resource type="Texture2D" uid="uid://v3swky5qoe7n" path="res://assets_thirdparty/spare_textures/rope2_rough.jpg" id="6_snx2y"]
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_um6ab")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_y3gc2")
+shader_parameter/texture_albedo_sick = ExtResource("4_iovpo")
+shader_parameter/animtexture = ExtResource("2_4qcl7")
+shader_parameter/sickfac = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/texture_metallic = ExtResource("2_4qcl7")
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("6_snx2y")
+shader_parameter/specular = 0.21999999508256
+shader_parameter/metallic = 0.6499999854712
+shader_parameter/texture_normal = ExtResource("5_eh8tf")
+shader_parameter/normal_scale = 5.000000997499999
+shader_parameter/snakerad = 0.1
+shader_parameter/snakeradperi = 0.0
+shader_parameter/timefac = 5.0
+shader_parameter/perialongfac = 60.0
+shader_parameter/texvtime = 0.3
+shader_parameter/texutime = 0.4
+shader_parameter/zcyldir = Vector3(-1, 0, 0)

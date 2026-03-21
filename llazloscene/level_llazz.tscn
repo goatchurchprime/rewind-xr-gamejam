@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ds8x4vl5kmare"]
+
+[ext_resource type="PackedScene" uid="uid://uam1uggmvii8" path="res://llazloscene/workshop_c.glb" id="1_c6hi3"]
+
+[node name="LevelLlazz" type="Node3D" unique_id=612926994]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1108732199]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8948522, 2.8579028)
+light_color = Color(1, 1, 0.8, 1)
+shadow_enabled = true
+omni_range = 12.038
+omni_attenuation = 0.014
+
+[node name="workshop_c" parent="." unique_id=1290395546 instance=ExtResource("1_c6hi3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1758023714]
+transform = Transform3D(-0.87534314, 0.12165412, -0.46794727, -0.05379105, 0.93731743, 0.34429988, 0.4805004, 0.32655203, -0.8139307, 0, 3.990271, 0)
+light_energy = 3.592
+shadow_enabled = true
+
+[editable path="workshop_c"]

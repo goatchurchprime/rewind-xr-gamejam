@@ -30,21 +30,22 @@
 [ext_resource type="AudioStream" uid="uid://dqovsr2pln3qd" path="res://level_editor/snake_drawing/sounds/switch5.wav" id="25_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://dxtq7yrwuy505" path="res://snakemonster/snake_monsters.tscn" id="25_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://uam1uggmvii8" path="res://llazloscene/workshop_c.glb" id="27_a6jrf"]
+[ext_resource type="Texture2D" uid="uid://bp4mot31pu7sr" path="res://assets_thirdparty/spare_textures/rope2_normal.jpg" id="29_seu75"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_xuqvo"]
+[sub_resource type="QuadMesh" id="QuadMesh_seu75"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qsp4k"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_htxhm"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kq58d"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k2k6"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_qsp4k")
+albedo_texture = SubResource("ViewportTexture_htxhm")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_seu75"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_0rl1p"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
 
@@ -85,20 +86,20 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 
-[sub_resource type="QuadMesh" id="QuadMesh_htxhm"]
+[sub_resource type="QuadMesh" id="QuadMesh_ok6jj"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_jq2sk"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_facbu"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4k2k6"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b1qrp"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_jq2sk")
+albedo_texture = SubResource("ViewportTexture_facbu")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0rl1p"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_come4"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -130,6 +131,8 @@ height = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lswn8"]
 albedo_color = Color(1, 0.50980395, 0.19215687, 1)
+normal_enabled = true
+normal_texture = ExtResource("29_seu75")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_0odxb"]
 top_radius = 0.1
@@ -226,14 +229,14 @@ layout_mode = 2
 text = "Fast"
 
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_xuqvo")
-surface_material_override/0 = SubResource("StandardMaterial3D_kq58d")
+mesh = SubResource("QuadMesh_seu75")
+surface_material_override/0 = SubResource("StandardMaterial3D_4k2k6")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_seu75")
+shape = SubResource("BoxShape3D_0rl1p")
 
 [node name="XRController3D_right" type="XRController3D" parent="XROrigin3D" unique_id=2092080945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20470023, 1.0419132, -0.43321365)
@@ -307,14 +310,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_htxhm")
-surface_material_override/0 = SubResource("StandardMaterial3D_4k2k6")
+mesh = SubResource("QuadMesh_ok6jj")
+surface_material_override/0 = SubResource("StandardMaterial3D_b1qrp")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_0rl1p")
+shape = SubResource("BoxShape3D_come4")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
