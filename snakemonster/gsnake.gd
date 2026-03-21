@@ -123,9 +123,9 @@ func processsnake(delta):
 			retractionprogress = 0.0
 			emergeextent = 0.0
 			setsnakepos(1-emergeextent, retractionprogress)
-			$ReelCyl/ReelSound.play()
-			$ReelCyl/ReelSound.volume_db = -10.0
+			$ReelCyl/ReelSound.volume_db = -30.0
 			$ReelCyl/ReelSound.pitch_scale = 1.0
+			$ReelCyl/ReelSound.play()
 	elif state == SNAKE_EMERGING:
 		emergeextent += delta*emergerate
 		if emergeextent >= 1.0:

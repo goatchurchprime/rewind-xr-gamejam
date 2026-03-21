@@ -4,10 +4,12 @@
 [ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="2_gu154"]
 [ext_resource type="Texture2D" uid="uid://cnsiuwqn8w0qg" path="res://snakemonster/redtexture.png" id="2_wqaro"]
 [ext_resource type="Texture2D" uid="uid://bslc04wevqsn4" path="res://assets_thirdparty/spare_textures/rope2_albedo.jpg" id="3_b8ltl"]
+[ext_resource type="Texture2D" uid="uid://cwkkrk7o5t8ie" path="res://assets_thirdparty/spare_textures/rope2_metal.jpg" id="3_q2wyi"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
-[ext_resource type="AudioStream" uid="uid://cixk8st64jhy7" path="res://audio/sfx/reel.wav" id="6_b8ltl"]
+[ext_resource type="Texture2D" uid="uid://v3swky5qoe7n" path="res://assets_thirdparty/spare_textures/rope2_rough.jpg" id="5_nwxym"]
 [ext_resource type="AudioStream" uid="uid://dlhy7dcdl2tln" path="res://audio/sfx/wrong.wav" id="6_kaqc7"]
-[ext_resource type="Texture2D" uid="uid://clbh1fxadtfy1" path="res://assets_thirdparty/icosa/plugsocket/Plug and socket.png" id="8_b8ltl"]
+[ext_resource type="Texture2D" uid="uid://cxb672unm3txw" path="res://assets_thirdparty/icosa/plugsocket/Plug and socket.png" id="8_b8ltl"]
+[ext_resource type="AudioStream" uid="uid://c260opsai5uuy" path="res://audio/sfx/spool.wav" id="8_q2wyi"]
 
 [sub_resource type="TubeTrailMesh" id="TubeTrailMesh_82xsv"]
 radius = 1.0
@@ -23,7 +25,13 @@ shader = ExtResource("2_gu154")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/texture_albedo = ExtResource("3_b8ltl")
 shader_parameter/texture_albedo_sick = ExtResource("2_wqaro")
+shader_parameter/animtexture = ExtResource("3_q2wyi")
 shader_parameter/sickfac = 0.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(0, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("5_nwxym")
+shader_parameter/specular = 0.0
+shader_parameter/metallic = 0.6499999854712
 shader_parameter/snakerad = 0.1
 shader_parameter/snakeradperi = 0.0
 shader_parameter/timefac = 5.0
@@ -144,7 +152,8 @@ mesh = SubResource("BoxMesh_wqaro")
 surface_material_override/0 = SubResource("StandardMaterial3D_kaqc7")
 
 [node name="ReelSound" type="AudioStreamPlayer3D" parent="ReelCyl" unique_id=1549136595]
-stream = ExtResource("6_b8ltl")
+stream = ExtResource("8_q2wyi")
+panning_strength = 2.0
 
 [node name="SnakeHead" type="RigidBody3D" parent="." unique_id=731574432]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8018334, 0)
