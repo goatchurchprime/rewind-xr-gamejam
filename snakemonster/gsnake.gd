@@ -51,6 +51,12 @@ func loadsnakemotionimg(fname, fromresourceloader):
 	$ReelCyl.global_transform = $ReelDirectionMarker3D.global_transform*$ReelCyl/ReelPoint.transform.inverse()
 	animmaterial.set_shader_parameter("zcyldir", $ReelCyl.global_transform.basis.z)
 
+	var c0E = animimage.get_pixel(animimage.get_width()-1,0)
+	var c0pE = animimage.get_pixel(animimage.get_width()-2,0)
+	var p0E = Vector3(c0E.r, c0E.g, c0E.b)
+	var p0pE = Vector3(c0pE.r, c0pE.g, c0pE.b)
+	$PlugSocket.look_at_from_position(p0E, p0pE)
+
 # All materials to be set through this so we can calculate the position of the head
 func setsnakepos(u, v):
 	animmaterial.set_shader_parameter("texutime", u)
