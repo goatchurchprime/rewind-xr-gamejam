@@ -83,7 +83,7 @@ func _process(delta):
 		
 			if $SnakeNodes.get_child_count() == 1:
 				var p00 = $ReelBox/ReelPoint.global_position
-				var p01f = Vector3(segpos.x, p00.yee, segpos.z)
+				var p01f = Vector3(segpos.x, p00.y, segpos.z)
 				$ReelDirectionMarker3D.look_at_from_position(p00, p00 - (p01f - p00))
 				$ReelBox.global_transform = $ReelDirectionMarker3D.global_transform*$ReelBox/ReelPoint.transform.inverse()
 				print("set reelbox trans1 ", $ReelBox.global_transform)

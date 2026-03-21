@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cpf0533wcr2u1" path="res://snakemonster/gsnake.gd" id="1_gu154"]
 [ext_resource type="Shader" uid="uid://cms55c0nq18j4" path="res://snakemonster/gsnake.gdshader" id="2_gu154"]
 [ext_resource type="Texture2D" uid="uid://cnsiuwqn8w0qg" path="res://snakemonster/redtexture.png" id="2_wqaro"]
-[ext_resource type="Texture2D" uid="uid://cdfejhsorhxlw" path="res://icon.svg" id="4_kaqc7"]
+[ext_resource type="Texture2D" uid="uid://bslc04wevqsn4" path="res://assets_thirdparty/spare_textures/rope2_albedo.jpg" id="3_b8ltl"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
 [ext_resource type="AudioStream" uid="uid://cixk8st64jhy7" path="res://audio/sfx/reel.wav" id="6_b8ltl"]
 [ext_resource type="AudioStream" uid="uid://dlhy7dcdl2tln" path="res://audio/sfx/wrong.wav" id="6_kaqc7"]
@@ -21,7 +21,7 @@ resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_gu154")
 shader_parameter/albedo = Color(1, 1, 1, 1)
-shader_parameter/texture_albedo = ExtResource("4_kaqc7")
+shader_parameter/texture_albedo = ExtResource("3_b8ltl")
 shader_parameter/texture_albedo_sick = ExtResource("2_wqaro")
 shader_parameter/sickfac = 0.0
 shader_parameter/snakerad = 0.1

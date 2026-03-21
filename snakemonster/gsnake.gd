@@ -148,6 +148,8 @@ func processsnake(delta):
 
 var timecooldown = Time.get_ticks_msec()
 func _on_snake_head_area_area_entered(area):
+	if not (state == SNAKE_EMERGING or state == SNAKE_RETRACTING):
+		return
 	if area.checksnakehit($SnakeHeadArea.global_transform.basis.z):
 		if state == SNAKE_EMERGING:
 			animmaterial.set_shader_parameter("sickfac", 0.25)
