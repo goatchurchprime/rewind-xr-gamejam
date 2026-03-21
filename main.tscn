@@ -372,6 +372,8 @@ autoplay = true
 
 [node name="SnakeJoints" type="Node3D" parent="SnakeDrawing" unique_id=1100033533]
 
+[node name="ReelDirectionMarker3D" type="Marker3D" parent="SnakeDrawing" unique_id=1048904615]
+
 [node name="SnakeMonsters" parent="." unique_id=1755609400 instance=ExtResource("25_xuqvo")]
 
 [node name="LevelLlazz" type="Node3D" parent="." unique_id=106429022]
