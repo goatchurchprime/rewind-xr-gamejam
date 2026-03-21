@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cm3se6ug70ls1"]
+
+[ext_resource type="Script" uid="uid://bgwy54ngtjmy3" path="res://snake_head_hitter.gd" id="1_w6flk"]
+[ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="2_mlifj"]
+[ext_resource type="Script" uid="uid://b15qba0ch13uw" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="3_hu4nf"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_htxhm"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq2sk"]
+transparency = 1
+albedo_color = Color(0.011764706, 0, 0, 0)
+
+[sub_resource type="Resource" id="Resource_htxhm"]
+script = ExtResource("3_hu4nf")
+magnitude = 0.6
+metadata/_custom_type_script = "uid://b15qba0ch13uw"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4k2k6"]
+radius = 0.1
+
+[node name="SnakeHeadHitter" type="Area3D" unique_id=1032796558]
+collision_layer = 4194304
+collision_mask = 4194304
+script = ExtResource("1_w6flk")
+
+[node name="RedZone" type="MeshInstance3D" parent="." unique_id=1239144076]
+mesh = SubResource("SphereMesh_htxhm")
+surface_material_override/0 = SubResource("StandardMaterial3D_jq2sk")
+script = ExtResource("2_mlifj")
+event = SubResource("Resource_htxhm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2032198111]
+shape = SubResource("SphereShape3D_4k2k6")

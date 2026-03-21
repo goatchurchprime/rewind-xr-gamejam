@@ -108,7 +108,6 @@ enum {  SNAKE_HIBERNATING, SNAKE_EMERGING, SNAKE_RETRACTING, SNAKE_DYING, SNAKE_
 var state = SNAKE_HIBERNATING
 var emergeextent = 0.0
 var retractionprogress = 0.0
-var timecountdown = 0.0
 var emergerate = 0.5*0.1
 var retractrate = 1.5*0.1
 func resetsnake():
@@ -116,8 +115,6 @@ func resetsnake():
 	$ReelCyl/ReelSound.stop()
 	emergeextent = 0.0
 	retractionprogress = 0.0
-	timecountdown = randf_range(1, 3)
-	print("timecountdown ", timecountdown)
 	setsnakepos(1-emergeextent, retractionprogress)
 	animmaterial.set_shader_parameter("sickfac", 0.0)
 	
@@ -149,7 +146,6 @@ func processsnake(delta):
 			state = SNAKE_DEAD if state == SNAKE_DYING else SNAKE_HIBERNATING
 			emergeextent = 0.0
 			setsnakepos(1-emergeextent, retractionprogress)
-			timecountdown = randf_range(1, 3)
 		else:
 			setsnakepos(1-emergeextent, retractionprogress)
 

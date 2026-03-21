@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var webrtcroomname : String = "rewindgame"
+var makingsnakes = true
 func _ready():
 	if webrtcroomname:
 		await get_tree().create_timer(randf()*0.2 + 0.2).timeout
@@ -9,8 +10,15 @@ func _ready():
 		$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(false)
 		$PlayerAvatars.visible = false
 	$SnakeMonsters.setusercontrolpanel(%UserControlPanel)
-	$SnakeMonsters.edir = "res://level_editor/snakeexrs"
-	$SnakeMonsters.loadsnakeexrs()
+	$GameLevel.setusercontrolpanel(%UserControlPanel)
+
+	if makingsnakes:
+		$SnakeMonsters.edir = "res://level_editor/snakeexrs"
+		$SnakeMonsters.loadsnakeexrs()
+	else:
+		$GameLevel.scenelist.select(0)
+		
+
 
 func _on_start_xr_xr_failed_to_initialize():
 	$XROrigin3D/XRSimulator.enabled = true
