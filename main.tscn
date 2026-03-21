@@ -24,12 +24,9 @@
 [ext_resource type="Script" uid="uid://d2oqgf6d408gy" path="res://level_editor/snake_drawing/snake_drawing.gd" id="22_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cmxsgymulrx0l" path="res://level_editor/snake_drawing/sounds/switch7.wav" id="24_xuqvo"]
 [ext_resource type="AudioStream" uid="uid://cewowdu3vkh8u" path="res://level_editor/snake_drawing/sounds/click04.wav" id="25_0odxb"]
-[ext_resource type="PackedScene" uid="uid://1riyg3ondt7x" path="res://assets/Scenes/factory_crucible.tscn" id="25_lswn8"]
 [ext_resource type="AudioStream" uid="uid://dqovsr2pln3qd" path="res://level_editor/snake_drawing/sounds/switch5.wav" id="25_qsp4k"]
 [ext_resource type="PackedScene" uid="uid://dxtq7yrwuy505" path="res://snakemonster/snake_monsters.tscn" id="25_xuqvo"]
-[ext_resource type="PackedScene" uid="uid://dh3gap8vnjcq" path="res://assets/Scenes/factory_heavy_pipe.tscn" id="26_a6jrf"]
-[ext_resource type="PackedScene" uid="uid://c2dvcq46p2ba6" path="res://assets/Scenes/factory_support.tscn" id="27_a6jrf"]
-[ext_resource type="PackedScene" uid="uid://cgrwim1tvq2iq" path="res://llazloscene/workshop.glb" id="30_kq58d"]
+[ext_resource type="PackedScene" uid="uid://uam1uggmvii8" path="res://llazloscene/workshop_c.glb" id="27_a6jrf"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_qsp4k"]
 resource_local_to_scene = true
@@ -74,19 +71,6 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 [sub_resource type="Environment" id="Environment_1bvp3"]
 background_mode = 2
 sky = SubResource("Sky_h2yge")
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_cegan"]
-height = 1.0
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_82xsv"]
-material = ExtResource("14_1u8w0")
-height = 1.0
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_getpj"]
-size = Vector3(1, 2, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ryguw"]
-size = Vector3(1, 2, 1)
 
 [sub_resource type="QuadMesh" id="QuadMesh_jq2sk"]
 resource_local_to_scene = true
@@ -290,47 +274,8 @@ mesh = SubResource("BoxMesh_lquwl")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Floor" unique_id=1037734184]
 shape = SubResource("BoxShape3D_7mycd")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World" unique_id=410131671]
-transform = Transform3D(-0.9278622, -0.17434128, 0.3296616, -0.05379104, 0.9373175, 0.3442999, -0.3690233, 0.30173004, -0.8790796, 0, 3.990271, 0)
-light_energy = 3.592
-shadow_enabled = true
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=112167591]
 environment = SubResource("Environment_1bvp3")
-
-[node name="Furniture" type="Node3D" parent="World" unique_id=142939096]
-
-[node name="Table1" type="StaticBody3D" parent="World/Furniture" unique_id=1953537167]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4630303, 0.5, -4.111409)
-collision_layer = 8388609
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Table1" unique_id=106720632]
-shape = SubResource("CylinderShape3D_cegan")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Table1" unique_id=271947632]
-mesh = SubResource("CylinderMesh_82xsv")
-
-[node name="Fridge" type="StaticBody3D" parent="World/Furniture" unique_id=1950314042]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2637808, 1, -6.051605)
-collision_layer = 8388609
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Fridge" unique_id=818338518]
-shape = SubResource("BoxShape3D_getpj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Fridge" unique_id=1440077541]
-mesh = SubResource("BoxMesh_ryguw")
-surface_material_override/0 = ExtResource("14_1u8w0")
-
-[node name="Bench" type="StaticBody3D" parent="World/Furniture" unique_id=168053193]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.16594148, 0.42203808, -5.045845)
-collision_layer = 8388608
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Furniture/Bench" unique_id=1393600983]
-shape = SubResource("BoxShape3D_getpj")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Furniture/Bench" unique_id=458416978]
-mesh = SubResource("BoxMesh_ryguw")
-surface_material_override/0 = ExtResource("14_1u8w0")
 
 [node name="NetworkGatewayViewport" parent="." unique_id=2145623234 instance=ExtResource("15_getpj")]
 transform = Transform3D(0.9211039, 0, 0.38931686, 0, 1, 0, -0.38931686, 0, 0.9211039, -8.163665, 1.255002, -2.7729235)
@@ -424,12 +369,6 @@ autoplay = true
 
 [node name="LevelLlazz" type="Node3D" parent="." unique_id=106429022]
 
-[node name="workshop" parent="LevelLlazz" unique_id=332086484 instance=ExtResource("30_kq58d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.02477026, 0, 0)
-
-[node name="Ironwork" parent="LevelLlazz/workshop/BakedMesh/Root/Bldg" parent_id_path=PackedInt32Array(332086484, 947525221) index="3" unique_id=349727761]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8900602, 0, 0)
-
 [node name="OmniLight3D" type="OmniLight3D" parent="LevelLlazz" unique_id=1651606596]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8948522, 2.8579028)
 light_color = Color(1, 1, 0.8, 1)
@@ -437,56 +376,13 @@ shadow_enabled = true
 omni_range = 12.038
 omni_attenuation = 0.014
 
-[node name="FactoryScene" type="Node3D" parent="." unique_id=44295846]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.747894)
+[node name="workshop_c" parent="LevelLlazz" unique_id=1290395546 instance=ExtResource("27_a6jrf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
 
-[node name="Factory_Crucible2" parent="FactoryScene" unique_id=632465990 instance=ExtResource("25_lswn8")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17, 0, -2)
-
-[node name="Factory_Crucible3" parent="FactoryScene" unique_id=462531442 instance=ExtResource("25_lswn8")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -17, 0, 4)
-
-[node name="Factory_HeavyPipe2" parent="FactoryScene" unique_id=1513262734 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.276302, 0, 8.328898)
-
-[node name="Factory_HeavyPipe3" parent="FactoryScene" unique_id=1979208963 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.276302, 0, 8.328898)
-
-[node name="Factory_HeavyPipe4" parent="FactoryScene" unique_id=92447089 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2763019, 0, 8.328898)
-
-[node name="Factory_HeavyPipe5" parent="FactoryScene" unique_id=952322958 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2763019, 1.582345, 8.328898)
-
-[node name="Factory_HeavyPipe6" parent="FactoryScene" unique_id=590512700 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.276302, 1.582345, 8.328898)
-
-[node name="Factory_HeavyPipe7" parent="FactoryScene" unique_id=753105062 instance=ExtResource("26_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.276302, 3.0769076, 8.328898)
-
-[node name="Factory_Support2" parent="FactoryScene" unique_id=1834334623 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 20)
-
-[node name="Factory_Support3" parent="FactoryScene" unique_id=1114631791 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 15)
-
-[node name="Factory_Support4" parent="FactoryScene" unique_id=1033429354 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 10)
-
-[node name="Factory_Support5" parent="FactoryScene" unique_id=1086250561 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 5)
-
-[node name="Factory_Support6" parent="FactoryScene" unique_id=351874203 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -1)
-
-[node name="Factory_Support7" parent="FactoryScene" unique_id=679995329 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -7)
-
-[node name="Factory_Support8" parent="FactoryScene" unique_id=565935960 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -13)
-
-[node name="Factory_Support9" parent="FactoryScene" unique_id=876685993 instance=ExtResource("27_a6jrf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -19)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="LevelLlazz" unique_id=410131671]
+transform = Transform3D(-0.87534314, 0.12165412, -0.46794727, -0.05379105, 0.93731743, 0.34429988, 0.4805004, 0.32655203, -0.8139307, 0, 3.990271, 0)
+light_energy = 3.592
+shadow_enabled = true
 
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="action_pressed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_pressed"]
@@ -496,4 +392,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -19)
 
 [editable path="XROrigin3D/XRController3D_left/Viewport2Din3D"]
 [editable path="NetworkGatewayViewport"]
-[editable path="LevelLlazz/workshop"]
+[editable path="LevelLlazz/workshop_c"]
