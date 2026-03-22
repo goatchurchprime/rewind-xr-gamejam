@@ -36,7 +36,7 @@ func sceneselected(i):
 		fadetween.tween_method(Dset_fade, 0.0, 1.0, 0.34)
 		await fadetween.finished
 	else:
-		startingonblack = true
+		startingonblack = false
 
 	var snakemonsters = get_node("../SnakeMonsters")
 	hideendlevelnote()
@@ -73,6 +73,9 @@ func sceneselected(i):
 
 func showendlevelnote(nplugged, ndead):
 	if not $EndLevelNote.visible:
+		var xrcameratrans : Transform3D = get_node("/root/Main/XROrigin3D/XRCamera3D").global_transform
+		var horizvec = Vector3(xrcameratrans.basis.z.x, 0.0, xrcameratrans.basis.z.z).normalized()
+		$EndLevelNote.look_at_from_position(xrcameratrans.origin - horizvec, xrcameratrans.origin - horizvec*2)
 		$EndLevelNote.visible = true
 		$EndLevelNote/Label3D.text = "Level Complete\nPlugged: %d  stopped: %d" % [nplugged, ndead]
 		$EndLevelNote/InteractableAreaButtonNext.monitoring = true

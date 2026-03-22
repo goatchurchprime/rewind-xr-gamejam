@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://b1hy5shuvvmec" path="res://snakemonster/snake_material.tres" id="2_wqaro"]
 [ext_resource type="Script" uid="uid://bfrlpbsqg5lqr" path="res://addons/godot-xr-tools/objects/pickable.gd" id="5_i3bct"]
 [ext_resource type="AudioStream" uid="uid://dlhy7dcdl2tln" path="res://audio/sfx/wrong.wav" id="6_kaqc7"]
-[ext_resource type="Material" uid="uid://bvfclfdg3bfpw" path="res://snakemonster/plugsocketoverride_material.tres" id="7_kaqc7"]
 [ext_resource type="Texture2D" uid="uid://cxb672unm3txw" path="res://assets_thirdparty/icosa/plugsocket/Plug and socket.png" id="8_b8ltl"]
 [ext_resource type="AudioStream" uid="uid://c260opsai5uuy" path="res://audio/sfx/spool.wav" id="8_q2wyi"]
 
@@ -207,7 +206,6 @@ mesh = SubResource("ArrayMesh_josyk")
 
 [node name="PlugSocket" type="MeshInstance3D" parent="." unique_id=1833955432]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.5375013, -1.0154032)
-material_override = ExtResource("7_kaqc7")
 mesh = SubResource("ArrayMesh_5dvb4")
 
 [connection signal="action_pressed" from="ReelCyl" to="." method="_on_reel_cyl_action_pressed"]

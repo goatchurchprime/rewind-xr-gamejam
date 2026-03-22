@@ -267,6 +267,12 @@ popup/item_2/id = 2
 [node name="HBox3" type="HBoxContainer" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox" unique_id=2054557204]
 layout_mode = 2
 
+[node name="SnakeQuantity" type="SpinBox" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox3" unique_id=1720288551]
+layout_mode = 2
+min_value = 1.0
+max_value = 20.0
+value = 1.0
+
 [node name="Label" type="Label" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox3" unique_id=1041398245]
 layout_mode = 2
 text = "Volume"
@@ -415,7 +421,7 @@ mesh = SubResource("BoxMesh_1u8w0")
 surface_material_override/0 = SubResource("StandardMaterial3D_1u8w0")
 
 [node name="SnakeHead" type="RigidBody3D" parent="SnakeDrawing" unique_id=423996981]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.78194, 0.9344528, -1.2499684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32106233, 1.1781027, -1.2499684)
 collision_layer = 4
 collision_mask = 196615
 freeze = true

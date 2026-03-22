@@ -57,9 +57,8 @@ func loadsnakemotionimg(fname, fromresourceloader):
 	var c0pE = animimage.get_pixel(animimage.get_width()-2,0)
 	var p0E = Vector3(c0E.r, c0E.g, c0E.b)
 	var p0pE = Vector3(c0pE.r, c0pE.g, c0pE.b)
-	$PlugSocket.look_at_from_position(p0E, p0pE)
-
-
+	var p0Evec = p0pE - p0E 
+	$PlugSocket.look_at_from_position(p0E - p0Evec*0.7, p0E - p0Evec*2)
 
 # All materials to be set through this so we can calculate the position of the head
 func setsnakepos(u, v):
@@ -140,6 +139,7 @@ func processsnake(delta):
 		if emergeextent >= 1.0:
 			emergeextent = 1.0
 			animmaterial.set_shader_parameter("albedo", Color.GREEN)
+			$PlugSocket.set_surface_override_material(0, plugsockhighlightmaterial)
 			state = SNAKE_PLUGGED
 		setsnakepos(1-emergeextent, retractionprogress)
 	elif state == SNAKE_RETRACTING or state == SNAKE_DYING:

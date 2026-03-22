@@ -7,6 +7,7 @@ var makesnakebutton : Button = null
 var deletesnakebutton : Button = null
 var hitsnakebutton : Button = null
 var playsnakesfastbutton : CheckButton = null
+var snakequantityspinbox : SpinBox = null
 
 var Csnake = load("res://snakemonster/gsnake.tscn")
 var edir = "res://level_editor/snakeexrs"
@@ -26,9 +27,6 @@ func loadsnakeexrs():
 			sn.setsnakepos(0.0, 0.0)
 	updatesnakelist()
 
-
-func animatesnake():
-	pass
 
 var snakesplaying = false
 var maxsnakesemerging = 1
@@ -68,6 +66,7 @@ func _process(delta):
 		if nplugged + ndead == get_child_count():
 			get_node("../GameLevel").showendlevelnote(nplugged, ndead)
 
+	maxsnakesemerging = snakequantityspinbox.value
 	if nemerging < maxsnakesemerging:
 		if countdowntimeremerging == -1000:
 			countdowntimeremerging = randf_range(2, 4)
@@ -90,7 +89,6 @@ func setusercontrolpanel(lusercontrolpanel):
 	usercontrolpanel = lusercontrolpanel
 	print(lusercontrolpanel.get_path())
 	snakelist = usercontrolpanel.get_node("VBox/SnakeEntities")
-	usercontrolpanel.get_node("VBox/HBox/AnimateSnake").connect("pressed", animatesnake)
 	playsnakesbutton = usercontrolpanel.get_node("VBox/HBox2/PlaySnakes")
 	playsnakesbutton.connect("toggled", playsnakes)
 	makesnakebutton = usercontrolpanel.get_node("VBox/HBox/MakeSnake")
@@ -100,6 +98,7 @@ func setusercontrolpanel(lusercontrolpanel):
 	hitsnakebutton = usercontrolpanel.get_node("VBox/HBox/HitSnake")
 	hitsnakebutton.connect("pressed", hitsnake)
 	playsnakesfastbutton = usercontrolpanel.get_node("VBox/HBox2/PlayFast")
+	snakequantityspinbox = usercontrolpanel.get_node("VBox/HBox3/SnakeQuantity")
 	usercontrolpanel.get_node("VBox/HBox/AnimateSnake").connect("pressed", highlightsnake)
 	updatesnakelist()
 
