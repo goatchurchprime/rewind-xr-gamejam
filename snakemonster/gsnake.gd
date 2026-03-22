@@ -4,6 +4,7 @@ extends Node3D
 var animimage : Image
 var animtexture : Texture2D
 var animmaterial = null
+@onready var plugsockhighlightmaterial = load("res://snakemonster/plugsocketoverride_material.tres")
 
 static func Dmakespiralsnakerows(animwidth, animheight):
 	var animdata = PackedVector3Array()
@@ -57,6 +58,8 @@ func loadsnakemotionimg(fname, fromresourceloader):
 	var p0E = Vector3(c0E.r, c0E.g, c0E.b)
 	var p0pE = Vector3(c0pE.r, c0pE.g, c0pE.b)
 	$PlugSocket.look_at_from_position(p0E, p0pE)
+
+
 
 # All materials to be set through this so we can calculate the position of the head
 func setsnakepos(u, v):

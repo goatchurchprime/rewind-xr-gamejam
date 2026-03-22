@@ -201,6 +201,19 @@ offset_right = 300.0
 offset_bottom = 200.0
 color = Color(1.92523e-07, 0.26396504, 0.26399526, 1)
 
+[node name="ColorRect" type="ColorRect" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/ColorRect" unique_id=18690993]
+layout_mode = 0
+offset_left = 100.0
+offset_right = 250.0
+offset_bottom = 40.0
+color = Color(1, 0.015686275, 0.03137255, 1)
+
+[node name="Label" type="Label" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/ColorRect/ColorRect" unique_id=583645083]
+layout_mode = 0
+offset_right = 162.0
+offset_bottom = 23.0
+text = "Debug: Please ignore"
+
 [node name="VBox" type="VBoxContainer" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel" unique_id=561963533]
 layout_mode = 0
 offset_right = 40.0
@@ -215,7 +228,7 @@ layout_mode = 2
 
 [node name="AnimateSnake" type="Button" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox" unique_id=1017464407]
 layout_mode = 2
-text = "Animate"
+text = "Highlight"
 
 [node name="MakeSnake" type="Button" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox" unique_id=665466306]
 layout_mode = 2
@@ -238,6 +251,7 @@ text = "Play"
 
 [node name="PlayFast" type="CheckButton" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox2" unique_id=995144890]
 layout_mode = 2
+button_pressed = true
 text = "Fast"
 
 [node name="SceneChoice" type="OptionButton" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox2" unique_id=1304584298]
@@ -261,6 +275,22 @@ text = "Volume"
 layout_mode = 2
 size_flags_horizontal = 3
 value = 50.0
+
+[node name="HBox4" type="HBoxContainer" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox" unique_id=1736107326]
+layout_mode = 2
+
+[node name="SnakeEditMode" type="Button" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox4" unique_id=1128072717]
+layout_mode = 2
+text = "EditMode"
+
+[node name="NetworkConnect" type="Button" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox4" unique_id=1109993654]
+layout_mode = 2
+text = "NetworkConnect"
+
+[node name="TextEdit" type="TextEdit" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox4" unique_id=385434839]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "plugzzz"
 
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
 mesh = SubResource("QuadMesh_4k2k6")

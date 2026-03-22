@@ -85,6 +85,7 @@ func _process(delta):
 func makesnake():
 	SnakeDrawing.makesnake()
 
+
 func setusercontrolpanel(lusercontrolpanel):
 	usercontrolpanel = lusercontrolpanel
 	print(lusercontrolpanel.get_path())
@@ -99,8 +100,8 @@ func setusercontrolpanel(lusercontrolpanel):
 	hitsnakebutton = usercontrolpanel.get_node("VBox/HBox/HitSnake")
 	hitsnakebutton.connect("pressed", hitsnake)
 	playsnakesfastbutton = usercontrolpanel.get_node("VBox/HBox2/PlayFast")
+	usercontrolpanel.get_node("VBox/HBox/AnimateSnake").connect("pressed", highlightsnake)
 	updatesnakelist()
-
 
 func newsnakeimage(lsnakeimage : Image):
 	var fn
@@ -118,6 +119,11 @@ func deletesnake():
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(fn))
 	fromresourceloader = false  # now we have unimported resources
 	loadsnakeexrs()
+
+func highlightsnake():
+	var ssn = snakelist.get_item_text(snakelist.selected)
+	for sn in get_children():
+		sn.animmaterial.set_shader_parameter("albedo", Color.WHITE if sn.get_name() != ssn else Color.CYAN)
 
 func hitsnake():
 	var snn = snakelist.get_item_text(snakelist.selected)

@@ -1,25 +1,39 @@
 extends Node3D
 
+
 @export var webrtcroomname : String = "rewindgame"
 var makingsnakes = false
+
+func entereditmode():
+	$SnakeDrawing.visible = true
+	$SnakeDrawing/SnakeHead.enabled = true
+	$SnakeMonsters.fromresourceloader = false
+	$SnakeMonsters.loadsnakeexrs()
+
+func startmultiplayernetwork():
+	$NetworkGatewayViewport/Viewport/NetworkGateway.enabled = true
+	$NetworkGatewayViewport/Viewport/NetworkGateway.visible = true
+	$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(true)
+	$PlayerAvatars.visible = true
+	webrtcroomname = $XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox4/TextEdit.text
+	$NetworkGatewayViewport/Viewport/NetworkGateway.initialstatemqttwebrtc($NetworkGatewayViewport/Viewport/NetworkGateway.NETWORK_OPTIONS_MQTT_WEBRTC.AS_NECESSARY, webrtcroomname, null)
+	$NetworkGatewayViewport/Viewport/NetworkGateway.set_vox_on()
+
+
 func _ready():
-	if webrtcroomname:
-		await get_tree().create_timer(randf()*0.2 + 0.2).timeout
-		$NetworkGatewayViewport/Viewport/NetworkGateway.initialstatemqttwebrtc($NetworkGatewayViewport/Viewport/NetworkGateway.NETWORK_OPTIONS_MQTT_WEBRTC.AS_NECESSARY, webrtcroomname, null)
-	else:
-		$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(false)
-		$PlayerAvatars.visible = false
+	$NetworkGatewayViewport/Viewport/NetworkGateway.enabled = false
+	$NetworkGatewayViewport/Viewport/NetworkGateway.visible = false
+	$PlayerAvatars.get_child(0).get_node("PlayerFrame").set_process(false)
+	$PlayerAvatars.visible = false
 	$SnakeMonsters.setusercontrolpanel(%UserControlPanel)
 	$GameLevel.setusercontrolpanel(%UserControlPanel)
+	%UserControlPanel/VBox/HBox4/SnakeEditMode.connect("pressed", entereditmode)
+	%UserControlPanel/VBox/HBox4/NetworkConnect.connect("pressed", startmultiplayernetwork)
 
-	if makingsnakes:
-		$SnakeMonsters.edir = "res://level_editor/snakeexrs"
-		$SnakeMonsters.loadsnakeexrs()
-	else:
-		$SnakeDrawing/SnakeHead.enabled = false
-		$SnakeDrawing.visible = false
-		$GameLevel.scenelist.select(0)
-		$GameLevel.scenelist.item_selected.emit(0)
+	$SnakeDrawing/SnakeHead.enabled = false
+	$SnakeDrawing.visible = false
+	$GameLevel.scenelist.select(0)
+	$GameLevel.scenelist.item_selected.emit(0)
 
 
 func _on_start_xr_xr_failed_to_initialize():
