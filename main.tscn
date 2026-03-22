@@ -33,23 +33,22 @@
 [ext_resource type="Script" uid="uid://burawd1atrvna" path="res://game_level.gd" id="30_htxhm"]
 [ext_resource type="PackedScene" uid="uid://cme66uldrjl2i" path="res://addons/godot-xr-tools/interactables/interactable_area_button.tscn" id="30_seu75"]
 [ext_resource type="Script" uid="uid://dff408qq7s26e" path="res://addons/godot-xr-tools/rumble/rumbler.gd" id="32_0rl1p"]
-[ext_resource type="PackedScene" uid="uid://ds8x4vl5kmare" path="res://llazloscene/level_llazz.tscn" id="32_jq2sk"]
 [ext_resource type="Script" uid="uid://b15qba0ch13uw" path="res://addons/godot-xr-tools/rumble/rumble_event.gd" id="33_ok6jj"]
 
-[sub_resource type="QuadMesh" id="QuadMesh_seu75"]
+[sub_resource type="QuadMesh" id="QuadMesh_4k2k6"]
 resource_local_to_scene = true
 size = Vector2(0.3, 0.1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_htxhm"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0rl1p"]
 viewport_path = NodePath("XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jq2sk"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ok6jj"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_htxhm")
+albedo_texture = SubResource("ViewportTexture_0rl1p")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_4k2k6"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_facbu"]
 resource_local_to_scene = true
 size = Vector3(0.3, 0.1, 0.02)
 
@@ -74,20 +73,20 @@ sky_material = SubResource("ProceduralSkyMaterial_vivmo")
 background_mode = 2
 sky = SubResource("Sky_h2yge")
 
-[sub_resource type="QuadMesh" id="QuadMesh_0rl1p"]
+[sub_resource type="QuadMesh" id="QuadMesh_b1qrp"]
 resource_local_to_scene = true
 size = Vector2(3, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ok6jj"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_come4"]
 viewport_path = NodePath("NetworkGatewayViewport/Viewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_facbu"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h8e4i"]
 transparency = 1
 cull_mode = 2
-albedo_texture = SubResource("ViewportTexture_ok6jj")
+albedo_texture = SubResource("ViewportTexture_come4")
 texture_filter = 1
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_b1qrp"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_4lmeg"]
 resource_local_to_scene = true
 size = Vector3(3, 2, 0.02)
 
@@ -251,15 +250,27 @@ popup/item_1/id = 1
 popup/item_2/text = "tavi"
 popup/item_2/id = 2
 
+[node name="HBox3" type="HBoxContainer" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox" unique_id=2054557204]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox3" unique_id=1041398245]
+layout_mode = 2
+text = "Volume"
+
+[node name="HSliderVolume" type="HSlider" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/Viewport/UserControlPanel/VBox/HBox3" unique_id=988431347]
+layout_mode = 2
+size_flags_horizontal = 3
+value = 50.0
+
 [node name="Screen" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="1"]
-mesh = SubResource("QuadMesh_seu75")
-surface_material_override/0 = SubResource("StandardMaterial3D_jq2sk")
+mesh = SubResource("QuadMesh_4k2k6")
+surface_material_override/0 = SubResource("StandardMaterial3D_ok6jj")
 
 [node name="StaticBody3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D" index="2"]
 screen_size = Vector2(0.3, 0.1)
 
 [node name="CollisionShape3D" parent="XROrigin3D/XRController3D_left/Viewport2Din3D/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_4k2k6")
+shape = SubResource("BoxShape3D_facbu")
 
 [node name="SnakeHeadHitter" parent="XROrigin3D/XRController3D_left" unique_id=1032796558 instance=ExtResource("9_kq58d")]
 
@@ -328,14 +339,14 @@ playersnodepath = NodePath("../../../PlayerAvatars")
 localplayerscene = ""
 
 [node name="Screen" parent="NetworkGatewayViewport" index="1"]
-mesh = SubResource("QuadMesh_0rl1p")
-surface_material_override/0 = SubResource("StandardMaterial3D_facbu")
+mesh = SubResource("QuadMesh_b1qrp")
+surface_material_override/0 = SubResource("StandardMaterial3D_h8e4i")
 
 [node name="StaticBody3D" parent="NetworkGatewayViewport" index="2"]
 viewport_size = Vector2(700, 450)
 
 [node name="CollisionShape3D" parent="NetworkGatewayViewport/StaticBody3D" index="0"]
-shape = SubResource("BoxShape3D_b1qrp")
+shape = SubResource("BoxShape3D_4lmeg")
 
 [node name="PlayerAvatars" type="Node3D" parent="." unique_id=1854644174]
 
@@ -456,12 +467,6 @@ target = NodePath("../../../../XROrigin3D/XRController3D_right")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2077707, 0)
 text = "Play again"
 
-[node name="LevelLlazz" parent="GameLevel" unique_id=612926994 instance=ExtResource("32_jq2sk")]
-
-[node name="Collision" parent="GameLevel/LevelLlazz/workshop_c/BakedMesh_001/Root_001" parent_id_path=PackedInt32Array(612926994, 1290395546, 1223807145) index="0" unique_id=226331919]
-collision_layer = 8388609
-collision_mask = 8388609
-
 [connection signal="xr_failed_to_initialize" from="XROrigin3D/StartXR" to="." method="_on_start_xr_xr_failed_to_initialize"]
 [connection signal="action_pressed" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_pressed"]
 [connection signal="action_released" from="SnakeDrawing/SnakeHead" to="SnakeDrawing" method="_on_snake_head_action_released"]
@@ -475,5 +480,3 @@ collision_mask = 8388609
 [editable path="XROrigin3D/XRController3D_right/SnakeHeadHitter"]
 [editable path="XROrigin3D/PlayerBody"]
 [editable path="NetworkGatewayViewport"]
-[editable path="GameLevel/LevelLlazz"]
-[editable path="GameLevel/LevelLlazz/workshop_c"]

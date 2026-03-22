@@ -16,9 +16,15 @@ func setusercontrolpanel(lusercontrolpanel):
 	usercontrolpanel = lusercontrolpanel
 	scenelist = usercontrolpanel.get_node("VBox/HBox2/SceneChoice")
 	scenelist.item_selected.connect(sceneselected)
+	usercontrolpanel.get_node("VBox/HBox3/HSliderVolume").connect("value_changed", func (x): $Music.set_volume_linear(x*0.01))
 
 func Dset_fade(p_value : float):
 	XRToolsFade.set_fade("spawnpoint", Color(0.1, 0.1, 0.1, p_value))
+
+var startingonblack = true
+func _ready():
+	XRToolsFade.set_fade("spawnpoint", Color(0.1, 0.1, 0.2, 1.0))
+	startingonblack = true
 
 func sceneselected(i):
 	var scenename = scenelist.get_item_text(i)
@@ -26,8 +32,11 @@ func sceneselected(i):
 	var sceneres = scenes[scenename]
 
 	var fadetween = get_tree().create_tween()
-	fadetween.tween_method(Dset_fade, 0.0, 1.0, 0.34)
-	await fadetween.finished
+	if not startingonblack:
+		fadetween.tween_method(Dset_fade, 0.0, 1.0, 0.34)
+		await fadetween.finished
+	else:
+		startingonblack = true
 
 	var snakemonsters = get_node("../SnakeMonsters")
 	hideendlevelnote()
